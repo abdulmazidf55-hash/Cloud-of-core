@@ -3,37 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Cloud of Core - Mobile</title>
+    <title>Cloud of Core - Premium Dashboard</title>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <!-- Font Awesome (Mobile Optimized) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background: #0a0f1e;
+            background: #030614;
             color: #fff;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Simplified Background (No Plexus - Faster) */
-        body::before {
-            content: '';
+        /* ===== OPTIMIZED PLEXUS BACKGROUND ===== */
+        #plexus-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.05) 0%, #0a0f1e 70%);
-            z-index: -1;
+            z-index: 0;
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        /* Dark Overlay for better readability */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0,255,255,0.03) 0%, #030614 90%);
+            z-index: 1;
+            pointer-events: none;
         }
 
         /* ===== LANDING PAGE ===== */
@@ -43,12 +59,13 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #0a0f1e;
+            background: transparent;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(2px);
         }
         #landing-page.hidden {
             opacity: 0;
@@ -59,32 +76,44 @@
             text-align: center;
             padding: 20px;
             width: 100%;
+            position: relative;
+            z-index: 1001;
         }
 
         .landing-logo {
-            width: min(250px, 70%);
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px cyan);
-            animation: gentleFloat 3s ease-in-out infinite;
+            width: min(320px, 80%);
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8));
+            animation: premiumFloat 4s ease-in-out infinite;
         }
 
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes premiumFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.02); }
         }
 
         .glow-btn {
-            padding: 14px 40px;
-            font-size: 1.3rem;
-            font-weight: bold;
+            padding: 16px 48px;
+            font-size: 1.4rem;
+            font-weight: 700;
             border: none;
-            background: linear-gradient(45deg, #00ffff, #0088ff);
-            color: #0a0f1e;
-            border-radius: 50px;
+            background: linear-gradient(135deg, #00ffff, #0066ff, #00ffff);
+            background-size: 200% 200%;
+            color: #030614;
+            border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 0 20px cyan;
-            width: min(300px, 80%);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+            animation: gradientShift 3s ease infinite;
+            width: min(350px, 85%);
             margin: 0 auto;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* ===== MODAL ===== */
@@ -96,51 +125,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(3, 6, 20, 0.95);
+            backdrop-filter: blur(10px);
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
         .modal.show {
             display: flex;
+            animation: modalAppear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalAppear {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .modal-content {
-            background: #1e293b;
-            padding: 30px 20px;
-            border-radius: 20px;
+            background: linear-gradient(145deg, #1a2639, #0f172a);
+            padding: 35px 25px;
+            border-radius: 32px;
             width: 100%;
-            max-width: 350px;
-            border: 2px solid cyan;
-        }
-
-        .modal-content h2 {
-            color: cyan;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-        }
-
-        .modal-content input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #00ffff33;
-            border-radius: 8px;
-            background: #334155;
-            color: white;
-            font-size: 16px; /* Prevents zoom on mobile */
-        }
-
-        .modal-content button {
-            width: 100%;
-            padding: 14px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 8px;
-            background: cyan;
-            color: #0a0f1e;
-            font-weight: bold;
-            font-size: 1.1rem;
+            max-width: 380px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -8px rgba(0,255,255,0.3);
         }
 
         /* ===== MAIN APP ===== */
@@ -148,25 +156,28 @@
             display: none;
             min-height: 100vh;
             flex-direction: column;
+            position: relative;
+            z-index: 10;
         }
 
-        /* Mobile Header */
+        /* Glass Header */
         .header {
-            background: rgba(30, 41, 59, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 12px 15px;
+            background: rgba(10, 15, 30, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 2px solid cyan;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
         }
 
         .header-logo {
-            height: 40px;
+            height: 42px;
             width: auto;
+            filter: drop-shadow(0 0 15px cyan);
         }
 
         .search-container {
@@ -176,253 +187,287 @@
 
         #search-input {
             width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #00ffff33;
-            border-radius: 25px;
-            background: #1e293b;
+            padding: 12px 18px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 40px;
+            background: rgba(30, 41, 59, 0.7);
             color: white;
-            font-size: 14px;
+            font-size: 15px;
+            backdrop-filter: blur(5px);
         }
 
-        #search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #1e293b;
-            border-radius: 10px;
-            margin-top: 5px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-            border: 1px solid cyan;
-            z-index: 1000;
-        }
-
-        .search-item {
-            padding: 12px 15px;
-            border-bottom: 1px solid #334155;
-            font-size: 14px;
-        }
-
-        .logout-btn {
-            background: transparent;
-            border: 1px solid cyan;
-            color: cyan;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            white-space: nowrap;
+        #search-input:focus {
+            outline: none;
+            border-color: cyan;
+            box-shadow: 0 0 25px rgba(0,255,255,0.3);
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
-            padding: 20px 15px;
+            padding: 25px 20px;
+            position: relative;
+            z-index: 20;
         }
 
         .main-logo {
-            width: min(180px, 50%);
+            width: min(200px, 45%);
             display: block;
             margin: 0 auto 20px;
-            filter: drop-shadow(0 0 15px cyan);
+            filter: drop-shadow(0 0 30px cyan);
         }
 
         .student-count {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             text-align: center;
-            color: cyan;
-            margin: 15px 0;
-            font-weight: bold;
+            color: #00ffff;
+            margin: 15px 0 25px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(0,255,255,0.5);
+            letter-spacing: -0.5px;
         }
 
-        /* Mobile Stats Cards - Grid 2 columns */
+        /* ===== TRADE STATS CARDS ===== */
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin: 20px 0 25px;
         }
 
         .stat-card {
-            background: rgba(30, 41, 59, 0.9);
-            border: 1px solid cyan;
-            border-radius: 12px;
-            padding: 12px 8px;
+            background: linear-gradient(145deg, rgba(26, 38, 57, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 16px 8px;
             text-align: center;
+            box-shadow: 0 10px 30px -10px rgba(0,255,255,0.2);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:active {
+            transform: scale(0.98);
         }
 
         .stat-batch {
-            font-size: 1rem;
-            font-weight: bold;
-            color: cyan;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00ffff;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         .stat-value {
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 5px;
+            color: white;
+            text-shadow: 0 0 15px rgba(0,255,255,0.5);
         }
 
-        .trend-up { color: #00ff00; }
-        .trend-down { color: #ff4444; }
+        .trend-up { color: #22ff7e; }
+        .trend-down { color: #ff4d4d; }
 
         .stat-label {
-            font-size: 0.7rem;
-            color: #aaa;
-            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #00ffff;
+            margin-top: 8px;
+            opacity: 0.9;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Batch Buttons - Scrollable */
+        /* Batch Buttons */
         .batch-buttons {
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            padding: 10px 0;
-            margin: 15px 0;
+            padding: 10px 0 15px;
+            margin: 10px 0;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
 
-        .batch-buttons::-webkit-scrollbar {
-            display: none;
-        }
-
         .batch-btn {
-            padding: 8px 20px;
-            border: 1px solid cyan;
-            background: transparent;
+            padding: 10px 22px;
+            border: 1.5px solid rgba(0, 255, 255, 0.5);
+            background: rgba(26, 38, 57, 0.7);
+            backdrop-filter: blur(5px);
             color: white;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
             white-space: nowrap;
+            transition: 0.2s;
         }
 
         .batch-btn:active {
             background: cyan;
-            color: #0a0f1e;
+            color: #030614;
+            border-color: cyan;
         }
 
         /* Student Grid */
         .student-list-container {
-            max-height: 350px;
+            max-height: 380px;
             overflow-y: auto;
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 15px;
-            padding: 15px;
-            margin: 15px 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 20px 15px;
+            margin: 15px 0 20px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
         }
 
         .student-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
 
         .student-card {
-            background: #1e293b;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #00ffff33;
-            font-size: 0.8rem;
+            background: rgba(30, 41, 59, 0.8);
+            padding: 12px 6px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            font-size: 0.85rem;
             text-align: center;
-            color: cyan;
+            color: #00ffff;
+            font-weight: 500;
+            transition: 0.2s;
         }
 
-        /* Ranking Section */
+        .student-card:active {
+            background: cyan;
+            color: #030614;
+            transform: scale(0.96);
+        }
+
+        /* ===== TOP 10 RANKING ===== */
         .ranking-section {
-            margin: 25px 0;
+            margin: 30px 0 20px;
         }
 
         .section-title {
-            font-size: 1.3rem;
-            color: cyan;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: transparent;
+            background: linear-gradient(135deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
         }
 
         .ranking-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .rank-item {
             display: flex;
             align-items: center;
-            background: #1e293b;
-            padding: 8px 12px;
-            border-radius: 30px;
-            border: 1px solid #00ffff33;
+            background: linear-gradient(90deg, rgba(26, 38, 57, 0.8), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(5px);
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .rank-number {
-            width: 30px;
-            font-size: 0.9rem;
-            color: cyan;
+            width: 36px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #00ffff;
         }
 
         .rank-badge {
-            width: 60px;
-            font-size: 0.7rem;
-        }
-
-        .premium-badge {
-            background: linear-gradient(135deg, #ffd700, #ffaa00);
-            color: #0a0f1e;
-            padding: 3px 8px;
-            border-radius: 15px;
-            font-size: 0.7rem;
+            width: 45px;
+            font-size: 1.1rem;
         }
 
         .rank-name {
             flex: 1;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
 
         .rank-points {
-            font-size: 0.9rem;
-            color: cyan;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #00ffff;
         }
 
-        /* Notice Section */
+        /* ===== NOTICE SECTION ===== */
         .notice-section {
-            margin: 25px 0;
-            padding: 20px 15px;
-            background: rgba(30, 41, 59, 0.8);
-            border-radius: 15px;
-            border: 1px solid cyan;
+            margin: 30px 0 20px;
+            padding: 22px 18px;
+            background: linear-gradient(145deg, rgba(26, 38, 57, 0.7), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(8px);
+            border-radius: 28px;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notice-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0,255,255,0.1), transparent);
+            animation: rotateSlow 10s linear infinite;
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .notice-title {
-            font-size: 1.2rem;
-            color: cyan;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #00ffff;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .fire-animation {
-            display: inline-block;
-            animation: gentleFire 2s infinite;
+        .fire-icon {
+            animation: flame 2s ease-in-out infinite;
+            font-size: 1.6rem;
         }
 
-        @keyframes gentleFire {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes flame {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; filter: hue-rotate(10deg); }
         }
 
         .notice-content {
-            font-size: 1rem;
-            line-height: 1.5;
-            padding: 10px;
-            background: #1e293b;
-            border-radius: 8px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
+            border-left: 4px solid #00ffff;
+            font-weight: 500;
+            position: relative;
+            z-index: 10;
         }
 
-        /* Popup */
+        /* ===== ADVANCED POPUP ===== */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -430,8 +475,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
+            background: rgba(3, 6, 20, 0.7);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
             align-items: center;
             justify-content: center;
             padding: 20px;
@@ -439,112 +485,225 @@
 
         .popup-overlay.show {
             display: flex;
+            animation: overlayAppear 0.4s ease;
         }
 
-        .popup-content {
-            background: #1e293b;
-            padding: 25px 20px;
-            border-radius: 20px;
+        @keyframes overlayAppear {
+            from { opacity: 0; backdrop-filter: blur(0); }
+            to { opacity: 1; backdrop-filter: blur(12px); }
+        }
+
+        .popup-card {
+            background: linear-gradient(165deg, #1a2639, #0f172a);
+            padding: 28px 22px;
+            border-radius: 40px;
             width: 100%;
-            max-width: 350px;
-            border: 2px solid cyan;
+            max-width: 420px;
+            border: 2px solid rgba(0, 255, 255, 0.6);
+            box-shadow: 0 30px 60px -15px rgba(0,255,255,0.4);
             position: relative;
+            transform-origin: center;
+            animation: popupCardAppear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popupCardAppear {
+            0% { opacity: 0; transform: scale(0.7) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .popup-close {
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
+            top: 18px;
+            right: 22px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: cyan;
+            font-size: 24px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .popup-close:active {
+            background: cyan;
+            color: #030614;
+            transform: rotate(90deg);
+        }
+
+        .popup-title {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: transparent;
+            background: linear-gradient(135deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            margin-bottom: 15px;
+            padding-right: 40px;
+            letter-spacing: -0.5px;
+        }
+
+        .student-id-badge {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 6px 15px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px dashed cyan;
+            font-size: 0.9rem;
+            color: cyan;
+        }
+
+        /* Premium Info Cards */
+        .premium-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .premium-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 24px;
+            padding: 18px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: cyan;
+            font-size: 1.3rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stats-row:last-child {
+            border-bottom: none;
+        }
+
+        .stats-label {
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        .stats-value {
+            font-weight: 700;
+            color: cyan;
+            font-size: 1.3rem;
+        }
+
+        .notice-card {
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 18px;
+            border-left: 4px solid cyan;
+        }
+
+        .notice-card p {
+            color: #ddd;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         /* Footer */
         .footer {
-            background: #0f172a;
+            background: rgba(10, 15, 30, 0.8);
+            backdrop-filter: blur(10px);
             padding: 30px 20px 15px;
-            border-top: 2px solid cyan;
-            margin-top: 20px;
+            border-top: 2px solid rgba(0, 255, 255, 0.3);
+            margin-top: 30px;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         .footer-section h3 {
             color: cyan;
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin-bottom: 8px;
         }
 
         .footer-section p {
-            font-size: 0.8rem;
             color: #aaa;
-            line-height: 1.5;
+            font-size: 0.85rem;
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 15px;
-            margin-top: 15px;
-            border-top: 1px solid #334155;
-            font-size: 0.7rem;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #1e293b;
             color: #666;
-        }
-
-        /* Info Tables */
-        .info-tables {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .info-tables table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .info-tables th {
-            background: cyan;
-            color: #0a0f1e;
-            padding: 8px;
-            font-size: 0.9rem;
-        }
-
-        .info-tables td {
-            padding: 8px;
-            border-bottom: 1px solid #334155;
+            font-size: 0.75rem;
         }
     </style>
 </head>
 <body>
+    <!-- Plexus Background Canvas (Optimized) -->
+    <canvas id="plexus-canvas"></canvas>
+    <div class="overlay"></div>
+
     <!-- LANDING PAGE -->
     <div id="landing-page">
         <div class="landing-content">
             <img src="https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png" alt="Logo" class="landing-logo">
             <br>
-            <button class="glow-btn" onclick="showAuthModal()">🚀 ENTER</button>
+            <button class="glow-btn" onclick="showAuthModal()">ENTER DASHBOARD</button>
         </div>
     </div>
 
     <!-- AUTH MODAL -->
     <div id="auth-modal" class="modal">
         <div class="modal-content">
-            <h2>🔐 SIGN IN</h2>
-            <input type="email" id="email" placeholder="📧 Email">
-            <input type="password" id="password" placeholder="🔑 Password">
+            <h2 style="color:cyan; text-align:center; margin-bottom:25px;">🔐 ACCESS</h2>
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
             <button id="auth-action-btn" onclick="handleAuth()">Sign In</button>
-            <p style="color:#aaa; margin-top:10px;" onclick="toggleAuthMode()">New user? Sign Up</p>
+            <p style="color:#aaa; margin-top:15px;" onclick="toggleAuthMode()">Create Account</p>
             <p style="color:#aaa;" onclick="closeModal()">Close</p>
         </div>
     </div>
 
-    <!-- POPUP -->
+    <!-- PREMIUM POPUP -->
     <div id="popup" class="popup-overlay">
-        <div class="popup-content">
+        <div class="popup-card">
             <span class="popup-close" onclick="closePopup()">&times;</span>
             <div id="popup-content"></div>
         </div>
@@ -555,46 +714,45 @@
         <div class="header">
             <img src="https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png" alt="Logo" class="header-logo">
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="🔍 Search..." oninput="searchStudents(this.value)">
+                <input type="text" id="search-input" placeholder="Search students..." oninput="searchStudents(this.value)">
                 <div id="search-results"></div>
             </div>
-            <button class="logout-btn" onclick="logout()">Exit</button>
+            <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
         </div>
 
         <div class="main-content">
             <img src="https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png" alt="Logo" class="main-logo">
             
-            <div class="student-count" id="total-students-display">📊 2026 Total: 1852</div>
+            <div class="student-count" id="total-students-display">📊 2026 · 1,852 Students</div>
 
-            <!-- Stats Cards -->
+            <!-- Stats with "Total Points" -->
             <div class="stats-container" id="batch-stats"></div>
 
             <!-- Batch Buttons -->
             <div class="batch-buttons">
-                <button class="batch-btn" onclick="showBatchStudents('301')">301 (900)</button>
-                <button class="batch-btn" onclick="showBatchStudents('302')">302 (300)</button>
-                <button class="batch-btn" onclick="showBatchStudents('303')">303 (300)</button>
-                <button class="batch-btn" onclick="showBatchStudents('304')">304 (318)</button>
-                <button class="batch-btn" onclick="showBatchStudents('305')">305 (4)</button>
+                <button class="batch-btn" onclick="showBatchStudents('301')">301 · 900</button>
+                <button class="batch-btn" onclick="showBatchStudents('302')">302 · 300</button>
+                <button class="batch-btn" onclick="showBatchStudents('303')">303 · 300</button>
+                <button class="batch-btn" onclick="showBatchStudents('304')">304 · 318</button>
+                <button class="batch-btn" onclick="showBatchStudents('305')">305 · 4</button>
             </div>
 
             <!-- Student List -->
             <div id="student-list-container" class="student-list-container" style="display: none;">
-                <h3 style="color:cyan; margin-bottom:10px;" id="batch-title"></h3>
+                <h3 style="color:cyan; margin-bottom:15px;" id="batch-title"></h3>
                 <div id="student-grid" class="student-grid"></div>
             </div>
 
             <!-- Top 10 Ranking -->
             <div class="ranking-section">
-                <h2 class="section-title">🏆 TOP 10</h2>
+                <h2 class="section-title">🏆 TOP 10 LEADERBOARD</h2>
                 <div class="ranking-list" id="ranking-list"></div>
             </div>
 
-            <!-- Notice -->
+            <!-- Notice with Fire Animation -->
             <div class="notice-section">
                 <h2 class="notice-title">
-                    <span class="fire-animation">🔥</span> NOTICE 
-                    <span class="fire-animation">🔥</span>
+                    <span class="fire-icon">🔥</span> LIVE UPDATE <span class="fire-icon">🔥</span>
                 </h2>
                 <div class="notice-content" id="notice-content"></div>
             </div>
@@ -604,18 +762,13 @@
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Cloud of Core</h3>
-                    <p>Est. 2020 | 5000+ Students</p>
-                    <p>ISO 27001 Certified</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p>info@cloudofcore.com</p>
-                    <p>+1 (555) 123-4567</p>
+                    <h3>CLOUD OF CORE</h3>
+                    <p>© 2026 · All rights reserved</p>
+                    <p>Version 3.0 · Premium Edition</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Cloud of Core. All rights reserved.</p>
+                <p>ISO 27001 Certified · Best EdTech 2025</p>
             </div>
         </footer>
     </div>
@@ -634,7 +787,84 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Auth State
+        // ===== OPTIMIZED PLEXUS BACKGROUND =====
+        function initPlexus() {
+            const canvas = document.getElementById('plexus-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const particleCount = 60; // Reduced for performance
+            const connectionDistance = 120;
+
+            function resize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            function createParticles() {
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.2,
+                        vy: (Math.random() - 0.5) * 0.2,
+                        size: Math.random() * 1.5 + 0.5
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+                
+                // Draw connections
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < connectionDistance) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(0, 255, 255, ${0.1 * (1 - dist/connectionDistance)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                // Draw particles
+                for (let p of particles) {
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(0, 255, 255, 0.5)';
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+                }
+                
+                requestAnimationFrame(draw);
+            }
+
+            resize();
+            createParticles();
+            draw();
+
+            window.addEventListener('resize', () => {
+                resize();
+                particles = [];
+                createParticles();
+            });
+        }
+
+        // Auth
         let isSignUp = false;
         let allStudentsData = {};
 
@@ -648,15 +878,10 @@
         function handleAuth() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            if (isSignUp) {
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then(() => closeModal())
-                    .catch(error => alert(error.message));
-            } else {
-                auth.signInWithEmailAndPassword(email, password)
-                    .then(() => closeModal())
-                    .catch(error => alert(error.message));
-            }
+            const action = isSignUp ? auth.createUserWithEmailAndPassword : auth.signInWithEmailAndPassword;
+            action(email, password)
+                .then(() => closeModal())
+                .catch(error => alert(error.message));
         }
 
         function logout() { auth.signOut(); }
@@ -673,11 +898,10 @@
             }
         });
 
-        // Load Data
         function loadData() {
             db.collection('settings').doc('general').onSnapshot(doc => {
                 if (doc.exists) {
-                    document.getElementById('total-students-display').innerText = '📊 ' + doc.data().totalStudents;
+                    document.getElementById('total-students-display').innerHTML = `📊 2026 · ${doc.data().totalStudents}`;
                 }
             });
 
@@ -687,12 +911,11 @@
             });
         }
 
-        // Load Real-time Data
         function loadRealTimeData() {
-            // Show defaults immediately
+            // Show defaults
             document.getElementById('batch-stats').innerHTML = generateDefaultStats();
             document.getElementById('ranking-list').innerHTML = generateDefaultRanking();
-            document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core!';
+            document.getElementById('notice-content').innerHTML = '🔥 Platform update: New features added! Check them out.';
 
             // Batch Stats
             db.collection('batchStats').onSnapshot(snapshot => {
@@ -709,7 +932,7 @@
                                         <i class="fas fa-arrow-${data.trend}"></i>
                                     </span>
                                 </div>
-                                <div class="stat-label">Students</div>
+                                <div class="stat-label">TOTAL POINTS</div>
                             </div>
                         `;
                     });
@@ -748,11 +971,11 @@
 
         function generateDefaultStats() {
             const stats = [
-                { batch: '301', value: '1,245', trend: 'up' },
-                { batch: '302', value: '982', trend: 'down' },
-                { batch: '303', value: '1,567', trend: 'up' },
-                { batch: '304', value: '756', trend: 'down' },
-                { batch: '305', value: '2,101', trend: 'up' }
+                { batch: '301', value: '12.4K', trend: 'up' },
+                { batch: '302', value: '9.8K', trend: 'down' },
+                { batch: '303', value: '15.6K', trend: 'up' },
+                { batch: '304', value: '7.5K', trend: 'down' },
+                { batch: '305', value: '21.0K', trend: 'up' }
             ];
             return stats.map(s => `
                 <div class="stat-card">
@@ -761,15 +984,15 @@
                         ${s.value}
                         <span class="trend-${s.trend}"><i class="fas fa-arrow-${s.trend}"></i></span>
                     </div>
-                    <div class="stat-label">Total Points</div>
+                    <div class="stat-label">TOTAL POINTS</div>
                 </div>
             `).join('');
         }
 
         function generateDefaultRanking() {
             const ranks = [
-                'Majedul Islam Fahad', 'Sayid Hossain Sayem', 'Abu Talha Shamim',
-                'Kamrul Hassan Sojib', 'Rafiqul Islam', 'Shahidul Alam',
+                'Majedul I. Fahad', 'Sayid H. Sayem', 'Abu T. Shamim',
+                'Kamrul H. Sojib', 'Rafiqul Islam', 'Shahidul Alam',
                 'Tanvir Ahmed', 'Hasan Mahmud', 'Faisal Rahman', 'Nur Hossain'
             ];
             return ranks.map((name, i) => `
@@ -777,40 +1000,26 @@
                     <span class="rank-number">#${i+1}</span>
                     <div class="rank-badge">${i===0?'👑':i===1?'🥈':i===2?'🥉':''}</div>
                     <span class="rank-name">${name}</span>
-                    <span class="rank-points">${2500 - i*100}</span>
+                    <span class="rank-points">${2850 - i*120}</span>
                 </div>
             `).join('');
         }
 
-        // Generate batch students
-        const batchStudents = (function() {
-            const cache = {};
-            const firstNames = ['Mohammed','Ahmed','Abdullah','Omar','Ali','Hassan','Hussein','Karim','Rashid','Jamal'];
-            const lastNames = ['Khan','Rahman','Ahmed','Hossain','Islam','Miah','Sarker','Das','Paul','Roy'];
-            
-            function generate(count) {
-                let students = [];
-                for (let i = 0; i < count; i++) {
-                    students.push(`${firstNames[Math.floor(Math.random()*10)]} ${lastNames[Math.floor(Math.random()*10)]}`);
-                }
-                return students.sort();
-            }
-            
-            return {
-                '301': generate(900),
-                '302': generate(300),
-                '303': generate(300),
-                '304': generate(318),
-                '305': ['majedul islam fahad', 'sayid hossain sayem', 'abu talha shamim', 'kamrul hassan sojib']
-            };
-        })();
+        // Batch Students
+        const batchStudents = {
+            '301': Array(900).fill(0).map((_,i) => `Student ${301}${String(i+1).padStart(3,'0')}`),
+            '302': Array(300).fill(0).map((_,i) => `Student ${302}${String(i+1).padStart(3,'0')}`),
+            '303': Array(300).fill(0).map((_,i) => `Student ${303}${String(i+1).padStart(3,'0')}`),
+            '304': Array(318).fill(0).map((_,i) => `Student ${304}${String(i+1).padStart(3,'0')}`),
+            '305': ['majedul islam fahad', 'sayid hossain sayem', 'abu talha shamim', 'kamrul hassan sojib']
+        };
 
         function showBatchStudents(batch) {
             const container = document.getElementById('student-list-container');
             const grid = document.getElementById('student-grid');
-            document.getElementById('batch-title').innerText = `Batch ${batch} (${batchStudents[batch].length})`;
+            document.getElementById('batch-title').innerHTML = `📚 BATCH ${batch} · ${batchStudents[batch].length} STUDENTS`;
             grid.innerHTML = batchStudents[batch].map(name => 
-                `<div class="student-card" onclick="handleStudentClick('${batch}', '${name}')">${name.substring(0,15)}...</div>`
+                `<div class="student-card" onclick="handleStudentClick('${batch}', '${name}')">${name.length > 18 ? name.substring(0,16)+'...' : name}</div>`
             ).join('');
             container.style.display = 'block';
         }
@@ -818,22 +1027,57 @@
         function handleStudentClick(batch, name) {
             if (batch === '305') {
                 const data = allStudentsData[name] || { 
-                    classPoints: 85, totalPoints: 420, examMarks: 78, totalMarks: 390, 
-                    notice: 'Regular attendance required.'
+                    classPoints: 94, totalPoints: 486, examMarks: 89, totalMarks: 445, 
+                    notice: '🌟 Outstanding performance! Keep it up. Next assessment: March 15.'
                 };
+                
                 document.getElementById('popup-content').innerHTML = `
-                    <h3 style="color:cyan;">${name}</h3>
-                    <div class="info-tables">
-                        <table><tr><th>Points</th><td>${data.classPoints}</td></tr>
-                        <tr><th>Total</th><td>${data.totalPoints}</td></tr></table>
-                        <table><tr><th>Marks</th><td>${data.examMarks}</td></tr>
-                        <tr><th>Total</th><td>${data.totalMarks}</td></tr></table>
-                        <p style="margin-top:10px;">${data.notice}</p>
+                    <div class="popup-title">${name.includes(' ') ? name.split(' ').map(n => n.charAt(0).toUpperCase()+n.slice(1)).join(' ') : name}</div>
+                    <div class="student-id-badge">🎓 ID: COC-305-${String(Math.floor(Math.random()*900+100))}</div>
+                    
+                    <div class="premium-grid">
+                        <div class="premium-card">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-star"></i></div>
+                                <h3>Class Performance</h3>
+                            </div>
+                            <div class="stats-row">
+                                <span class="stats-label">Class Points</span>
+                                <span class="stats-value">${data.classPoints}</span>
+                            </div>
+                            <div class="stats-row">
+                                <span class="stats-label">Total Points</span>
+                                <span class="stats-value">${data.totalPoints}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="premium-card">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-pencil-alt"></i></div>
+                                <h3>Examination</h3>
+                            </div>
+                            <div class="stats-row">
+                                <span class="stats-label">Exam Marks</span>
+                                <span class="stats-value">${data.examMarks}</span>
+                            </div>
+                            <div class="stats-row">
+                                <span class="stats-label">Total Marks</span>
+                                <span class="stats-value">${data.totalMarks}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="notice-card">
+                            <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+                                <i class="fas fa-bell" style="color:cyan;"></i>
+                                <span style="color:cyan; font-weight:600;">NOTICE</span>
+                            </div>
+                            <p>${data.notice}</p>
+                        </div>
                     </div>
                 `;
                 document.getElementById('popup').classList.add('show');
             } else {
-                alert(`❌ Not a ${batch} batch student`);
+                alert(`❌ Access Denied · Not a member of Batch ${batch}`);
             }
         }
 
@@ -841,7 +1085,7 @@
             document.getElementById('popup').classList.remove('show');
         }
 
-        // Search with debounce
+        // Search
         let searchTimeout;
         function searchStudents(query) {
             clearTimeout(searchTimeout);
@@ -859,23 +1103,28 @@
                 }
                 
                 if (found.length > 0) {
-                    results.innerHTML = found.map(f => 
-                        `<div class="search-item" onclick="handleStudentClick('${f.batch}','${f.name}')">${f.name}</div>`
+                    results.innerHTML = found.slice(0,5).map(f => 
+                        `<div class="search-item" onclick="handleStudentClick('${f.batch}','${f.name}')">${f.name} · Batch ${f.batch}</div>`
                     ).join('');
                     results.style.display = 'block';
                 } else {
-                    results.innerHTML = '<div class="search-item">❌ Not found</div>';
+                    results.innerHTML = '<div class="search-item">❌ No results found</div>';
                     results.style.display = 'block';
                 }
-            }, 300);
+            }, 250);
         }
 
-        // Close search on outside click
+        // Close search
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
                 document.getElementById('search-results').style.display = 'none';
             }
         });
+
+        // Initialize
+        window.onload = function() {
+            initPlexus();
+        };
     </script>
 </body>
 </html>
