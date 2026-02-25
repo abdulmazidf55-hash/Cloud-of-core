@@ -10,12 +10,14 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts for Better Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
         }
         
         body {
@@ -62,7 +64,6 @@
             visibility: hidden;
         }
         
-        /* Tech Animation Overlay */
         .tech-overlay {
             position: absolute;
             width: 100%;
@@ -306,7 +307,292 @@
             font-weight: bold;
             text-shadow: 0 0 20px cyan;
         }
+
+        /* ===== NEW: TRADE STYLE STATISTICS ===== */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 40px 0;
+        }
         
+        .stat-card {
+            background: rgba(26, 38, 57, 0.9);
+            backdrop-filter: blur(5px);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            animation: statPulse 2s infinite;
+            cursor: pointer;
+        }
+        .stat-card:nth-child(1) { animation-delay: 0s; }
+        .stat-card:nth-child(2) { animation-delay: 0.4s; }
+        .stat-card:nth-child(3) { animation-delay: 0.8s; }
+        .stat-card:nth-child(4) { animation-delay: 1.2s; }
+        .stat-card:nth-child(5) { animation-delay: 1.6s; }
+        
+        @keyframes statPulse {
+            0%, 100% { transform: translateY(0); box-shadow: 0 0 15px rgba(0,255,255,0.3); }
+            50% { transform: translateY(-5px); box-shadow: 0 0 30px rgba(0,255,255,0.6); }
+        }
+        
+        .stat-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px cyan;
+        }
+        
+        .stat-batch {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: cyan;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 0 15px cyan;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .trend-up {
+            color: #00ff00;
+            font-size: 1rem;
+            animation: trendUp 1s infinite;
+        }
+        
+        .trend-down {
+            color: #ff4444;
+            font-size: 1rem;
+            animation: trendDown 1s infinite;
+        }
+        
+        @keyframes trendUp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes trendDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+        
+        .stat-label {
+            color: #aaa;
+            margin-top: 5px;
+            font-size: 0.8rem;
+        }
+        
+        /* ===== NEW: RANKING SECTION ===== */
+        .ranking-section {
+            margin: 50px 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: cyan;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px cyan;
+            animation: titleGlow 2s infinite;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 15px cyan; }
+            50% { text-shadow: 0 0 30px cyan, 0 0 45px cyan; }
+        }
+        
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .rank-item {
+            display: flex;
+            align-items: center;
+            background: rgba(26, 38, 57, 0.8);
+            backdrop-filter: blur(5px);
+            border: 1px solid #00ffff33;
+            border-radius: 40px;
+            padding: 10px 20px;
+            transition: 0.3s;
+            animation: slideIn 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .rank-item:nth-child(1) { animation-delay: 0.1s; }
+        .rank-item:nth-child(2) { animation-delay: 0.2s; }
+        .rank-item:nth-child(3) { animation-delay: 0.3s; }
+        .rank-item:nth-child(4) { animation-delay: 0.4s; }
+        .rank-item:nth-child(5) { animation-delay: 0.5s; }
+        .rank-item:nth-child(6) { animation-delay: 0.6s; }
+        .rank-item:nth-child(7) { animation-delay: 0.7s; }
+        .rank-item:nth-child(8) { animation-delay: 0.8s; }
+        .rank-item:nth-child(9) { animation-delay: 0.9s; }
+        .rank-item:nth-child(10) { animation-delay: 1s; }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .rank-item:hover {
+            transform: scale(1.02) translateX(10px);
+            border-color: cyan;
+            box-shadow: 0 0 30px rgba(0,255,255,0.3);
+        }
+        
+        .rank-number {
+            width: 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: cyan;
+        }
+        
+        .rank-badge {
+            width: 80px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .premium-badge {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #0a0f1e;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 0 0 20px gold;
+            animation: premiumGlow 1.5s infinite;
+        }
+        
+        @keyframes premiumGlow {
+            0%, 100% { box-shadow: 0 0 15px gold; }
+            50% { box-shadow: 0 0 30px gold, 0 0 45px gold; }
+        }
+        
+        .silver-badge {
+            background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+            color: #0a0f1e;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 0 0 15px silver;
+        }
+        
+        .bronze-badge {
+            background: linear-gradient(135deg, #cd7f32, #b06d2c);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 0 0 15px #cd7f32;
+        }
+        
+        .rank-name {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .rank-points {
+            font-size: 1.1rem;
+            color: cyan;
+            font-weight: bold;
+        }
+
+        /* ===== NEW: NOTICE SECTION WITH FIRE ANIMATION ===== */
+        .notice-section {
+            margin: 50px 0;
+            padding: 25px;
+            background: rgba(26, 38, 57, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            border: 2px solid cyan;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notice-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0,255,255,0.1), transparent);
+            animation: rotate 15s linear infinite;
+        }
+        
+        .notice-title {
+            font-size: 1.8rem;
+            color: cyan;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .fire-animation {
+            display: inline-block;
+            animation: fire 1s infinite;
+            font-size: 2rem;
+        }
+        
+        @keyframes fire {
+            0%, 100% { transform: scale(1); opacity: 1; filter: hue-rotate(0deg); }
+            50% { transform: scale(1.2); opacity: 0.9; filter: hue-rotate(20deg); }
+        }
+        
+        .notice-content {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: white;
+            position: relative;
+            z-index: 10;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid cyan;
+            animation: noticePulse 2s infinite;
+        }
+        
+        @keyframes noticePulse {
+            0%, 100% { border-left-color: cyan; }
+            50% { border-left-color: #ff00ff; }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Existing Batch Buttons */
         .batch-buttons {
             display: flex;
             gap: 15px;
@@ -572,8 +858,15 @@
 
         <div class="main-content">
             <img src="https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png" alt="Logo" class="main-logo">
+            
             <div class="student-count" id="total-students-display">📊 2026 Total Students: 1852</div>
 
+            <!-- NEW: Trade Style Statistics -->
+            <div class="stats-container" id="batch-stats">
+                <!-- Dynamically populated from Firebase -->
+            </div>
+
+            <!-- Existing Batch Buttons -->
             <div class="batch-buttons">
                 <button class="batch-btn" onclick="showBatchStudents('301')">🎓 301 Batch (900)</button>
                 <button class="batch-btn" onclick="showBatchStudents('302')">🎓 302 Batch (300)</button>
@@ -585,6 +878,25 @@
             <div id="student-list-container" class="student-list-container" style="display: none;">
                 <h3 style="color: cyan; margin-bottom: 20px;" id="batch-title"></h3>
                 <div id="student-grid" class="student-grid"></div>
+            </div>
+
+            <!-- NEW: Top 10 Ranking Section -->
+            <div class="ranking-section">
+                <h2 class="section-title">🏆 TOP 10 STUDENTS 🏆</h2>
+                <div class="ranking-list" id="ranking-list">
+                    <!-- Dynamically populated from Firebase -->
+                </div>
+            </div>
+
+            <!-- NEW: Notice Section with Fire Animation -->
+            <div class="notice-section">
+                <h2 class="notice-title">
+                    <span class="fire-animation">🔥</span> NOTICE & UPDATES 
+                    <span class="fire-animation">🔥</span>
+                </h2>
+                <div class="notice-content" id="notice-content">
+                    Loading notices...
+                </div>
             </div>
         </div>
 
@@ -688,7 +1000,6 @@
                 for (let i = 0; i < particles.length; i++) {
                     let p = particles[i];
                     
-                    // Mouse interaction
                     if (mouseX !== null && mouseY !== null) {
                         let dx = mouseX - p.x;
                         let dy = mouseY - p.y;
@@ -703,11 +1014,9 @@
                     p.x += p.vx;
                     p.y += p.vy;
                     
-                    // Boundary check
                     if (p.x < 0 || p.x > width) p.vx *= -1;
                     if (p.y < 0 || p.y > height) p.vy *= -1;
                     
-                    // Keep in bounds
                     p.x = Math.max(0, Math.min(width, p.x));
                     p.y = Math.max(0, Math.min(height, p.y));
                 }
@@ -716,7 +1025,6 @@
             function draw() {
                 ctx.clearRect(0, 0, width, height);
                 
-                // Draw connections
                 ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)';
                 ctx.lineWidth = 1;
                 
@@ -737,7 +1045,6 @@
                     }
                 }
                 
-                // Draw particles
                 for (let i = 0; i < particles.length; i++) {
                     let p = particles[i];
                     ctx.beginPath();
@@ -745,7 +1052,6 @@
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     ctx.fill();
                     
-                    // Glow effect
                     ctx.shadowColor = 'cyan';
                     ctx.shadowBlur = 10;
                     ctx.fill();
@@ -784,6 +1090,7 @@
         // Initialize plexus on load
         window.onload = function() {
             initPlexus();
+            loadRealTimeData();
         };
 
         // Auth State
@@ -829,6 +1136,7 @@
                 document.getElementById('landing-page').classList.add('hidden');
                 document.getElementById('main-app').style.display = 'flex';
                 loadData();
+                loadRealTimeData();
             } else {
                 currentUser = null;
                 document.getElementById('landing-page').classList.remove('hidden');
@@ -852,6 +1160,132 @@
             });
         }
 
+        // Load Real-time Data for New Features
+        function loadRealTimeData() {
+            // Load Batch Stats
+            db.collection('batchStats').onSnapshot(snapshot => {
+                const statsContainer = document.getElementById('batch-stats');
+                if (snapshot.empty) {
+                    // Default data
+                    statsContainer.innerHTML = generateDefaultStats();
+                } else {
+                    let html = '';
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        html += `
+                            <div class="stat-card">
+                                <div class="stat-batch">BATCH ${data.batch}</div>
+                                <div class="stat-value">
+                                    ${data.value}
+                                    <span class="trend-${data.trend}">
+                                        <i class="fas fa-arrow-${data.trend === 'up' ? 'up' : 'down'}"></i>
+                                    </span>
+                                </div>
+                                <div class="stat-label">Students</div>
+                            </div>
+                        `;
+                    });
+                    statsContainer.innerHTML = html;
+                }
+            });
+
+            // Load Top 10 Ranking
+            db.collection('ranking').orderBy('points', 'desc').limit(10).onSnapshot(snapshot => {
+                const rankingList = document.getElementById('ranking-list');
+                if (snapshot.empty) {
+                    rankingList.innerHTML = generateDefaultRanking();
+                } else {
+                    let html = '';
+                    let index = 1;
+                    snapshot.forEach(doc => {
+                        const student = doc.data();
+                        let badge = '';
+                        if (index === 1) badge = '<span class="premium-badge">👑 PREMIUM</span>';
+                        else if (index === 2) badge = '<span class="silver-badge">🥈 SILVER</span>';
+                        else if (index === 3) badge = '<span class="bronze-badge">🥉 BRONZE</span>';
+                        
+                        html += `
+                            <div class="rank-item">
+                                <span class="rank-number">#${index}</span>
+                                <div class="rank-badge">${badge}</div>
+                                <span class="rank-name">${student.name}</span>
+                                <span class="rank-points">${student.points} pts</span>
+                            </div>
+                        `;
+                        index++;
+                    });
+                    rankingList.innerHTML = html;
+                }
+            });
+
+            // Load Notice
+            db.collection('notices').doc('latest').onSnapshot(doc => {
+                if (doc.exists) {
+                    document.getElementById('notice-content').innerHTML = doc.data().content;
+                } else {
+                    document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core! Stay tuned for updates.';
+                }
+            });
+        }
+
+        // Generate default stats
+        function generateDefaultStats() {
+            const defaultStats = [
+                { batch: '301', value: '1,245', trend: 'up' },
+                { batch: '302', value: '982', trend: 'down' },
+                { batch: '303', value: '1,567', trend: 'up' },
+                { batch: '304', value: '756', trend: 'down' },
+                { batch: '305', value: '2,101', trend: 'up' }
+            ];
+            
+            return defaultStats.map(stat => `
+                <div class="stat-card">
+                    <div class="stat-batch">BATCH ${stat.batch}</div>
+                    <div class="stat-value">
+                        ${stat.value}
+                        <span class="trend-${stat.trend}">
+                            <i class="fas fa-arrow-${stat.trend === 'up' ? 'up' : 'down'}"></i>
+                        </span>
+                    </div>
+                    <div class="stat-label">Students</div>
+                </div>
+            `).join('');
+        }
+
+        // Generate default ranking
+        function generateDefaultRanking() {
+            const defaultRanking = [
+                { name: 'Majedul Islam Fahad', points: 2850 },
+                { name: 'Sayid Hossain Sayem', points: 2720 },
+                { name: 'Abu Talha Shamim', points: 2680 },
+                { name: 'Kamrul Hassan Sojib', points: 2540 },
+                { name: 'Rafiqul Islam', points: 2410 },
+                { name: 'Shahidul Alam', points: 2350 },
+                { name: 'Tanvir Ahmed', points: 2280 },
+                { name: 'Hasan Mahmud', points: 2190 },
+                { name: 'Faisal Rahman', points: 2100 },
+                { name: 'Nur Hossain', points: 2050 }
+            ];
+            
+            let html = '';
+            defaultRanking.forEach((student, index) => {
+                let badge = '';
+                if (index === 0) badge = '<span class="premium-badge">👑 PREMIUM</span>';
+                else if (index === 1) badge = '<span class="silver-badge">🥈 SILVER</span>';
+                else if (index === 2) badge = '<span class="bronze-badge">🥉 BRONZE</span>';
+                
+                html += `
+                    <div class="rank-item">
+                        <span class="rank-number">#${index + 1}</span>
+                        <div class="rank-badge">${badge}</div>
+                        <span class="rank-name">${student.name}</span>
+                        <span class="rank-points">${student.points} pts</span>
+                    </div>
+                `;
+            });
+            return html;
+        }
+
         // Generate student names for batches
         function generateBatchStudents(batch, count) {
             const firstNames = ['Mohammed', 'Ahmed', 'Abdullah', 'Omar', 'Ali', 'Hassan', 'Hussein', 'Karim', 'Rashid', 'Jamal', 'Amir', 'Bilal', 'Farid', 'Zayn', 'Rayhan', 'Tanvir', 'Shahid', 'Kamal', 'Rafiq', 'Shams', 'Nur', 'Faisal', 'Riyad', 'Hasan', 'Hossain', 'Mahbub', 'Mamun', 'Sohel', 'Rana', 'Shakil', 'Bappi', 'Mithun', 'Rubel', 'Shohag', 'Rony', 'Shahed', 'Tuhin', 'Mintu', 'Babul', 'Kuddus'];
@@ -862,7 +1296,7 @@
                 const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
                 const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
                 const middleInitial = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-                students.push(`${firstName} ${middleInitial}. ${lastName} (ID: ${batch}-${String(i+1).padStart(4, '0')})`);
+                students.push(`${firstName} ${middleInitial}. ${lastName}`);
             }
             return students.sort();
         }
@@ -895,7 +1329,6 @@
         // Handle student click based on batch
         function handleStudentClick(batch, name) {
             if (batch === '305') {
-                // Show detailed info for 305 batch students
                 const data = allStudentsData[name] || { 
                     classPoints: Math.floor(Math.random() * 100), 
                     totalPoints: Math.floor(Math.random() * 500), 
@@ -953,7 +1386,6 @@
                 return; 
             }
             
-            // Search in all batch students
             let allStudents = [];
             for (let batch in batchStudents) {
                 allStudents = allStudents.concat(batchStudents[batch].map(name => ({ name, batch })));
@@ -982,4 +1414,4 @@
         });
     </script>
 </body>
-  </html>
+</html>
