@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Cloud of Core - Premium Dashboard</title>
+    <title>Cloud of Core - International Dashboard</title>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
@@ -28,7 +28,7 @@
             overflow-x: hidden;
         }
 
-        /* ===== OPTIMIZED PLEXUS BACKGROUND ===== */
+        /* ===== PLEXUS BACKGROUND ===== */
         #plexus-canvas {
             position: fixed;
             top: 0;
@@ -40,7 +40,6 @@
             pointer-events: none;
         }
 
-        /* Dark Overlay for better readability */
         .overlay {
             position: fixed;
             top: 0;
@@ -64,7 +63,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.5s ease;
             backdrop-filter: blur(2px);
         }
         #landing-page.hidden {
@@ -97,26 +96,17 @@
             font-size: 1.4rem;
             font-weight: 700;
             border: none;
-            background: linear-gradient(135deg, #00ffff, #0066ff, #00ffff);
-            background-size: 200% 200%;
+            background: linear-gradient(135deg, #00ffff, #0066ff);
             color: #030614;
             border-radius: 60px;
             cursor: pointer;
             box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
-            animation: gradientShift 3s ease infinite;
             width: min(350px, 85%);
             margin: 0 auto;
-            letter-spacing: 1px;
             border: 1px solid rgba(255,255,255,0.2);
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* ===== MODAL ===== */
+        /* ===== UNIQUE SIGNIN POPUP ===== */
         .modal {
             display: none;
             position: fixed;
@@ -125,30 +115,125 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 6, 20, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 6, 20, 0.8);
+            backdrop-filter: blur(15px);
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
         .modal.show {
             display: flex;
-            animation: modalAppear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes modalAppear {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
+            animation: modalGlow 0.5s ease;
         }
 
         .modal-content {
-            background: linear-gradient(145deg, #1a2639, #0f172a);
-            padding: 35px 25px;
-            border-radius: 32px;
+            background: linear-gradient(165deg, #0f1a2f, #030614);
+            padding: 40px 30px;
+            border-radius: 50px;
             width: 100%;
-            max-width: 380px;
-            border: 2px solid rgba(0, 255, 255, 0.5);
-            box-shadow: 0 25px 50px -8px rgba(0,255,255,0.3);
+            max-width: 400px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 30px 60px -15px rgba(0,255,255,0.4);
+            position: relative;
+            animation: cardFloat 0.6s ease-out;
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 2px solid cyan;
+            font-size: 2.5rem;
+            color: cyan;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px cyan; }
+            50% { box-shadow: 0 0 40px cyan; }
+        }
+
+        .modal-content h2 {
+            color: transparent;
+            background: linear-gradient(135deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: cyan;
+            font-size: 1.2rem;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 16px 20px 16px 55px;
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-radius: 40px;
+            background: rgba(10, 20, 40, 0.7);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 16px;
+            margin: 15px 0 10px;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #00ffff, #0066ff);
+            color: #030614;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .auth-links span {
+            color: cyan;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: cyan;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: 1px solid rgba(0,255,255,0.3);
         }
 
         /* ===== MAIN APP ===== */
@@ -160,7 +245,6 @@
             z-index: 10;
         }
 
-        /* Glass Header */
         .header {
             background: rgba(10, 15, 30, 0.8);
             backdrop-filter: blur(12px);
@@ -193,16 +277,41 @@
             background: rgba(30, 41, 59, 0.7);
             color: white;
             font-size: 15px;
-            backdrop-filter: blur(5px);
         }
 
-        #search-input:focus {
-            outline: none;
-            border-color: cyan;
-            box-shadow: 0 0 25px rgba(0,255,255,0.3);
+        #search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #1e293b;
+            border-radius: 10px;
+            margin-top: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            border: 1px solid cyan;
+            z-index: 1000;
         }
 
-        /* Main Content */
+        .search-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #334155;
+            color: cyan;
+            cursor: pointer;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1.5px solid cyan;
+            color: cyan;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         .main-content {
             flex: 1;
             padding: 25px 20px;
@@ -224,10 +333,9 @@
             margin: 15px 0 25px;
             font-weight: 700;
             text-shadow: 0 0 20px rgba(0,255,255,0.5);
-            letter-spacing: -0.5px;
         }
 
-        /* ===== TRADE STATS CARDS ===== */
+        /* Stats Cards */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -242,19 +350,12 @@
             border-radius: 20px;
             padding: 16px 8px;
             text-align: center;
-            box-shadow: 0 10px 30px -10px rgba(0,255,255,0.2);
-            transition: transform 0.2s;
-        }
-
-        .stat-card:active {
-            transform: scale(0.98);
         }
 
         .stat-batch {
             font-size: 1.1rem;
             font-weight: 700;
             color: #00ffff;
-            letter-spacing: 1px;
             margin-bottom: 5px;
         }
 
@@ -266,7 +367,6 @@
             justify-content: center;
             gap: 5px;
             color: white;
-            text-shadow: 0 0 15px rgba(0,255,255,0.5);
         }
 
         .trend-up { color: #22ff7e; }
@@ -276,40 +376,58 @@
             font-size: 0.8rem;
             color: #00ffff;
             margin-top: 8px;
-            opacity: 0.9;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        /* Batch Buttons */
+        /* BATCH BUTTONS WITH BATCH NUMBER */
         .batch-buttons {
             display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 10px 0 15px;
-            margin: 10px 0;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 25px 0;
         }
 
         .batch-btn {
-            padding: 10px 22px;
-            border: 1.5px solid rgba(0, 255, 255, 0.5);
-            background: rgba(26, 38, 57, 0.7);
+            padding: 14px 32px;
+            border: 2px solid rgba(0, 255, 255, 0.6);
+            background: rgba(26, 38, 57, 0.8);
             backdrop-filter: blur(5px);
             color: white;
-            border-radius: 40px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            white-space: nowrap;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
             transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(0,255,255,0.2);
+            position: relative;
+            overflow: hidden;
         }
 
-        .batch-btn:active {
+        .batch-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, cyan, transparent, cyan);
+            border-radius: 50px;
+            z-index: -1;
+            animation: borderGlow 2s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes borderGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .batch-btn:hover {
             background: cyan;
             color: #030614;
-            border-color: cyan;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px cyan;
         }
 
         /* Student Grid */
@@ -339,16 +457,16 @@
             text-align: center;
             color: #00ffff;
             font-weight: 500;
+            cursor: pointer;
             transition: 0.2s;
         }
 
         .student-card:active {
             background: cyan;
             color: #030614;
-            transform: scale(0.96);
         }
 
-        /* ===== TOP 10 RANKING ===== */
+        /* Ranking with Animated Stickers */
         .ranking-section {
             margin: 30px 0 20px;
         }
@@ -362,7 +480,6 @@
             background-clip: text;
             text-align: center;
             margin-bottom: 18px;
-            letter-spacing: -0.5px;
         }
 
         .ranking-list {
@@ -390,7 +507,23 @@
 
         .rank-badge {
             width: 45px;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
+            animation: badgeGlow 1.5s infinite;
+        }
+
+        /* Animated Stickers - No Text */
+        .rank-badge i {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px currentColor); }
+            50% { filter: drop-shadow(0 0 15px currentColor); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .rank-name {
@@ -405,7 +538,7 @@
             color: #00ffff;
         }
 
-        /* ===== NOTICE SECTION ===== */
+        /* Notice Section */
         .notice-section {
             margin: 30px 0 20px;
             padding: 22px 18px;
@@ -413,24 +546,6 @@
             backdrop-filter: blur(8px);
             border-radius: 28px;
             border: 1px solid rgba(0, 255, 255, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .notice-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0,255,255,0.1), transparent);
-            animation: rotateSlow 10s linear infinite;
-        }
-
-        @keyframes rotateSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .notice-title {
@@ -452,7 +567,7 @@
 
         @keyframes flame {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; filter: hue-rotate(10deg); }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
 
         .notice-content {
@@ -462,12 +577,9 @@
             background: rgba(0, 0, 0, 0.3);
             border-radius: 18px;
             border-left: 4px solid #00ffff;
-            font-weight: 500;
-            position: relative;
-            z-index: 10;
         }
 
-        /* ===== ADVANCED POPUP ===== */
+        /* Premium Popup */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -488,11 +600,6 @@
             animation: overlayAppear 0.4s ease;
         }
 
-        @keyframes overlayAppear {
-            from { opacity: 0; backdrop-filter: blur(0); }
-            to { opacity: 1; backdrop-filter: blur(12px); }
-        }
-
         .popup-card {
             background: linear-gradient(165deg, #1a2639, #0f172a);
             padding: 28px 22px;
@@ -501,14 +608,7 @@
             max-width: 420px;
             border: 2px solid rgba(0, 255, 255, 0.6);
             box-shadow: 0 30px 60px -15px rgba(0,255,255,0.4);
-            position: relative;
-            transform-origin: center;
-            animation: popupCardAppear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes popupCardAppear {
-            0% { opacity: 0; transform: scale(0.7) translateY(30px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+            animation: popupAppear 0.5s ease;
         }
 
         .popup-close {
@@ -517,7 +617,7 @@
             right: 22px;
             width: 36px;
             height: 36px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -525,118 +625,8 @@
             color: cyan;
             font-size: 24px;
             cursor: pointer;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            transition: 0.2s;
-            z-index: 10;
         }
 
-        .popup-close:active {
-            background: cyan;
-            color: #030614;
-            transform: rotate(90deg);
-        }
-
-        .popup-title {
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: transparent;
-            background: linear-gradient(135deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            margin-bottom: 15px;
-            padding-right: 40px;
-            letter-spacing: -0.5px;
-        }
-
-        .student-id-badge {
-            background: rgba(0, 255, 255, 0.1);
-            padding: 6px 15px;
-            border-radius: 40px;
-            display: inline-block;
-            margin-bottom: 20px;
-            border: 1px dashed cyan;
-            font-size: 0.9rem;
-            color: cyan;
-        }
-
-        /* Premium Info Cards */
-        .premium-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin: 20px 0;
-        }
-
-        .premium-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(5px);
-            border-radius: 24px;
-            padding: 18px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 255, 255, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: cyan;
-            font-size: 1.3rem;
-        }
-
-        .card-header h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .stats-row:last-child {
-            border-bottom: none;
-        }
-
-        .stats-label {
-            color: #aaa;
-            font-size: 0.95rem;
-        }
-
-        .stats-value {
-            font-weight: 700;
-            color: cyan;
-            font-size: 1.3rem;
-        }
-
-        .notice-card {
-            background: rgba(0, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 18px;
-            border-left: 4px solid cyan;
-        }
-
-        .notice-card p {
-            color: #ddd;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* Footer */
         .footer {
             background: rgba(10, 15, 30, 0.8);
             backdrop-filter: blur(10px);
@@ -646,11 +636,6 @@
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            max-width: 500px;
-            margin: 0 auto;
             text-align: center;
         }
 
@@ -676,7 +661,6 @@
     </style>
 </head>
 <body>
-    <!-- Plexus Background Canvas (Optimized) -->
     <canvas id="plexus-canvas"></canvas>
     <div class="overlay"></div>
 
@@ -685,23 +669,39 @@
         <div class="landing-content">
             <img src="https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png" alt="Logo" class="landing-logo">
             <br>
-            <button class="glow-btn" onclick="showAuthModal()">ENTER DASHBOARD</button>
+            <button class="glow-btn" onclick="showAuthModal()">GO TO DASHBOARD</button>
         </div>
     </div>
 
-    <!-- AUTH MODAL -->
+    <!-- SIGNIN POPUP -->
     <div id="auth-modal" class="modal">
         <div class="modal-content">
-            <h2 style="color:cyan; text-align:center; margin-bottom:25px;">🔐 ACCESS</h2>
-            <input type="email" id="email" placeholder="Email">
-            <input type="password" id="password" placeholder="Password">
-            <button id="auth-action-btn" onclick="handleAuth()">Sign In</button>
-            <p style="color:#aaa; margin-top:15px;" onclick="toggleAuthMode()">Create Account</p>
-            <p style="color:#aaa;" onclick="closeModal()">Close</p>
+            <div class="close-btn" onclick="closeModal()">&times;</div>
+            <div class="modal-icon">
+                <i class="fas fa-user-astronaut"></i>
+            </div>
+            <h2>WELCOME BACK</h2>
+            
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email Address">
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            
+            <button id="auth-action-btn" onclick="handleAuth()">SIGN IN</button>
+            
+            <div class="auth-links">
+                <span onclick="toggleAuthMode()">Create Account</span>
+                <span>Forgot Password?</span>
+            </div>
         </div>
     </div>
 
-    <!-- PREMIUM POPUP -->
+    <!-- POPUP -->
     <div id="popup" class="popup-overlay">
         <div class="popup-card">
             <span class="popup-close" onclick="closePopup()">&times;</span>
@@ -717,7 +717,7 @@
                 <input type="text" id="search-input" placeholder="Search students..." oninput="searchStudents(this.value)">
                 <div id="search-results"></div>
             </div>
-            <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+            <button class="logout-btn" onclick="logout()">EXIT</button>
         </div>
 
         <div class="main-content">
@@ -725,16 +725,16 @@
             
             <div class="student-count" id="total-students-display">📊 2026 · 1,852 Students</div>
 
-            <!-- Stats with "Total Points" -->
+            <!-- Stats -->
             <div class="stats-container" id="batch-stats"></div>
 
-            <!-- Batch Buttons -->
+            <!-- BATCH BUTTONS WITH BATCH NUMBER -->
             <div class="batch-buttons">
-                <button class="batch-btn" onclick="showBatchStudents('301')">301 · 900</button>
-                <button class="batch-btn" onclick="showBatchStudents('302')">302 · 300</button>
-                <button class="batch-btn" onclick="showBatchStudents('303')">303 · 300</button>
-                <button class="batch-btn" onclick="showBatchStudents('304')">304 · 318</button>
-                <button class="batch-btn" onclick="showBatchStudents('305')">305 · 4</button>
+                <button class="batch-btn" onclick="showBatchStudents('301')">BATCH 301 · 900</button>
+                <button class="batch-btn" onclick="showBatchStudents('302')">BATCH 302 · 300</button>
+                <button class="batch-btn" onclick="showBatchStudents('303')">BATCH 303 · 300</button>
+                <button class="batch-btn" onclick="showBatchStudents('304')">BATCH 304 · 318</button>
+                <button class="batch-btn" onclick="showBatchStudents('305')">BATCH 305 · 4</button>
             </div>
 
             <!-- Student List -->
@@ -743,13 +743,13 @@
                 <div id="student-grid" class="student-grid"></div>
             </div>
 
-            <!-- Top 10 Ranking -->
+            <!-- Ranking with Animated Stickers -->
             <div class="ranking-section">
                 <h2 class="section-title">🏆 TOP 10 LEADERBOARD</h2>
                 <div class="ranking-list" id="ranking-list"></div>
             </div>
 
-            <!-- Notice with Fire Animation -->
+            <!-- Notice -->
             <div class="notice-section">
                 <h2 class="notice-title">
                     <span class="fire-icon">🔥</span> LIVE UPDATE <span class="fire-icon">🔥</span>
@@ -764,7 +764,7 @@
                 <div class="footer-section">
                     <h3>CLOUD OF CORE</h3>
                     <p>© 2026 · All rights reserved</p>
-                    <p>Version 3.0 · Premium Edition</p>
+                    <p>International Edition · v4.0</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -774,7 +774,6 @@
     </div>
 
     <script>
-        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyDZjU69H4bIEHvQ5OeEAbVNt8ay8XF4178",
             authDomain: "cloudofcore-e7554.firebaseapp.com",
@@ -787,14 +786,13 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // ===== OPTIMIZED PLEXUS BACKGROUND =====
+        // Plexus Background
         function initPlexus() {
             const canvas = document.getElementById('plexus-canvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
-            const particleCount = 60; // Reduced for performance
-            const connectionDistance = 120;
+            const particleCount = 60;
 
             function resize() {
                 width = window.innerWidth;
@@ -818,16 +816,15 @@
             function draw() {
                 ctx.clearRect(0, 0, width, height);
                 
-                // Draw connections
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
                         
-                        if (dist < connectionDistance) {
+                        if (dist < 120) {
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(0, 255, 255, ${0.1 * (1 - dist/connectionDistance)})`;
+                            ctx.strokeStyle = `rgba(0, 255, 255, ${0.1 * (1 - dist/120)})`;
                             ctx.lineWidth = 0.5;
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
@@ -836,7 +833,6 @@
                     }
                 }
                 
-                // Draw particles
                 for (let p of particles) {
                     ctx.beginPath();
                     ctx.fillStyle = 'rgba(0, 255, 255, 0.5)';
@@ -868,23 +864,45 @@
         let isSignUp = false;
         let allStudentsData = {};
 
-        function showAuthModal() { document.getElementById('auth-modal').classList.add('show'); }
-        function closeModal() { document.getElementById('auth-modal').classList.remove('show'); }
+        function showAuthModal() { 
+            document.getElementById('auth-modal').classList.add('show'); 
+        }
+        
+        function closeModal() { 
+            document.getElementById('auth-modal').classList.remove('show'); 
+        }
+        
         function toggleAuthMode() {
             isSignUp = !isSignUp;
-            document.getElementById('auth-action-btn').innerText = isSignUp ? 'Sign Up' : 'Sign In';
+            document.getElementById('auth-action-btn').innerText = isSignUp ? 'SIGN UP' : 'SIGN IN';
         }
 
         function handleAuth() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const action = isSignUp ? auth.createUserWithEmailAndPassword : auth.signInWithEmailAndPassword;
-            action(email, password)
-                .then(() => closeModal())
-                .catch(error => alert(error.message));
+            
+            if (isSignUp) {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then(() => {
+                        closeModal();
+                        document.getElementById('landing-page').classList.add('hidden');
+                        document.getElementById('main-app').style.display = 'flex';
+                    })
+                    .catch(error => alert(error.message));
+            } else {
+                auth.signInWithEmailAndPassword(email, password)
+                    .then(() => {
+                        closeModal();
+                        document.getElementById('landing-page').classList.add('hidden');
+                        document.getElementById('main-app').style.display = 'flex';
+                    })
+                    .catch(error => alert(error.message));
+            }
         }
 
-        function logout() { auth.signOut(); }
+        function logout() { 
+            auth.signOut(); 
+        }
 
         auth.onAuthStateChanged(user => {
             if (user) {
@@ -898,6 +916,7 @@
             }
         });
 
+        // Load Data
         function loadData() {
             db.collection('settings').doc('general').onSnapshot(doc => {
                 if (doc.exists) {
@@ -912,12 +931,10 @@
         }
 
         function loadRealTimeData() {
-            // Show defaults
             document.getElementById('batch-stats').innerHTML = generateDefaultStats();
             document.getElementById('ranking-list').innerHTML = generateDefaultRanking();
-            document.getElementById('notice-content').innerHTML = '🔥 Platform update: New features added! Check them out.';
+            document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core International!';
 
-            // Batch Stats
             db.collection('batchStats').onSnapshot(snapshot => {
                 if (!snapshot.empty) {
                     let html = '';
@@ -940,17 +957,22 @@
                 }
             });
 
-            // Ranking
             db.collection('ranking').orderBy('points', 'desc').limit(10).onSnapshot(snapshot => {
                 if (!snapshot.empty) {
                     let html = '';
                     let i = 1;
                     snapshot.forEach(doc => {
                         const s = doc.data();
+                        let badge = '';
+                        if (i === 1) badge = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
+                        else if (i === 2) badge = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
+                        else if (i === 3) badge = '<i class="fas fa-medal" style="color:#cd7f32;"></i>';
+                        else badge = '<i class="fas fa-star" style="color:#00ffff;"></i>';
+                        
                         html += `
                             <div class="rank-item">
                                 <span class="rank-number">#${i}</span>
-                                <div class="rank-badge">${i===1?'👑':i===2?'🥈':i===3?'🥉':''}</div>
+                                <div class="rank-badge">${badge}</div>
                                 <span class="rank-name">${s.name}</span>
                                 <span class="rank-points">${s.points}</span>
                             </div>
@@ -961,7 +983,6 @@
                 }
             });
 
-            // Notice
             db.collection('notices').doc('latest').onSnapshot(doc => {
                 if (doc.exists) {
                     document.getElementById('notice-content').innerHTML = doc.data().content;
@@ -995,22 +1016,84 @@
                 'Kamrul H. Sojib', 'Rafiqul Islam', 'Shahidul Alam',
                 'Tanvir Ahmed', 'Hasan Mahmud', 'Faisal Rahman', 'Nur Hossain'
             ];
-            return ranks.map((name, i) => `
-                <div class="rank-item">
-                    <span class="rank-number">#${i+1}</span>
-                    <div class="rank-badge">${i===0?'👑':i===1?'🥈':i===2?'🥉':''}</div>
-                    <span class="rank-name">${name}</span>
-                    <span class="rank-points">${2850 - i*120}</span>
-                </div>
-            `).join('');
+            return ranks.map((name, i) => {
+                let badge = '';
+                if (i === 0) badge = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
+                else if (i === 1) badge = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
+                else if (i === 2) badge = '<i class="fas fa-medal" style="color:#cd7f32;"></i>';
+                else badge = '<i class="fas fa-star" style="color:#00ffff;"></i>';
+                
+                return `
+                    <div class="rank-item">
+                        <span class="rank-number">#${i+1}</span>
+                        <div class="rank-badge">${badge}</div>
+                        <span class="rank-name">${name}</span>
+                        <span class="rank-points">${2850 - i*120}</span>
+                    </div>
+                `;
+            }).join('');
         }
 
-        // Batch Students
+        // INTERNATIONAL STUDENT NAMES
+        
+        // USA/UK Names for Batch 301 (900 students)
+        const usNames = [
+            'James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Christopher',
+            'Charles', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul', 'Steven', 'Andrew', 'Kenneth',
+            'Joshua', 'Kevin', 'Brian', 'George', 'Edward', 'Ronald', 'Timothy', 'Jason', 'Jeffrey', 'Ryan',
+            'Jacob', 'Gary', 'Nicholas', 'Eric', 'Stephen', 'Jonathan', 'Larry', 'Scott', 'Frank', 'Brandon',
+            'Raymond', 'Gregory', 'Samuel', 'Benjamin', 'Patrick', 'Jack', 'Henry', 'Walter', 'Dennis', 'Jerry'
+        ];
+        
+        const ukLastNames = [
+            'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez',
+            'Wilson', 'Anderson', 'Taylor', 'Thomas', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson',
+            'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker', 'Young', 'Allen',
+            'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill', 'Flores', 'Green', 'Adams', 'Nelson',
+            'Baker', 'Hall', 'Rivera', 'Campbell', 'Mitchell', 'Carter', 'Roberts', 'Gomez', 'Phillips', 'Evans'
+        ];
+
+        // Middle Eastern Names for Batch 302 (300 students)
+        const arabicNames = [
+            'Mohammed', 'Ahmed', 'Ali', 'Omar', 'Hassan', 'Hussein', 'Abdullah', 'Ibrahim', 'Khalid', 'Mahmoud',
+            'Youssef', 'Mustafa', 'Hamza', 'Bilal', 'Amir', 'Tariq', 'Sami', 'Rashid', 'Jamal', 'Nadir',
+            'Farid', 'Zayn', 'Karim', 'Rayan', 'Adnan', 'Fahad', 'Nasser', 'Sultan', 'Majid', 'Waleed'
+        ];
+
+        // European Names for Batch 303 (300 students)
+        const europeanNames = [
+            'Lucas', 'Liam', 'Noah', 'Oliver', 'Elijah', 'Mateo', 'Theo', 'Leo', 'Elias', 'Louis',
+            'Arthur', 'Gabriel', 'Jules', 'Adam', 'Hugo', 'Leon', 'Paul', 'Nathan', 'Tom', 'Max',
+            'Felix', 'David', 'Samuel', 'Julian', 'Alexander', 'Niklas', 'Simon', 'Daniel', 'Jonas', 'Erik'
+        ];
+
+        // Latin/Spanish Names for Batch 304 (318 students)
+        const latinNames = [
+            'Carlos', 'Jose', 'Luis', 'Miguel', 'Javier', 'Diego', 'Fernando', 'Alejandro', 'Andres', 'Santiago',
+            'Matias', 'Sebastian', 'Nicolas', 'Gabriel', 'Rafael', 'Eduardo', 'Francisco', 'Ricardo', 'Jorge', 'Pedro',
+            'Pablo', 'Cesar', 'Oscar', 'Hector', 'Raul', 'Ruben', 'Ivan', 'Victor', 'Manuel', 'Antonio'
+        ];
+
+        // Generate batch students
+        function generateInternationalStudents(batch, count, nameArray, lastNameArray = null) {
+            let students = [];
+            for (let i = 0; i < count; i++) {
+                const firstName = nameArray[Math.floor(Math.random() * nameArray.length)];
+                if (lastNameArray) {
+                    const lastName = lastNameArray[Math.floor(Math.random() * lastNameArray.length)];
+                    students.push(`${firstName} ${lastName}`);
+                } else {
+                    students.push(firstName);
+                }
+            }
+            return students.sort();
+        }
+
         const batchStudents = {
-            '301': Array(900).fill(0).map((_,i) => `Student ${301}${String(i+1).padStart(3,'0')}`),
-            '302': Array(300).fill(0).map((_,i) => `Student ${302}${String(i+1).padStart(3,'0')}`),
-            '303': Array(300).fill(0).map((_,i) => `Student ${303}${String(i+1).padStart(3,'0')}`),
-            '304': Array(318).fill(0).map((_,i) => `Student ${304}${String(i+1).padStart(3,'0')}`),
+            '301': generateInternationalStudents('301', 900, usNames, ukLastNames),
+            '302': generateInternationalStudents('302', 300, arabicNames),
+            '303': generateInternationalStudents('303', 300, europeanNames),
+            '304': generateInternationalStudents('304', 318, latinNames),
             '305': ['majedul islam fahad', 'sayid hossain sayem', 'abu talha shamim', 'kamrul hassan sojib']
         };
 
@@ -1019,7 +1102,7 @@
             const grid = document.getElementById('student-grid');
             document.getElementById('batch-title').innerHTML = `📚 BATCH ${batch} · ${batchStudents[batch].length} STUDENTS`;
             grid.innerHTML = batchStudents[batch].map(name => 
-                `<div class="student-card" onclick="handleStudentClick('${batch}', '${name}')">${name.length > 18 ? name.substring(0,16)+'...' : name}</div>`
+                `<div class="student-card" onclick="handleStudentClick('${batch}', '${name}')">${name.length > 20 ? name.substring(0,18)+'...' : name}</div>`
             ).join('');
             container.style.display = 'block';
         }
@@ -1028,56 +1111,46 @@
             if (batch === '305') {
                 const data = allStudentsData[name] || { 
                     classPoints: 94, totalPoints: 486, examMarks: 89, totalMarks: 445, 
-                    notice: '🌟 Outstanding performance! Keep it up. Next assessment: March 15.'
+                    notice: '🌟 Outstanding performance! Keep it up.'
                 };
                 
                 document.getElementById('popup-content').innerHTML = `
-                    <div class="popup-title">${name.includes(' ') ? name.split(' ').map(n => n.charAt(0).toUpperCase()+n.slice(1)).join(' ') : name}</div>
-                    <div class="student-id-badge">🎓 ID: COC-305-${String(Math.floor(Math.random()*900+100))}</div>
-                    
-                    <div class="premium-grid">
-                        <div class="premium-card">
-                            <div class="card-header">
-                                <div class="card-icon"><i class="fas fa-star"></i></div>
-                                <h3>Class Performance</h3>
-                            </div>
-                            <div class="stats-row">
-                                <span class="stats-label">Class Points</span>
-                                <span class="stats-value">${data.classPoints}</span>
-                            </div>
-                            <div class="stats-row">
-                                <span class="stats-label">Total Points</span>
-                                <span class="stats-value">${data.totalPoints}</span>
-                            </div>
+                    <div style="font-size:1.6rem; font-weight:800; color:cyan; margin-bottom:10px;">${name}</div>
+                    <div style="margin:15px 0; padding:15px; background:rgba(0,255,255,0.1); border-radius:20px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                            <span>Class Points:</span>
+                            <span style="color:cyan; font-weight:700;">${data.classPoints}</span>
                         </div>
-                        
-                        <div class="premium-card">
-                            <div class="card-header">
-                                <div class="card-icon"><i class="fas fa-pencil-alt"></i></div>
-                                <h3>Examination</h3>
-                            </div>
-                            <div class="stats-row">
-                                <span class="stats-label">Exam Marks</span>
-                                <span class="stats-value">${data.examMarks}</span>
-                            </div>
-                            <div class="stats-row">
-                                <span class="stats-label">Total Marks</span>
-                                <span class="stats-value">${data.totalMarks}</span>
-                            </div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                            <span>Total Points:</span>
+                            <span style="color:cyan; font-weight:700;">${data.totalPoints}</span>
                         </div>
-                        
-                        <div class="notice-card">
-                            <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
-                                <i class="fas fa-bell" style="color:cyan;"></i>
-                                <span style="color:cyan; font-weight:600;">NOTICE</span>
-                            </div>
-                            <p>${data.notice}</p>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                            <span>Exam Marks:</span>
+                            <span style="color:cyan; font-weight:700;">${data.examMarks}</span>
                         </div>
+                        <div style="display:flex; justify-content:space-between;">
+                            <span>Total Marks:</span>
+                            <span style="color:cyan; font-weight:700;">${data.totalMarks}</span>
+                        </div>
+                    </div>
+                    <div style="padding:15px; background:#1e293b; border-radius:16px;">
+                        <i class="fas fa-bell" style="color:cyan; margin-right:8px;"></i>
+                        ${data.notice}
                     </div>
                 `;
                 document.getElementById('popup').classList.add('show');
             } else {
-                alert(`❌ Access Denied · Not a member of Batch ${batch}`);
+                // Show error message in English for other batches
+                document.getElementById('popup-content').innerHTML = `
+                    <div style="text-align:center; padding:20px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size:3rem; color:#ff4d4d; margin-bottom:15px;"></i>
+                        <h2 style="color:#ff4d4d; margin-bottom:10px;">ACCESS DENIED</h2>
+                        <p style="font-size:1.1rem; color:#fff;">You are not a student of Batch ${batch}</p>
+                        <p style="color:#aaa; margin-top:15px;">This section is restricted to Batch ${batch} students only.</p>
+                    </div>
+                `;
+                document.getElementById('popup').classList.add('show');
             }
         }
 
@@ -1114,14 +1187,12 @@
             }, 250);
         }
 
-        // Close search
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
                 document.getElementById('search-results').style.display = 'none';
             }
         });
 
-        // Initialize
         window.onload = function() {
             initPlexus();
         };
