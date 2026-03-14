@@ -594,6 +594,77 @@
             box-shadow: 0 0 10px cyan;
         }
 
+        /* ===== TOP 10 LEADERBOARD (Previous Style) ===== */
+        .ranking-section {
+            margin: 30px 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: transparent;
+            background: linear-gradient(135deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(26, 38, 57, 0.8), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(5px);
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .rank-number {
+            width: 36px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #00ffff;
+        }
+
+        .rank-badge {
+            width: 45px;
+            font-size: 1.3rem;
+            animation: badgeGlow 1.5s infinite;
+        }
+
+        .rank-badge i {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px currentColor); }
+            50% { filter: drop-shadow(0 0 15px currentColor); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .rank-name {
+            flex: 1;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .rank-points {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #00ffff;
+        }
+
         /* BATCH BUTTONS */
         .batch-buttons {
             display: flex;
@@ -801,7 +872,7 @@
             font-size: 0.75rem;
         }
 
-        /* Desktop Responsive */
+        /* Responsive */
         @media (min-width: 768px) {
             .trending-card {
                 flex: 0 0 calc(33.333% - 10px);
@@ -810,10 +881,6 @@
             
             .trending-image {
                 height: 160px;
-            }
-            
-            .slider-btn {
-                display: flex;
             }
         }
 
@@ -925,6 +992,12 @@
             <div id="student-list-container" class="student-list-container" style="display: none;">
                 <h3 style="color:cyan; margin-bottom:15px;" id="batch-title"></h3>
                 <div id="student-grid" class="student-grid"></div>
+            </div>
+
+            <!-- TOP 10 LEADERBOARD (Previous Style) -->
+            <div class="ranking-section">
+                <h2 class="section-title">🏆 TOP 10 LEADERBOARD</h2>
+                <div class="ranking-list" id="ranking-list"></div>
             </div>
 
             <!-- Notice -->
@@ -1128,21 +1201,21 @@
             if (!trendingData.length) {
                 // Default data
                 trendingData = [
-                    { rank: 1, name: 'James Anderson', batch: '301', points: 2850, rating: 4.9, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+1' },
-                    { rank: 2, name: 'Mohammed Ahmed', batch: '302', points: 2720, rating: 4.8, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+2' },
-                    { rank: 3, name: 'Lucas Schmidt', batch: '303', points: 2680, rating: 4.8, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+3' },
-                    { rank: 4, name: 'Carlos Garcia', batch: '304', points: 2550, rating: 4.7, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+4' },
-                    { rank: 5, name: 'Majedul Fahad', batch: '305', points: 2450, rating: 4.7, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+5' },
-                    { rank: 6, name: 'John Smith', batch: '301', points: 2380, rating: 4.6, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+6' },
-                    { rank: 7, name: 'Ali Hassan', batch: '302', points: 2320, rating: 4.6, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+7' },
-                    { rank: 8, name: 'Oliver Brown', batch: '303', points: 2280, rating: 4.5, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+8' },
-                    { rank: 9, name: 'Miguel Torres', batch: '304', points: 2210, rating: 4.5, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+9' },
-                    { rank: 10, name: 'Sayid Sayem', batch: '305', points: 2150, rating: 4.4, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+10' },
-                    { rank: 11, name: 'Robert Wilson', batch: '301', points: 2080, rating: 4.4, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+11' },
-                    { rank: 12, name: 'Omar Farooq', batch: '302', points: 2020, rating: 4.3, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+12' },
-                    { rank: 13, name: 'Elias Mueller', batch: '303', points: 1950, rating: 4.3, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+13' },
-                    { rank: 14, name: 'Diego Lopez', batch: '304', points: 1880, rating: 4.2, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+14' },
-                    { rank: 15, name: 'Abu Shamim', batch: '305', points: 1820, rating: 4.2, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+15' }
+                    { rank: 1, name: 'James Anderson', batch: '301', points: 2850, rating: 4.9, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=James+A' },
+                    { rank: 2, name: 'Mohammed Ahmed', batch: '302', points: 2720, rating: 4.8, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Mohammed+A' },
+                    { rank: 3, name: 'Lucas Schmidt', batch: '303', points: 2680, rating: 4.8, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Lucas+S' },
+                    { rank: 4, name: 'Carlos Garcia', batch: '304', points: 2550, rating: 4.7, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Carlos+G' },
+                    { rank: 5, name: 'Majedul Fahad', batch: '305', points: 2450, rating: 4.7, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Majedul+F' },
+                    { rank: 6, name: 'John Smith', batch: '301', points: 2380, rating: 4.6, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=John+S' },
+                    { rank: 7, name: 'Ali Hassan', batch: '302', points: 2320, rating: 4.6, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Ali+H' },
+                    { rank: 8, name: 'Oliver Brown', batch: '303', points: 2280, rating: 4.5, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Oliver+B' },
+                    { rank: 9, name: 'Miguel Torres', batch: '304', points: 2210, rating: 4.5, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Miguel+T' },
+                    { rank: 10, name: 'Sayid Sayem', batch: '305', points: 2150, rating: 4.4, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Sayid+S' },
+                    { rank: 11, name: 'Robert Wilson', batch: '301', points: 2080, rating: 4.4, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Robert+W' },
+                    { rank: 12, name: 'Omar Farooq', batch: '302', points: 2020, rating: 4.3, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Omar+F' },
+                    { rank: 13, name: 'Elias Mueller', batch: '303', points: 1950, rating: 4.3, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Elias+M' },
+                    { rank: 14, name: 'Diego Lopez', batch: '304', points: 1880, rating: 4.2, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Diego+L' },
+                    { rank: 15, name: 'Abu Shamim', batch: '305', points: 1820, rating: 4.2, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Abu+S' }
                 ];
             }
 
@@ -1151,7 +1224,7 @@
                 html += `
                     <div class="trending-card">
                         <div class="trending-rank">#${student.rank}</div>
-                        <img src="${student.image}" alt="${student.name}" class="trending-image">
+                        <img src="${student.image}" alt="${student.name}" class="trending-image" onerror="this.src='https://via.placeholder.com/300x200/1a2639/00ffff?text=No+Image'">
                         <div class="trending-details">
                             <div class="trending-name">${student.name}</div>
                             <div class="trending-stats">
@@ -1237,7 +1310,6 @@
         function updateSliderPosition() {
             const slider = document.getElementById('trendingSlider');
             const cardsPerView = getCardsPerView();
-            const cardWidth = cardsPerView === 1 ? 100 : (100 / cardsPerView);
             slider.style.transform = `translateX(-${currentSlide * 100}%)`;
             
             // Update dots
@@ -1248,8 +1320,7 @@
         }
 
         function loadRealTimeData() {
-            document.getElementById('batch-stats').innerHTML = generateDefaultStats();
-
+            // Load batch stats
             db.collection('batchStats').onSnapshot(snapshot => {
                 if (!snapshot.empty) {
                     let html = '';
@@ -1269,12 +1340,46 @@
                         `;
                     });
                     document.getElementById('batch-stats').innerHTML = html;
+                } else {
+                    document.getElementById('batch-stats').innerHTML = generateDefaultStats();
                 }
             });
 
+            // Load ranking (Top 10)
+            db.collection('ranking').orderBy('points', 'desc').limit(10).onSnapshot(snapshot => {
+                if (!snapshot.empty) {
+                    let html = '';
+                    let i = 1;
+                    snapshot.forEach(doc => {
+                        const s = doc.data();
+                        let badge = '';
+                        if (i === 1) badge = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
+                        else if (i === 2) badge = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
+                        else if (i === 3) badge = '<i class="fas fa-medal" style="color:#cd7f32;"></i>';
+                        else badge = '<i class="fas fa-star" style="color:#00ffff;"></i>';
+                        
+                        html += `
+                            <div class="rank-item">
+                                <span class="rank-number">#${i}</span>
+                                <div class="rank-badge">${badge}</div>
+                                <span class="rank-name">${s.name}</span>
+                                <span class="rank-points">${s.points}</span>
+                            </div>
+                        `;
+                        i++;
+                    });
+                    document.getElementById('ranking-list').innerHTML = html;
+                } else {
+                    document.getElementById('ranking-list').innerHTML = generateDefaultRanking();
+                }
+            });
+
+            // Load notice
             db.collection('notices').doc('latest').onSnapshot(doc => {
                 if (doc.exists) {
                     document.getElementById('notice-content').innerHTML = doc.data().content;
+                } else {
+                    document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core International!';
                 }
             });
         }
@@ -1299,10 +1404,33 @@
             `).join('');
         }
 
+        function generateDefaultRanking() {
+            const ranks = [
+                'Majedul I. Fahad', 'Sayid H. Sayem', 'Abu T. Shamim',
+                'Kamrul H. Sojib', 'Rafiqul Islam', 'Shahidul Alam',
+                'Tanvir Ahmed', 'Hasan Mahmud', 'Faisal Rahman', 'Nur Hossain'
+            ];
+            return ranks.map((name, i) => {
+                let badge = '';
+                if (i === 0) badge = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
+                else if (i === 1) badge = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
+                else if (i === 2) badge = '<i class="fas fa-medal" style="color:#cd7f32;"></i>';
+                else badge = '<i class="fas fa-star" style="color:#00ffff;"></i>';
+                
+                return `
+                    <div class="rank-item">
+                        <span class="rank-number">#${i+1}</span>
+                        <div class="rank-badge">${badge}</div>
+                        <span class="rank-name">${name}</span>
+                        <span class="rank-points">${2850 - i*120}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
         // INTERNATIONAL STUDENT NAMES
         const usNames = [
-            'James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Christopher',
-            'Charles', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul', 'Steven', 'Andrew', 'Kenneth'
+            'James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Christopher'
         ];
         
         const ukLastNames = [
