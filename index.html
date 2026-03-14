@@ -380,7 +380,221 @@
             text-transform: uppercase;
         }
 
-        /* BATCH BUTTONS WITH BATCH NUMBER */
+        /* ===== TRENDING 15 SLIDER ===== */
+        .trending-section {
+            margin: 35px 0 25px;
+        }
+
+        .trending-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: transparent;
+            background: linear-gradient(135deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .trending-title i {
+            color: #ffd700;
+            animation: starPulse 1.5s infinite;
+        }
+
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 30px;
+            padding: 10px 0;
+        }
+
+        .slider-wrapper {
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .trending-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 15px;
+        }
+
+        .trending-card {
+            flex: 0 0 calc(100% - 20px);
+            min-width: calc(100% - 20px);
+            background: linear-gradient(165deg, #1a2639, #0f172a);
+            border-radius: 30px;
+            padding: 20px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trending-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, cyan, transparent, cyan);
+            border-radius: 30px;
+            z-index: -1;
+            animation: cardGlow 3s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes cardGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .trending-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 2px solid cyan;
+            margin-bottom: 15px;
+        }
+
+        .trending-details {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 15px;
+        }
+
+        .trending-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: cyan;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .trending-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .stat-item {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-label-small {
+            font-size: 0.75rem;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+
+        .stat-value-small {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: cyan;
+        }
+
+        .trending-rank {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 255, 0.2);
+            border: 2px solid cyan;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: cyan;
+            backdrop-filter: blur(5px);
+        }
+
+        .trending-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .trending-rating i {
+            color: #ffd700;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.2);
+            border: 2px solid cyan;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: cyan;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: cyan;
+            color: #030614;
+        }
+
+        .slider-btn.left {
+            left: 10px;
+        }
+
+        .slider-btn.right {
+            right: 10px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: cyan;
+            transform: scale(1.3);
+            box-shadow: 0 0 10px cyan;
+        }
+
+        /* BATCH BUTTONS */
         .batch-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -464,78 +678,6 @@
         .student-card:active {
             background: cyan;
             color: #030614;
-        }
-
-        /* Ranking with Animated Stickers */
-        .ranking-section {
-            margin: 30px 0 20px;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: transparent;
-            background: linear-gradient(135deg, #00ffff, #ffffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            text-align: center;
-            margin-bottom: 18px;
-        }
-
-        .ranking-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .rank-item {
-            display: flex;
-            align-items: center;
-            background: linear-gradient(90deg, rgba(26, 38, 57, 0.8), rgba(15, 23, 42, 0.8));
-            backdrop-filter: blur(5px);
-            padding: 12px 16px;
-            border-radius: 40px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .rank-number {
-            width: 36px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #00ffff;
-        }
-
-        .rank-badge {
-            width: 45px;
-            font-size: 1.3rem;
-            animation: badgeGlow 1.5s infinite;
-        }
-
-        /* Animated Stickers - No Text */
-        .rank-badge i {
-            animation: spin 3s linear infinite;
-        }
-
-        @keyframes badgeGlow {
-            0%, 100% { filter: drop-shadow(0 0 5px currentColor); }
-            50% { filter: drop-shadow(0 0 15px currentColor); }
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .rank-name {
-            flex: 1;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .rank-points {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #00ffff;
         }
 
         /* Notice Section */
@@ -658,6 +800,29 @@
             color: #666;
             font-size: 0.75rem;
         }
+
+        /* Desktop Responsive */
+        @media (min-width: 768px) {
+            .trending-card {
+                flex: 0 0 calc(33.333% - 10px);
+                min-width: calc(33.333% - 10px);
+            }
+            
+            .trending-image {
+                height: 160px;
+            }
+            
+            .slider-btn {
+                display: flex;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .trending-card {
+                flex: 0 0 calc(20% - 12px);
+                min-width: calc(20% - 12px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -725,10 +890,29 @@
             
             <div class="student-count" id="total-students-display">📊 2026 · 1,852 Students</div>
 
-            <!-- Stats -->
+            <!-- Stats Cards (Batch Points) -->
             <div class="stats-container" id="batch-stats"></div>
 
-            <!-- BATCH BUTTONS WITH BATCH NUMBER -->
+            <!-- TRENDING 15 SLIDER SECTION -->
+            <div class="trending-section">
+                <h2 class="trending-title">
+                    <i class="fas fa-star"></i> TRENDING 15 <i class="fas fa-star"></i>
+                </h2>
+                <div class="slider-container">
+                    <div class="slider-btn left" onclick="slideTrending(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-btn right" onclick="slideTrending(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="slider-wrapper">
+                        <div class="trending-slider" id="trendingSlider"></div>
+                    </div>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+
+            <!-- BATCH BUTTONS -->
             <div class="batch-buttons">
                 <button class="batch-btn" onclick="showBatchStudents('301')">BATCH 301 · 900</button>
                 <button class="batch-btn" onclick="showBatchStudents('302')">BATCH 302 · 300</button>
@@ -741,12 +925,6 @@
             <div id="student-list-container" class="student-list-container" style="display: none;">
                 <h3 style="color:cyan; margin-bottom:15px;" id="batch-title"></h3>
                 <div id="student-grid" class="student-grid"></div>
-            </div>
-
-            <!-- Ranking with Animated Stickers -->
-            <div class="ranking-section">
-                <h2 class="section-title">🏆 TOP 10 LEADERBOARD</h2>
-                <div class="ranking-list" id="ranking-list"></div>
             </div>
 
             <!-- Notice -->
@@ -863,6 +1041,8 @@
         // Auth
         let isSignUp = false;
         let allStudentsData = {};
+        let trendingData = [];
+        let currentSlide = 0;
 
         function showAuthModal() { 
             document.getElementById('auth-modal').classList.add('show'); 
@@ -910,6 +1090,7 @@
                 document.getElementById('main-app').style.display = 'flex';
                 loadData();
                 loadRealTimeData();
+                loadTrendingData();
             } else {
                 document.getElementById('landing-page').classList.remove('hidden');
                 document.getElementById('main-app').style.display = 'none';
@@ -930,10 +1111,144 @@
             });
         }
 
+        function loadTrendingData() {
+            db.collection('trending').orderBy('rank', 'asc').limit(15).onSnapshot(snapshot => {
+                trendingData = [];
+                snapshot.forEach(doc => {
+                    trendingData.push(doc.data());
+                });
+                renderTrendingSlider();
+            });
+        }
+
+        function renderTrendingSlider() {
+            const slider = document.getElementById('trendingSlider');
+            const dotsContainer = document.getElementById('sliderDots');
+            
+            if (!trendingData.length) {
+                // Default data
+                trendingData = [
+                    { rank: 1, name: 'James Anderson', batch: '301', points: 2850, rating: 4.9, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+1' },
+                    { rank: 2, name: 'Mohammed Ahmed', batch: '302', points: 2720, rating: 4.8, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+2' },
+                    { rank: 3, name: 'Lucas Schmidt', batch: '303', points: 2680, rating: 4.8, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+3' },
+                    { rank: 4, name: 'Carlos Garcia', batch: '304', points: 2550, rating: 4.7, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+4' },
+                    { rank: 5, name: 'Majedul Fahad', batch: '305', points: 2450, rating: 4.7, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+5' },
+                    { rank: 6, name: 'John Smith', batch: '301', points: 2380, rating: 4.6, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+6' },
+                    { rank: 7, name: 'Ali Hassan', batch: '302', points: 2320, rating: 4.6, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+7' },
+                    { rank: 8, name: 'Oliver Brown', batch: '303', points: 2280, rating: 4.5, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+8' },
+                    { rank: 9, name: 'Miguel Torres', batch: '304', points: 2210, rating: 4.5, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+9' },
+                    { rank: 10, name: 'Sayid Sayem', batch: '305', points: 2150, rating: 4.4, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+10' },
+                    { rank: 11, name: 'Robert Wilson', batch: '301', points: 2080, rating: 4.4, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+11' },
+                    { rank: 12, name: 'Omar Farooq', batch: '302', points: 2020, rating: 4.3, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+12' },
+                    { rank: 13, name: 'Elias Mueller', batch: '303', points: 1950, rating: 4.3, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+13' },
+                    { rank: 14, name: 'Diego Lopez', batch: '304', points: 1880, rating: 4.2, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+14' },
+                    { rank: 15, name: 'Abu Shamim', batch: '305', points: 1820, rating: 4.2, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Student+15' }
+                ];
+            }
+
+            let html = '';
+            trendingData.forEach((student, index) => {
+                html += `
+                    <div class="trending-card">
+                        <div class="trending-rank">#${student.rank}</div>
+                        <img src="${student.image}" alt="${student.name}" class="trending-image">
+                        <div class="trending-details">
+                            <div class="trending-name">${student.name}</div>
+                            <div class="trending-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label-small">BATCH</div>
+                                    <div class="stat-value-small">${student.batch}</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label-small">POINTS</div>
+                                    <div class="stat-value-small">${student.points}</div>
+                                </div>
+                            </div>
+                            <div class="trending-rating">
+                                ${getRatingStars(student.rating)}
+                                <span style="color:cyan;">${student.rating}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            slider.innerHTML = html;
+            
+            // Create dots
+            const cardsPerView = getCardsPerView();
+            const totalDots = Math.ceil(trendingData.length / cardsPerView);
+            let dotsHtml = '';
+            for (let i = 0; i < totalDots; i++) {
+                dotsHtml += `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`;
+            }
+            dotsContainer.innerHTML = dotsHtml;
+            
+            currentSlide = 0;
+            updateSliderPosition();
+            
+            // Auto slide every 3 seconds
+            setInterval(autoSlide, 3000);
+        }
+
+        function getRatingStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            if (halfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            return stars;
+        }
+
+        function getCardsPerView() {
+            if (window.innerWidth >= 1024) return 5;
+            if (window.innerWidth >= 768) return 3;
+            return 1;
+        }
+
+        function slideTrending(direction) {
+            const cardsPerView = getCardsPerView();
+            const maxSlide = Math.ceil(trendingData.length / cardsPerView) - 1;
+            currentSlide = Math.max(0, Math.min(currentSlide + direction, maxSlide));
+            updateSliderPosition();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSliderPosition();
+        }
+
+        function autoSlide() {
+            const cardsPerView = getCardsPerView();
+            const maxSlide = Math.ceil(trendingData.length / cardsPerView) - 1;
+            currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
+            updateSliderPosition();
+        }
+
+        function updateSliderPosition() {
+            const slider = document.getElementById('trendingSlider');
+            const cardsPerView = getCardsPerView();
+            const cardWidth = cardsPerView === 1 ? 100 : (100 / cardsPerView);
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
         function loadRealTimeData() {
             document.getElementById('batch-stats').innerHTML = generateDefaultStats();
-            document.getElementById('ranking-list').innerHTML = generateDefaultRanking();
-            document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core International!';
 
             db.collection('batchStats').onSnapshot(snapshot => {
                 if (!snapshot.empty) {
@@ -954,32 +1269,6 @@
                         `;
                     });
                     document.getElementById('batch-stats').innerHTML = html;
-                }
-            });
-
-            db.collection('ranking').orderBy('points', 'desc').limit(10).onSnapshot(snapshot => {
-                if (!snapshot.empty) {
-                    let html = '';
-                    let i = 1;
-                    snapshot.forEach(doc => {
-                        const s = doc.data();
-                        let badge = '';
-                        if (i === 1) badge = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
-                        else if (i === 2) badge = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
-                        else if (i === 3) badge = '<i class="fas fa-medal" style="color:#cd7f32;"></i>';
-                        else badge = '<i class="fas fa-star" style="color:#00ffff;"></i>';
-                        
-                        html += `
-                            <div class="rank-item">
-                                <span class="rank-number">#${i}</span>
-                                <div class="rank-badge">${badge}</div>
-                                <span class="rank-name">${s.name}</span>
-                                <span class="rank-points">${s.points}</span>
-                            </div>
-                        `;
-                        i++;
-                    });
-                    document.getElementById('ranking-list').innerHTML = html;
                 }
             });
 
@@ -1010,71 +1299,28 @@
             `).join('');
         }
 
-        function generateDefaultRanking() {
-            const ranks = [
-                'Majedul I. Fahad', 'Sayid H. Sayem', 'Abu T. Shamim',
-                'Kamrul H. Sojib', 'Rafiqul Islam', 'Shahidul Alam',
-                'Tanvir Ahmed', 'Hasan Mahmud', 'Faisal Rahman', 'Nur Hossain'
-            ];
-            return ranks.map((name, i) => {
-                let badge = '';
-                if (i === 0) badge = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
-                else if (i === 1) badge = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
-                else if (i === 2) badge = '<i class="fas fa-medal" style="color:#cd7f32;"></i>';
-                else badge = '<i class="fas fa-star" style="color:#00ffff;"></i>';
-                
-                return `
-                    <div class="rank-item">
-                        <span class="rank-number">#${i+1}</span>
-                        <div class="rank-badge">${badge}</div>
-                        <span class="rank-name">${name}</span>
-                        <span class="rank-points">${2850 - i*120}</span>
-                    </div>
-                `;
-            }).join('');
-        }
-
         // INTERNATIONAL STUDENT NAMES
-        
-        // USA/UK Names for Batch 301 (900 students)
         const usNames = [
             'James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Christopher',
-            'Charles', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul', 'Steven', 'Andrew', 'Kenneth',
-            'Joshua', 'Kevin', 'Brian', 'George', 'Edward', 'Ronald', 'Timothy', 'Jason', 'Jeffrey', 'Ryan',
-            'Jacob', 'Gary', 'Nicholas', 'Eric', 'Stephen', 'Jonathan', 'Larry', 'Scott', 'Frank', 'Brandon',
-            'Raymond', 'Gregory', 'Samuel', 'Benjamin', 'Patrick', 'Jack', 'Henry', 'Walter', 'Dennis', 'Jerry'
+            'Charles', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul', 'Steven', 'Andrew', 'Kenneth'
         ];
         
         const ukLastNames = [
-            'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez',
-            'Wilson', 'Anderson', 'Taylor', 'Thomas', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson',
-            'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker', 'Young', 'Allen',
-            'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill', 'Flores', 'Green', 'Adams', 'Nelson',
-            'Baker', 'Hall', 'Rivera', 'Campbell', 'Mitchell', 'Carter', 'Roberts', 'Gomez', 'Phillips', 'Evans'
+            'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'
         ];
 
-        // Middle Eastern Names for Batch 302 (300 students)
         const arabicNames = [
-            'Mohammed', 'Ahmed', 'Ali', 'Omar', 'Hassan', 'Hussein', 'Abdullah', 'Ibrahim', 'Khalid', 'Mahmoud',
-            'Youssef', 'Mustafa', 'Hamza', 'Bilal', 'Amir', 'Tariq', 'Sami', 'Rashid', 'Jamal', 'Nadir',
-            'Farid', 'Zayn', 'Karim', 'Rayan', 'Adnan', 'Fahad', 'Nasser', 'Sultan', 'Majid', 'Waleed'
+            'Mohammed', 'Ahmed', 'Ali', 'Omar', 'Hassan', 'Hussein', 'Abdullah', 'Ibrahim', 'Khalid', 'Mahmoud'
         ];
 
-        // European Names for Batch 303 (300 students)
         const europeanNames = [
-            'Lucas', 'Liam', 'Noah', 'Oliver', 'Elijah', 'Mateo', 'Theo', 'Leo', 'Elias', 'Louis',
-            'Arthur', 'Gabriel', 'Jules', 'Adam', 'Hugo', 'Leon', 'Paul', 'Nathan', 'Tom', 'Max',
-            'Felix', 'David', 'Samuel', 'Julian', 'Alexander', 'Niklas', 'Simon', 'Daniel', 'Jonas', 'Erik'
+            'Lucas', 'Liam', 'Noah', 'Oliver', 'Elijah', 'Mateo', 'Theo', 'Leo', 'Elias', 'Louis'
         ];
 
-        // Latin/Spanish Names for Batch 304 (318 students)
         const latinNames = [
-            'Carlos', 'Jose', 'Luis', 'Miguel', 'Javier', 'Diego', 'Fernando', 'Alejandro', 'Andres', 'Santiago',
-            'Matias', 'Sebastian', 'Nicolas', 'Gabriel', 'Rafael', 'Eduardo', 'Francisco', 'Ricardo', 'Jorge', 'Pedro',
-            'Pablo', 'Cesar', 'Oscar', 'Hector', 'Raul', 'Ruben', 'Ivan', 'Victor', 'Manuel', 'Antonio'
+            'Carlos', 'Jose', 'Luis', 'Miguel', 'Javier', 'Diego', 'Fernando', 'Alejandro', 'Andres', 'Santiago'
         ];
 
-        // Generate batch students
         function generateInternationalStudents(batch, count, nameArray, lastNameArray = null) {
             let students = [];
             for (let i = 0; i < count; i++) {
@@ -1141,7 +1387,6 @@
                 `;
                 document.getElementById('popup').classList.add('show');
             } else {
-                // Show error message in English for other batches
                 document.getElementById('popup-content').innerHTML = `
                     <div style="text-align:center; padding:20px;">
                         <i class="fas fa-exclamation-triangle" style="font-size:3rem; color:#ff4d4d; margin-bottom:15px;"></i>
@@ -1191,6 +1436,18 @@
             if (!e.target.closest('.search-container')) {
                 document.getElementById('search-results').style.display = 'none';
             }
+        });
+
+        window.addEventListener('resize', () => {
+            updateSliderPosition();
+            const cardsPerView = getCardsPerView();
+            const totalDots = Math.ceil(trendingData.length / cardsPerView);
+            const dotsContainer = document.getElementById('sliderDots');
+            let dotsHtml = '';
+            for (let i = 0; i < totalDots; i++) {
+                dotsHtml += `<div class="dot ${i === currentSlide ? 'active' : ''}" onclick="goToSlide(${i})"></div>`;
+            }
+            dotsContainer.innerHTML = dotsHtml;
         });
 
         window.onload = function() {
