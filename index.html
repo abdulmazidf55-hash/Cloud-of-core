@@ -380,68 +380,151 @@
             text-transform: uppercase;
         }
 
-        /* ===== TRENDING 15 SLIDER ===== */
-        .trending-section {
-            margin: 35px 0 25px;
+        /* Batch Leadership Section */
+        .batch-leadership-section {
+            margin: 30px 0 20px;
+            padding: 20px;
+            background: linear-gradient(145deg, rgba(26, 38, 57, 0.6), rgba(15, 23, 42, 0.7));
+            backdrop-filter: blur(8px);
+            border-radius: 30px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
         }
 
-        .trending-title {
+        .leadership-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .leadership-header h3 {
             font-size: 1.8rem;
-            font-weight: 800;
             color: transparent;
             background: linear-gradient(135deg, #00ffff, #ffffff);
             -webkit-background-clip: text;
             background-clip: text;
-            text-align: center;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+            display: inline-block;
+            padding-bottom: 5px;
+            border-bottom: 2px solid cyan;
         }
 
-        .trending-title i {
-            color: #ffd700;
-            animation: starPulse 1.5s infinite;
+        .leadership-subtitle {
+            color: #aaa;
+            margin-top: 5px;
+            font-size: 0.9rem;
         }
 
-        @keyframes starPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
-        .slider-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 30px;
-            padding: 10px 0;
-        }
-
-        .slider-wrapper {
-            overflow: hidden;
+        .leadership-card {
+            background: rgba(30, 41, 59, 0.8);
             border-radius: 20px;
-        }
-
-        .trending-slider {
-            display: flex;
-            transition: transform 0.5s ease;
-            gap: 15px;
-        }
-
-        .trending-card {
-            flex: 0 0 calc(100% - 20px);
-            min-width: calc(100% - 20px);
-            background: linear-gradient(165deg, #1a2639, #0f172a);
-            border-radius: 30px;
-            padding: 20px;
-            border: 2px solid rgba(0, 255, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0,255,255,0.2);
+            padding: 15px 5px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: 0.3s;
             position: relative;
             overflow: hidden;
         }
 
-        .trending-card::before {
+        .leadership-card.batch-305-highlight {
+            background: linear-gradient(145deg, #1a4731, #0a2f1f);
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .leadership-rank {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: #00ffff;
+        }
+
+        .leadership-badge {
+            font-size: 2.5rem;
+            margin: 5px 0;
+            animation: badgePulse 2s infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px currentColor); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px currentColor); }
+        }
+
+        .diamond-badge { 
+            color: #b9f2ff; 
+            text-shadow: 0 0 20px #b9f2ff;
+        }
+        .gold-badge { 
+            color: #ffd700; 
+            text-shadow: 0 0 20px #ffd700;
+        }
+        .silver-badge { 
+            color: #c0c0c0; 
+            text-shadow: 0 0 20px #c0c0c0;
+        }
+        .bronze-badge { 
+            color: #cd7f32; 
+            text-shadow: 0 0 20px #cd7f32;
+        }
+        .standard-badge { 
+            color: #00ffff; 
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        .leadership-batch-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #00ffff;
+            margin: 5px 0;
+        }
+
+        .leadership-points {
+            font-size: 1.1rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .leadership-metric {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        /* BATCH BUTTONS */
+        .batch-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .batch-btn {
+            padding: 14px 32px;
+            border: 2px solid rgba(0, 255, 255, 0.6);
+            background: rgba(26, 38, 57, 0.8);
+            backdrop-filter: blur(5px);
+            color: white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(0,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .batch-btn.batch-305-btn {
+            background: linear-gradient(145deg, #1a4731, #0a2f1f);
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .batch-btn::before {
             content: '';
             position: absolute;
             top: -2px;
@@ -449,152 +532,66 @@
             right: -2px;
             bottom: -2px;
             background: linear-gradient(45deg, cyan, transparent, cyan);
-            border-radius: 30px;
+            border-radius: 50px;
             z-index: -1;
-            animation: cardGlow 3s linear infinite;
+            animation: borderGlow 2s linear infinite;
             opacity: 0.5;
         }
 
-        @keyframes cardGlow {
+        @keyframes borderGlow {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .trending-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 2px solid cyan;
-            margin-bottom: 15px;
+        .batch-btn:hover {
+            background: cyan;
+            color: #030614;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px cyan;
         }
 
-        .trending-details {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
-            padding: 15px;
+        .batch-btn.batch-305-btn:hover {
+            background: #00ff88;
+            color: #030614;
         }
 
-        .trending-name {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: cyan;
-            text-align: center;
-            margin-bottom: 10px;
+        /* Student Grid */
+        .student-list-container {
+            max-height: 380px;
+            overflow-y: auto;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 20px 15px;
+            margin: 15px 0 20px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
         }
 
-        .trending-stats {
+        .student-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            margin: 15px 0;
         }
 
-        .stat-item {
-            background: rgba(0, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 15px;
+        .student-card {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 12px 6px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            font-size: 0.85rem;
             text-align: center;
-        }
-
-        .stat-label-small {
-            font-size: 0.75rem;
-            color: #aaa;
-            text-transform: uppercase;
-        }
-
-        .stat-value-small {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: cyan;
-        }
-
-        .trending-rank {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 255, 255, 0.2);
-            border: 2px solid cyan;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: cyan;
-            backdrop-filter: blur(5px);
-        }
-
-        .trending-rating {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            margin-top: 10px;
-        }
-
-        .trending-rating i {
-            color: #ffd700;
-        }
-
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 255, 255, 0.2);
-            border: 2px solid cyan;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: cyan;
-            font-size: 1.2rem;
+            color: #00ffff;
+            font-weight: 500;
             cursor: pointer;
-            z-index: 10;
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
-        .slider-btn:hover {
+        .student-card:active {
             background: cyan;
             color: #030614;
         }
 
-        .slider-btn.left {
-            left: 10px;
-        }
-
-        .slider-btn.right {
-            right: 10px;
-        }
-
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(0, 255, 255, 0.3);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .dot.active {
-            background: cyan;
-            transform: scale(1.3);
-            box-shadow: 0 0 10px cyan;
-        }
-
-        /* ===== TOP 10 LEADERBOARD (Previous Style) ===== */
+        /* Top 10 Ranking with Animated Stickers */
         .ranking-section {
             margin: 30px 0 20px;
         }
@@ -665,90 +662,67 @@
             color: #00ffff;
         }
 
-        /* BATCH BUTTONS */
-        .batch-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin: 25px 0;
+        /* 305 Batch Ranking (Class Points Based) */
+        .batch-305-ranking {
+            margin: 20px 0;
+            background: rgba(26, 47, 36, 0.4);
+            border-radius: 20px;
+            padding: 15px;
+            border: 2px solid #00ff88;
         }
 
-        .batch-btn {
-            padding: 14px 32px;
-            border: 2px solid rgba(0, 255, 255, 0.6);
-            background: rgba(26, 38, 57, 0.8);
-            backdrop-filter: blur(5px);
-            color: white;
-            border-radius: 50px;
-            font-size: 1.1rem;
+        .batch-305-title {
+            color: #00ff88;
+            font-size: 1.3rem;
             font-weight: 700;
-            transition: 0.2s;
-            box-shadow: 0 5px 15px rgba(0,255,255,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .batch-btn::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, cyan, transparent, cyan);
-            border-radius: 50px;
-            z-index: -1;
-            animation: borderGlow 2s linear infinite;
-            opacity: 0.5;
-        }
-
-        @keyframes borderGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .batch-btn:hover {
-            background: cyan;
-            color: #030614;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px cyan;
-        }
-
-        /* Student Grid */
-        .student-list-container {
-            max-height: 380px;
-            overflow-y: auto;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 24px;
-            padding: 20px 15px;
-            margin: 15px 0 20px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-        }
-
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
         }
 
-        .student-card {
-            background: rgba(30, 41, 59, 0.8);
-            padding: 12px 6px;
-            border-radius: 16px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            font-size: 0.85rem;
-            text-align: center;
-            color: #00ffff;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
+        .batch-305-leaderboard {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .student-card:active {
-            background: cyan;
-            color: #030614;
+        .batch-305-leader-item {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 10px 15px;
+            border-radius: 30px;
+            border: 1px solid #00ff88;
+        }
+
+        .batch-305-rank {
+            width: 30px;
+            font-weight: 800;
+            color: #00ff88;
+        }
+
+        .batch-305-name {
+            flex: 1;
+            font-weight: 600;
+            color: white;
+        }
+
+        .batch-305-points {
+            color: #00ff88;
+            font-weight: 700;
+        }
+
+        .crown-icon {
+            color: #ffd700;
+            animation: crownFloat 2s infinite;
+        }
+
+        @keyframes crownFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
         }
 
         /* Notice Section */
@@ -871,25 +845,6 @@
             color: #666;
             font-size: 0.75rem;
         }
-
-        /* Responsive */
-        @media (min-width: 768px) {
-            .trending-card {
-                flex: 0 0 calc(33.333% - 10px);
-                min-width: calc(33.333% - 10px);
-            }
-            
-            .trending-image {
-                height: 160px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .trending-card {
-                flex: 0 0 calc(20% - 12px);
-                min-width: calc(20% - 12px);
-            }
-        }
     </style>
 </head>
 <body>
@@ -957,26 +912,16 @@
             
             <div class="student-count" id="total-students-display">📊 2026 · 1,852 Students</div>
 
-            <!-- Stats Cards (Batch Points) -->
+            <!-- Stats Cards -->
             <div class="stats-container" id="batch-stats"></div>
 
-            <!-- TRENDING 15 SLIDER SECTION -->
-            <div class="trending-section">
-                <h2 class="trending-title">
-                    <i class="fas fa-star"></i> TRENDING 15 <i class="fas fa-star"></i>
-                </h2>
-                <div class="slider-container">
-                    <div class="slider-btn left" onclick="slideTrending(-1)">
-                        <i class="fas fa-chevron-left"></i>
-                    </div>
-                    <div class="slider-btn right" onclick="slideTrending(1)">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="slider-wrapper">
-                        <div class="trending-slider" id="trendingSlider"></div>
-                    </div>
+            <!-- Best Performance Batch Leadership Board -->
+            <div class="batch-leadership-section">
+                <div class="leadership-header">
+                    <h3>💎 BEST PERFORMANCE BATCH</h3>
+                    <div class="leadership-subtitle">Top Performing Batches of the Year</div>
                 </div>
-                <div class="slider-dots" id="sliderDots"></div>
+                <div class="leadership-grid" id="leadership-grid"></div>
             </div>
 
             <!-- BATCH BUTTONS -->
@@ -985,7 +930,7 @@
                 <button class="batch-btn" onclick="showBatchStudents('302')">BATCH 302 · 300</button>
                 <button class="batch-btn" onclick="showBatchStudents('303')">BATCH 303 · 300</button>
                 <button class="batch-btn" onclick="showBatchStudents('304')">BATCH 304 · 318</button>
-                <button class="batch-btn" onclick="showBatchStudents('305')">BATCH 305 · 4</button>
+                <button class="batch-btn batch-305-btn" onclick="showBatchStudents('305')">BATCH 305 · 4</button>
             </div>
 
             <!-- Student List -->
@@ -994,7 +939,17 @@
                 <div id="student-grid" class="student-grid"></div>
             </div>
 
-            <!-- TOP 10 LEADERBOARD (Previous Style) -->
+            <!-- 305 Batch Ranking (Class Points Based) -->
+            <div id="batch-305-ranking-container" class="batch-305-ranking" style="display: none;">
+                <div class="batch-305-title">
+                    <i class="fas fa-crown crown-icon"></i>
+                    BATCH 305 LEADERBOARD
+                    <i class="fas fa-crown crown-icon"></i>
+                </div>
+                <div class="batch-305-leaderboard" id="batch-305-leaderboard"></div>
+            </div>
+
+            <!-- Top 10 Leaderboard -->
             <div class="ranking-section">
                 <h2 class="section-title">🏆 TOP 10 LEADERBOARD</h2>
                 <div class="ranking-list" id="ranking-list"></div>
@@ -1114,8 +1069,6 @@
         // Auth
         let isSignUp = false;
         let allStudentsData = {};
-        let trendingData = [];
-        let currentSlide = 0;
 
         function showAuthModal() { 
             document.getElementById('auth-modal').classList.add('show'); 
@@ -1163,7 +1116,6 @@
                 document.getElementById('main-app').style.display = 'flex';
                 loadData();
                 loadRealTimeData();
-                loadTrendingData();
             } else {
                 document.getElementById('landing-page').classList.remove('hidden');
                 document.getElementById('main-app').style.display = 'none';
@@ -1181,146 +1133,16 @@
             db.collection('students').onSnapshot(snapshot => {
                 allStudentsData = {};
                 snapshot.forEach(doc => allStudentsData[doc.id] = doc.data());
-            });
-        }
-
-        function loadTrendingData() {
-            db.collection('trending').orderBy('rank', 'asc').limit(15).onSnapshot(snapshot => {
-                trendingData = [];
-                snapshot.forEach(doc => {
-                    trendingData.push(doc.data());
-                });
-                renderTrendingSlider();
-            });
-        }
-
-        function renderTrendingSlider() {
-            const slider = document.getElementById('trendingSlider');
-            const dotsContainer = document.getElementById('sliderDots');
-            
-            if (!trendingData.length) {
-                // Default data
-                trendingData = [
-                    { rank: 1, name: 'James Anderson', batch: '301', points: 2850, rating: 4.9, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=James+A' },
-                    { rank: 2, name: 'Mohammed Ahmed', batch: '302', points: 2720, rating: 4.8, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Mohammed+A' },
-                    { rank: 3, name: 'Lucas Schmidt', batch: '303', points: 2680, rating: 4.8, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Lucas+S' },
-                    { rank: 4, name: 'Carlos Garcia', batch: '304', points: 2550, rating: 4.7, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Carlos+G' },
-                    { rank: 5, name: 'Majedul Fahad', batch: '305', points: 2450, rating: 4.7, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Majedul+F' },
-                    { rank: 6, name: 'John Smith', batch: '301', points: 2380, rating: 4.6, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=John+S' },
-                    { rank: 7, name: 'Ali Hassan', batch: '302', points: 2320, rating: 4.6, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Ali+H' },
-                    { rank: 8, name: 'Oliver Brown', batch: '303', points: 2280, rating: 4.5, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Oliver+B' },
-                    { rank: 9, name: 'Miguel Torres', batch: '304', points: 2210, rating: 4.5, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Miguel+T' },
-                    { rank: 10, name: 'Sayid Sayem', batch: '305', points: 2150, rating: 4.4, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Sayid+S' },
-                    { rank: 11, name: 'Robert Wilson', batch: '301', points: 2080, rating: 4.4, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Robert+W' },
-                    { rank: 12, name: 'Omar Farooq', batch: '302', points: 2020, rating: 4.3, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Omar+F' },
-                    { rank: 13, name: 'Elias Mueller', batch: '303', points: 1950, rating: 4.3, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Elias+M' },
-                    { rank: 14, name: 'Diego Lopez', batch: '304', points: 1880, rating: 4.2, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Diego+L' },
-                    { rank: 15, name: 'Abu Shamim', batch: '305', points: 1820, rating: 4.2, image: 'https://via.placeholder.com/300x200/1a2639/00ffff?text=Abu+S' }
-                ];
-            }
-
-            let html = '';
-            trendingData.forEach((student, index) => {
-                html += `
-                    <div class="trending-card">
-                        <div class="trending-rank">#${student.rank}</div>
-                        <img src="${student.image}" alt="${student.name}" class="trending-image" onerror="this.src='https://via.placeholder.com/300x200/1a2639/00ffff?text=No+Image'">
-                        <div class="trending-details">
-                            <div class="trending-name">${student.name}</div>
-                            <div class="trending-stats">
-                                <div class="stat-item">
-                                    <div class="stat-label-small">BATCH</div>
-                                    <div class="stat-value-small">${student.batch}</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-label-small">POINTS</div>
-                                    <div class="stat-value-small">${student.points}</div>
-                                </div>
-                            </div>
-                            <div class="trending-rating">
-                                ${getRatingStars(student.rating)}
-                                <span style="color:cyan;">${student.rating}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            slider.innerHTML = html;
-            
-            // Create dots
-            const cardsPerView = getCardsPerView();
-            const totalDots = Math.ceil(trendingData.length / cardsPerView);
-            let dotsHtml = '';
-            for (let i = 0; i < totalDots; i++) {
-                dotsHtml += `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`;
-            }
-            dotsContainer.innerHTML = dotsHtml;
-            
-            currentSlide = 0;
-            updateSliderPosition();
-            
-            // Auto slide every 3 seconds
-            setInterval(autoSlide, 3000);
-        }
-
-        function getRatingStars(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const halfStar = rating % 1 >= 0.5;
-            
-            for (let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            if (halfStar) {
-                stars += '<i class="fas fa-star-half-alt"></i>';
-            }
-            const emptyStars = 5 - Math.ceil(rating);
-            for (let i = 0; i < emptyStars; i++) {
-                stars += '<i class="far fa-star"></i>';
-            }
-            return stars;
-        }
-
-        function getCardsPerView() {
-            if (window.innerWidth >= 1024) return 5;
-            if (window.innerWidth >= 768) return 3;
-            return 1;
-        }
-
-        function slideTrending(direction) {
-            const cardsPerView = getCardsPerView();
-            const maxSlide = Math.ceil(trendingData.length / cardsPerView) - 1;
-            currentSlide = Math.max(0, Math.min(currentSlide + direction, maxSlide));
-            updateSliderPosition();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSliderPosition();
-        }
-
-        function autoSlide() {
-            const cardsPerView = getCardsPerView();
-            const maxSlide = Math.ceil(trendingData.length / cardsPerView) - 1;
-            currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
-            updateSliderPosition();
-        }
-
-        function updateSliderPosition() {
-            const slider = document.getElementById('trendingSlider');
-            const cardsPerView = getCardsPerView();
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            // Update dots
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
+                updateBatch305Leaderboard();
             });
         }
 
         function loadRealTimeData() {
-            // Load batch stats
+            document.getElementById('batch-stats').innerHTML = generateDefaultStats();
+            document.getElementById('ranking-list').innerHTML = generateDefaultRanking();
+            document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core International!';
+
+            // Load Batch Stats
             db.collection('batchStats').onSnapshot(snapshot => {
                 if (!snapshot.empty) {
                     let html = '';
@@ -1340,12 +1162,13 @@
                         `;
                     });
                     document.getElementById('batch-stats').innerHTML = html;
-                } else {
-                    document.getElementById('batch-stats').innerHTML = generateDefaultStats();
                 }
             });
 
-            // Load ranking (Top 10)
+            // Load Leadership Board
+            loadLeadershipBoard();
+
+            // Load Top 10 Ranking
             db.collection('ranking').orderBy('points', 'desc').limit(10).onSnapshot(snapshot => {
                 if (!snapshot.empty) {
                     let html = '';
@@ -1369,19 +1192,90 @@
                         i++;
                     });
                     document.getElementById('ranking-list').innerHTML = html;
-                } else {
-                    document.getElementById('ranking-list').innerHTML = generateDefaultRanking();
                 }
             });
 
-            // Load notice
+            // Load Notice
             db.collection('notices').doc('latest').onSnapshot(doc => {
                 if (doc.exists) {
                     document.getElementById('notice-content').innerHTML = doc.data().content;
-                } else {
-                    document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core International!';
                 }
             });
+        }
+
+        function loadLeadershipBoard() {
+            db.collection('batchLeadership').orderBy('rank', 'asc').onSnapshot(snapshot => {
+                if (!snapshot.empty) {
+                    let html = '';
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        const batchNum = data.batch;
+                        const isBatch305 = batchNum === '305';
+                        
+                        // Get badge based on rank
+                        let badgeIcon = '';
+                        let badgeClass = '';
+                        
+                        if (data.rank === 1) {
+                            badgeIcon = '<i class="fas fa-gem"></i>'; // Diamond
+                            badgeClass = 'diamond-badge';
+                        } else if (data.rank === 2) {
+                            badgeIcon = '<i class="fas fa-crown"></i>'; // Gold Crown
+                            badgeClass = 'gold-badge';
+                        } else if (data.rank === 3) {
+                            badgeIcon = '<i class="fas fa-medal"></i>'; // Silver Medal
+                            badgeClass = 'silver-badge';
+                        } else if (data.rank === 4) {
+                            badgeIcon = '<i class="fas fa-award"></i>'; // Bronze
+                            badgeClass = 'bronze-badge';
+                        } else {
+                            badgeIcon = '<i class="fas fa-star"></i>'; // Star for 5th
+                            badgeClass = 'standard-badge';
+                        }
+                        
+                        html += `
+                            <div class="leadership-card ${isBatch305 ? 'batch-305-highlight' : ''}">
+                                <div class="leadership-rank">#${data.rank}</div>
+                                <div class="leadership-badge ${badgeClass}">${badgeIcon}</div>
+                                <div class="leadership-batch-name">BATCH ${batchNum}</div>
+                                <div class="leadership-points">${data.value}</div>
+                                <div class="leadership-metric">${data.metric || 'Performance Score'}</div>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('leadership-grid').innerHTML = html;
+                }
+            });
+        }
+
+        function updateBatch305Leaderboard() {
+            const students = [
+                { name: 'majedul islam fahad', data: allStudentsData['majedul islam fahad'] || { classPoints: 94 } },
+                { name: 'sayid hossain sayem', data: allStudentsData['sayid hossain sayem'] || { classPoints: 82 } },
+                { name: 'abu talha shamim', data: allStudentsData['abu talha shamim'] || { classPoints: 78 } },
+                { name: 'kamrul hassan sojib', data: allStudentsData['kamrul hassan sojib'] || { classPoints: 71 } }
+            ];
+            
+            // Sort by class points
+            students.sort((a, b) => b.data.classPoints - a.data.classPoints);
+            
+            let html = '';
+            students.forEach((student, index) => {
+                let rankIcon = '';
+                if (index === 0) rankIcon = '<i class="fas fa-crown" style="color:#ffd700; margin-right:5px;"></i>';
+                else if (index === 1) rankIcon = '<i class="fas fa-medal" style="color:#c0c0c0; margin-right:5px;"></i>';
+                else if (index === 2) rankIcon = '<i class="fas fa-medal" style="color:#cd7f32; margin-right:5px;"></i>';
+                
+                html += `
+                    <div class="batch-305-leader-item">
+                        <span class="batch-305-rank">#${index + 1}</span>
+                        <span class="batch-305-name">${rankIcon} ${student.name}</span>
+                        <span class="batch-305-points">${student.data.classPoints} pts</span>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('batch-305-leaderboard').innerHTML = html;
         }
 
         function generateDefaultStats() {
@@ -1430,25 +1324,31 @@
 
         // INTERNATIONAL STUDENT NAMES
         const usNames = [
-            'James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Christopher'
+            'James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Christopher',
+            'Charles', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul', 'Steven', 'Andrew', 'Kenneth'
         ];
         
         const ukLastNames = [
-            'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'
+            'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez',
+            'Wilson', 'Anderson', 'Taylor', 'Thomas', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson'
         ];
 
         const arabicNames = [
-            'Mohammed', 'Ahmed', 'Ali', 'Omar', 'Hassan', 'Hussein', 'Abdullah', 'Ibrahim', 'Khalid', 'Mahmoud'
+            'Mohammed', 'Ahmed', 'Ali', 'Omar', 'Hassan', 'Hussein', 'Abdullah', 'Ibrahim', 'Khalid', 'Mahmoud',
+            'Youssef', 'Mustafa', 'Hamza', 'Bilal', 'Amir', 'Tariq', 'Sami', 'Rashid', 'Jamal', 'Nadir'
         ];
 
         const europeanNames = [
-            'Lucas', 'Liam', 'Noah', 'Oliver', 'Elijah', 'Mateo', 'Theo', 'Leo', 'Elias', 'Louis'
+            'Lucas', 'Liam', 'Noah', 'Oliver', 'Elijah', 'Mateo', 'Theo', 'Leo', 'Elias', 'Louis',
+            'Arthur', 'Gabriel', 'Jules', 'Adam', 'Hugo', 'Leon', 'Paul', 'Nathan', 'Tom', 'Max'
         ];
 
         const latinNames = [
-            'Carlos', 'Jose', 'Luis', 'Miguel', 'Javier', 'Diego', 'Fernando', 'Alejandro', 'Andres', 'Santiago'
+            'Carlos', 'Jose', 'Luis', 'Miguel', 'Javier', 'Diego', 'Fernando', 'Alejandro', 'Andres', 'Santiago',
+            'Matias', 'Sebastian', 'Nicolas', 'Gabriel', 'Rafael', 'Eduardo', 'Francisco', 'Ricardo', 'Jorge', 'Pedro'
         ];
 
+        // Generate batch students
         function generateInternationalStudents(batch, count, nameArray, lastNameArray = null) {
             let students = [];
             for (let i = 0; i < count; i++) {
@@ -1474,11 +1374,20 @@
         function showBatchStudents(batch) {
             const container = document.getElementById('student-list-container');
             const grid = document.getElementById('student-grid');
-            document.getElementById('batch-title').innerHTML = `📚 BATCH ${batch} · ${batchStudents[batch].length} STUDENTS`;
-            grid.innerHTML = batchStudents[batch].map(name => 
-                `<div class="student-card" onclick="handleStudentClick('${batch}', '${name}')">${name.length > 20 ? name.substring(0,18)+'...' : name}</div>`
-            ).join('');
-            container.style.display = 'block';
+            const batch305Ranking = document.getElementById('batch-305-ranking-container');
+            
+            if (batch === '305') {
+                container.style.display = 'none';
+                batch305Ranking.style.display = 'block';
+                updateBatch305Leaderboard();
+            } else {
+                batch305Ranking.style.display = 'none';
+                document.getElementById('batch-title').innerHTML = `📚 BATCH ${batch} · ${batchStudents[batch].length} STUDENTS`;
+                grid.innerHTML = batchStudents[batch].map(name => 
+                    `<div class="student-card" onclick="handleStudentClick('${batch}', '${name}')">${name.length > 20 ? name.substring(0,18)+'...' : name}</div>`
+                ).join('');
+                container.style.display = 'block';
+            }
         }
 
         function handleStudentClick(batch, name) {
@@ -1564,18 +1473,6 @@
             if (!e.target.closest('.search-container')) {
                 document.getElementById('search-results').style.display = 'none';
             }
-        });
-
-        window.addEventListener('resize', () => {
-            updateSliderPosition();
-            const cardsPerView = getCardsPerView();
-            const totalDots = Math.ceil(trendingData.length / cardsPerView);
-            const dotsContainer = document.getElementById('sliderDots');
-            let dotsHtml = '';
-            for (let i = 0; i < totalDots; i++) {
-                dotsHtml += `<div class="dot ${i === currentSlide ? 'active' : ''}" onclick="goToSlide(${i})"></div>`;
-            }
-            dotsContainer.innerHTML = dotsHtml;
         });
 
         window.onload = function() {
