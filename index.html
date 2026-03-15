@@ -380,30 +380,25 @@
             text-transform: uppercase;
         }
 
-        /* Batch Leadership Section */
+        /* Batch Leadership Section - Updated to match Top 10 style */
         .batch-leadership-section {
             margin: 30px 0 20px;
-            padding: 20px;
-            background: linear-gradient(145deg, rgba(26, 38, 57, 0.6), rgba(15, 23, 42, 0.7));
-            backdrop-filter: blur(8px);
-            border-radius: 30px;
-            border: 2px solid rgba(0, 255, 255, 0.3);
         }
 
         .leadership-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .leadership-header h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
+            font-weight: 800;
             color: transparent;
             background: linear-gradient(135deg, #00ffff, #ffffff);
             -webkit-background-clip: text;
             background-clip: text;
             display: inline-block;
             padding-bottom: 5px;
-            border-bottom: 2px solid cyan;
         }
 
         .leadership-subtitle {
@@ -412,86 +407,77 @@
             font-size: 0.9rem;
         }
 
-        .leadership-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+        .leadership-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .leadership-card {
-            background: rgba(30, 41, 59, 0.8);
-            border-radius: 20px;
-            padding: 15px 5px;
-            text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
+        .leadership-item {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(26, 38, 57, 0.8), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(5px);
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
-        .leadership-card.batch-305-highlight {
-            background: linear-gradient(145deg, #1a4731, #0a2f1f);
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-        }
-
-        .leadership-rank {
-            font-size: 2.2rem;
+        .leadership-rank-number {
+            width: 36px;
+            font-size: 1.1rem;
             font-weight: 800;
-            margin-bottom: 5px;
             color: #00ffff;
         }
 
         .leadership-badge {
-            font-size: 2.5rem;
-            margin: 5px 0;
-            animation: badgePulse 2s infinite;
+            width: 45px;
+            font-size: 1.3rem;
+            animation: badgeGlow 1.5s infinite;
         }
 
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px currentColor); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px currentColor); }
+        .leadership-badge i {
+            animation: spin 3s linear infinite;
         }
 
-        .diamond-badge { 
-            color: #b9f2ff; 
-            text-shadow: 0 0 20px #b9f2ff;
-        }
-        .gold-badge { 
-            color: #ffd700; 
-            text-shadow: 0 0 20px #ffd700;
-        }
-        .silver-badge { 
-            color: #c0c0c0; 
-            text-shadow: 0 0 20px #c0c0c0;
-        }
-        .bronze-badge { 
-            color: #cd7f32; 
-            text-shadow: 0 0 20px #cd7f32;
-        }
-        .standard-badge { 
-            color: #00ffff; 
-            text-shadow: 0 0 20px #00ffff;
-        }
+        .diamond-badge { color: #b9f2ff; }
+        .gold-badge { color: #ffd700; }
+        .silver-badge { color: #c0c0c0; }
+        .bronze-badge { color: #cd7f32; }
+        .standard-badge { color: #00ffff; }
 
         .leadership-batch-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #00ffff;
-            margin: 5px 0;
+            flex: 1;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
 
         .leadership-points {
-            font-size: 1.1rem;
-            color: white;
+            font-size: 1rem;
             font-weight: 700;
+            color: #00ffff;
         }
 
         .leadership-metric {
             font-size: 0.8rem;
             color: #aaa;
-            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .leadership-item.batch-305-highlight {
+            background: linear-gradient(90deg, rgba(26, 71, 49, 0.9), rgba(10, 47, 31, 0.9));
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px currentColor); }
+            50% { filter: drop-shadow(0 0 15px currentColor); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* BATCH BUTTONS */
@@ -638,16 +624,6 @@
 
         .rank-badge i {
             animation: spin 3s linear infinite;
-        }
-
-        @keyframes badgeGlow {
-            0%, 100% { filter: drop-shadow(0 0 5px currentColor); }
-            50% { filter: drop-shadow(0 0 15px currentColor); }
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .rank-name {
@@ -915,13 +891,13 @@
             <!-- Stats Cards -->
             <div class="stats-container" id="batch-stats"></div>
 
-            <!-- Best Performance Batch Leadership Board -->
+            <!-- Best Performance Batch Leadership Board - Now in list format matching Top 10 -->
             <div class="batch-leadership-section">
                 <div class="leadership-header">
                     <h3>💎 BEST PERFORMANCE BATCH</h3>
                     <div class="leadership-subtitle">Top Performing Batches of the Year</div>
                 </div>
-                <div class="leadership-grid" id="leadership-grid"></div>
+                <div class="leadership-list" id="leadership-list"></div>
             </div>
 
             <!-- BATCH BUTTONS -->
@@ -1234,16 +1210,16 @@
                         }
                         
                         html += `
-                            <div class="leadership-card ${isBatch305 ? 'batch-305-highlight' : ''}">
-                                <div class="leadership-rank">#${data.rank}</div>
+                            <div class="leadership-item ${isBatch305 ? 'batch-305-highlight' : ''}">
+                                <span class="leadership-rank-number">#${data.rank}</span>
                                 <div class="leadership-badge ${badgeClass}">${badgeIcon}</div>
-                                <div class="leadership-batch-name">BATCH ${batchNum}</div>
-                                <div class="leadership-points">${data.value}</div>
-                                <div class="leadership-metric">${data.metric || 'Performance Score'}</div>
+                                <span class="leadership-batch-name">BATCH ${batchNum}</span>
+                                <span class="leadership-points">${data.value}</span>
+                                <span class="leadership-metric">${data.metric || 'PTS'}</span>
                             </div>
                         `;
                     });
-                    document.getElementById('leadership-grid').innerHTML = html;
+                    document.getElementById('leadership-list').innerHTML = html;
                 }
             });
         }
