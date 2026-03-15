@@ -380,7 +380,7 @@
             text-transform: uppercase;
         }
 
-        /* Batch Leadership Section - Updated to match Top 10 style */
+        /* Batch Leadership Section */
         .batch-leadership-section {
             margin: 30px 0 20px;
         }
@@ -468,6 +468,116 @@
             background: linear-gradient(90deg, rgba(26, 71, 49, 0.9), rgba(10, 47, 31, 0.9));
             border: 2px solid #00ff88;
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Mission Success Rank Section - New */
+        .mission-section {
+            margin: 30px 0 20px;
+        }
+
+        .mission-header {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .mission-header h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: transparent;
+            background: linear-gradient(135deg, #ffaa00, #ffff00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .mission-subtitle {
+            color: #aaa;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .mission-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .mission-item {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(38, 26, 57, 0.8), rgba(23, 15, 42, 0.8));
+            backdrop-filter: blur(5px);
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+
+        .mission-rank-number {
+            width: 36px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffaa00;
+        }
+
+        .mission-badge {
+            width: 45px;
+            font-size: 1.3rem;
+            animation: missionGlow 2s infinite;
+        }
+
+        .mission-badge i {
+            animation: pulse 2s infinite;
+        }
+
+        .gold-mission { color: #ffd700; }
+        .silver-mission { color: #c0c0c0; }
+        .bronze-mission { color: #cd7f32; }
+        .blue-mission { color: #00ffff; }
+        .purple-mission { color: #aa80ff; }
+
+        .mission-batch-name {
+            flex: 1;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .mission-stats {
+            display: flex;
+            gap: 8px;
+            margin-right: 10px;
+        }
+
+        .mission-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 45px;
+        }
+
+        .mission-stat-label {
+            font-size: 0.65rem;
+            color: #aaa;
+        }
+
+        .mission-stat-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .total-mission { color: #ffffff; }
+        .success-mission { color: #00ff88; }
+        .failed-mission { color: #ff4d4d; }
+
+        .mission-item.mission-highlight {
+            background: linear-gradient(90deg, rgba(71, 61, 26, 0.9), rgba(47, 40, 10, 0.9));
+            border: 2px solid #ffaa00;
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
+        }
+
+        @keyframes missionGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px #ffaa00); }
+            50% { filter: drop-shadow(0 0 15px #ffaa00); }
         }
 
         @keyframes badgeGlow {
@@ -577,7 +687,7 @@
             color: #030614;
         }
 
-        /* Top 10 Ranking with Animated Stickers */
+        /* Top 10 Ranking */
         .ranking-section {
             margin: 30px 0 20px;
         }
@@ -638,7 +748,7 @@
             color: #00ffff;
         }
 
-        /* 305 Batch Ranking (Based on Total Points) */
+        /* 305 Batch Ranking */
         .batch-305-ranking {
             margin: 20px 0;
             background: rgba(26, 47, 36, 0.4);
@@ -960,13 +1070,22 @@
             <!-- Stats Cards -->
             <div class="stats-container" id="batch-stats"></div>
 
-            <!-- Best Performance Batch Leadership Board - Now in list format matching Top 10 -->
+            <!-- Best Performance Batch Leadership Board -->
             <div class="batch-leadership-section">
                 <div class="leadership-header">
                     <h3>💎 BEST PERFORMANCE BATCH</h3>
-                    <div class="leadership-subtitle">Top Performing Batches of the week </div>
+                    <div class="leadership-subtitle">Top Performing Batches of the week</div>
                 </div>
                 <div class="leadership-list" id="leadership-list"></div>
+            </div>
+
+            <!-- NEW: Mission Success Rank Section -->
+            <div class="mission-section">
+                <div class="mission-header">
+                    <h3>🎯 MISSION SUCCESS RANK</h3>
+                    <div class="mission-subtitle">Batch Mission Statistics</div>
+                </div>
+                <div class="mission-list" id="mission-list"></div>
             </div>
 
             <!-- BATCH BUTTONS -->
@@ -984,7 +1103,7 @@
                 <div id="student-grid" class="student-grid"></div>
             </div>
 
-            <!-- 305 Batch Ranking (Based on Total Points) -->
+            <!-- 305 Batch Ranking -->
             <div id="batch-305-ranking-container" class="batch-305-ranking" style="display: none;">
                 <div class="batch-305-title">
                     <i class="fas fa-crown crown-icon"></i>
@@ -1215,6 +1334,9 @@
             // Load Leadership Board
             loadLeadershipBoard();
 
+            // Load Mission Success Rank
+            loadMissionRank();
+
             // Load Top 10 Ranking
             db.collection('ranking').orderBy('points', 'desc').limit(10).onSnapshot(snapshot => {
                 if (!snapshot.empty) {
@@ -1259,24 +1381,23 @@
                         const batchNum = data.batch;
                         const isBatch305 = batchNum === '305';
                         
-                        // Get badge based on rank
                         let badgeIcon = '';
                         let badgeClass = '';
                         
                         if (data.rank === 1) {
-                            badgeIcon = '<i class="fas fa-gem"></i>'; // Diamond
+                            badgeIcon = '<i class="fas fa-gem"></i>';
                             badgeClass = 'diamond-badge';
                         } else if (data.rank === 2) {
-                            badgeIcon = '<i class="fas fa-crown"></i>'; // Gold Crown
+                            badgeIcon = '<i class="fas fa-crown"></i>';
                             badgeClass = 'gold-badge';
                         } else if (data.rank === 3) {
-                            badgeIcon = '<i class="fas fa-medal"></i>'; // Silver Medal
+                            badgeIcon = '<i class="fas fa-medal"></i>';
                             badgeClass = 'silver-badge';
                         } else if (data.rank === 4) {
-                            badgeIcon = '<i class="fas fa-award"></i>'; // Bronze
+                            badgeIcon = '<i class="fas fa-award"></i>';
                             badgeClass = 'bronze-badge';
                         } else {
-                            badgeIcon = '<i class="fas fa-star"></i>'; // Star for 5th
+                            badgeIcon = '<i class="fas fa-star"></i>';
                             badgeClass = 'standard-badge';
                         }
                         
@@ -1295,6 +1416,130 @@
             });
         }
 
+        // New function to load Mission Success Rank
+        function loadMissionRank() {
+            db.collection('missionRank').orderBy('rank', 'asc').onSnapshot(snapshot => {
+                if (!snapshot.empty) {
+                    let html = '';
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        const batchNum = data.batch;
+                        const isHighlighted = data.highlighted || false;
+                        
+                        // Determine badge based on rank
+                        let badgeIcon = '';
+                        let badgeClass = '';
+                        
+                        if (data.rank === 1) {
+                            badgeIcon = '<i class="fas fa-trophy"></i>';
+                            badgeClass = 'gold-mission';
+                        } else if (data.rank === 2) {
+                            badgeIcon = '<i class="fas fa-medal"></i>';
+                            badgeClass = 'silver-mission';
+                        } else if (data.rank === 3) {
+                            badgeIcon = '<i class="fas fa-award"></i>';
+                            badgeClass = 'bronze-mission';
+                        } else if (data.rank === 4) {
+                            badgeIcon = '<i class="fas fa-star"></i>';
+                            badgeClass = 'blue-mission';
+                        } else {
+                            badgeIcon = '<i class="fas fa-chevron-circle-up"></i>';
+                            badgeClass = 'purple-mission';
+                        }
+                        
+                        // Mission stats
+                        const totalMissions = data.totalMissions || 0;
+                        const successMissions = data.successMissions || 0;
+                        const failedMissions = data.failedMissions || 0;
+                        
+                        html += `
+                            <div class="mission-item ${isHighlighted ? 'mission-highlight' : ''}">
+                                <span class="mission-rank-number">#${data.rank}</span>
+                                <div class="mission-badge ${badgeClass}">${badgeIcon}</div>
+                                <span class="mission-batch-name">BATCH ${batchNum}</span>
+                                <div class="mission-stats">
+                                    <div class="mission-stat">
+                                        <span class="mission-stat-label total-mission">Total</span>
+                                        <span class="mission-stat-value total-mission">${totalMissions}</span>
+                                    </div>
+                                    <div class="mission-stat">
+                                        <span class="mission-stat-label success-mission">✓</span>
+                                        <span class="mission-stat-value success-mission">${successMissions}</span>
+                                    </div>
+                                    <div class="mission-stat">
+                                        <span class="mission-stat-label failed-mission">✗</span>
+                                        <span class="mission-stat-value failed-mission">${failedMissions}</span>
+                                    </div>
+                                </div>
+                                <span class="leadership-metric">${data.metric || 'Missions'}</span>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('mission-list').innerHTML = html;
+                } else {
+                    // Default data if none exists
+                    document.getElementById('mission-list').innerHTML = generateDefaultMissionRank();
+                }
+            });
+        }
+
+        function generateDefaultMissionRank() {
+            const defaultMissions = [
+                { batch: '305', rank: 1, total: 24, success: 22, failed: 2, metric: 'Missions', highlighted: true },
+                { batch: '303', rank: 2, total: 32, success: 28, failed: 4, metric: 'Missions', highlighted: false },
+                { batch: '301', rank: 3, total: 45, success: 38, failed: 7, metric: 'Missions', highlighted: false },
+                { batch: '302', rank: 4, total: 28, success: 22, failed: 6, metric: 'Missions', highlighted: false },
+                { batch: '304', rank: 5, total: 36, success: 27, failed: 9, metric: 'Missions', highlighted: false }
+            ];
+            
+            let html = '';
+            defaultMissions.forEach(data => {
+                let badgeIcon = '';
+                let badgeClass = '';
+                
+                if (data.rank === 1) {
+                    badgeIcon = '<i class="fas fa-trophy"></i>';
+                    badgeClass = 'gold-mission';
+                } else if (data.rank === 2) {
+                    badgeIcon = '<i class="fas fa-medal"></i>';
+                    badgeClass = 'silver-mission';
+                } else if (data.rank === 3) {
+                    badgeIcon = '<i class="fas fa-award"></i>';
+                    badgeClass = 'bronze-mission';
+                } else if (data.rank === 4) {
+                    badgeIcon = '<i class="fas fa-star"></i>';
+                    badgeClass = 'blue-mission';
+                } else {
+                    badgeIcon = '<i class="fas fa-chevron-circle-up"></i>';
+                    badgeClass = 'purple-mission';
+                }
+                
+                html += `
+                    <div class="mission-item ${data.highlighted ? 'mission-highlight' : ''}">
+                        <span class="mission-rank-number">#${data.rank}</span>
+                        <div class="mission-badge ${badgeClass}">${badgeIcon}</div>
+                        <span class="mission-batch-name">BATCH ${data.batch}</span>
+                        <div class="mission-stats">
+                            <div class="mission-stat">
+                                <span class="mission-stat-label total-mission">Total</span>
+                                <span class="mission-stat-value total-mission">${data.total}</span>
+                            </div>
+                            <div class="mission-stat">
+                                <span class="mission-stat-label success-mission">✓</span>
+                                <span class="mission-stat-value success-mission">${data.success}</span>
+                            </div>
+                            <div class="mission-stat">
+                                <span class="mission-stat-label failed-mission">✗</span>
+                                <span class="mission-stat-value failed-mission">${data.failed}</span>
+                            </div>
+                        </div>
+                        <span class="leadership-metric">${data.metric}</span>
+                    </div>
+                `;
+            });
+            return html;
+        }
+
         function updateBatch305Leaderboard() {
             const studentNames = [
                 'majedul islam fahad',
@@ -1303,7 +1548,6 @@
                 'kamrul hassan sojib'
             ];
             
-            // Get student data and sort by totalPoints
             const students = studentNames.map(name => ({
                 name: name,
                 data: allStudentsData[name] || { 
@@ -1315,7 +1559,6 @@
                 }
             }));
             
-            // Sort by totalPoints in descending order
             students.sort((a, b) => b.data.totalPoints - a.data.totalPoints);
             
             let html = '';
