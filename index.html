@@ -638,7 +638,7 @@
             color: #00ffff;
         }
 
-        /* 305 Batch Ranking (Class Points Based) */
+        /* 305 Batch Ranking (Based on Total Points) */
         .batch-305-ranking {
             margin: 20px 0;
             background: rgba(26, 47, 36, 0.4);
@@ -669,26 +669,59 @@
             display: flex;
             align-items: center;
             background: rgba(0, 255, 136, 0.1);
-            padding: 10px 15px;
-            border-radius: 30px;
+            padding: 12px 16px;
+            border-radius: 40px;
             border: 1px solid #00ff88;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .batch-305-leader-item:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: scale(1.02);
+        }
+
+        .batch-305-leader-item.rank-1 {
+            background: linear-gradient(90deg, rgba(0, 255, 136, 0.3), rgba(0, 200, 100, 0.3));
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         .batch-305-rank {
-            width: 30px;
+            width: 40px;
             font-weight: 800;
             color: #00ff88;
+        }
+
+        .rank-1 .batch-305-rank {
+            color: #ffd700;
         }
 
         .batch-305-name {
             flex: 1;
             font-weight: 600;
             color: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .batch-305-points {
             color: #00ff88;
             font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .rank-1 .batch-305-points {
+            color: #ffd700;
+        }
+
+        .batch-305-total-points {
+            font-size: 0.8rem;
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.2);
+            padding: 2px 8px;
+            border-radius: 20px;
         }
 
         .crown-icon {
@@ -772,6 +805,7 @@
             border: 2px solid rgba(0, 255, 255, 0.6);
             box-shadow: 0 30px 60px -15px rgba(0,255,255,0.4);
             animation: popupAppear 0.5s ease;
+            position: relative;
         }
 
         .popup-close {
@@ -788,6 +822,41 @@
             color: cyan;
             font-size: 24px;
             cursor: pointer;
+            border: 1px solid rgba(0,255,255,0.3);
+        }
+
+        .student-detail {
+            margin: 10px 0;
+            padding: 15px;
+            background: rgba(0,255,255,0.1);
+            border-radius: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+        }
+
+        .detail-label {
+            color: #aaa;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: cyan;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .student-notice {
+            padding: 15px;
+            background: #1e293b;
+            border-radius: 16px;
+            margin-top: 15px;
+            border-left: 4px solid cyan;
         }
 
         .footer {
@@ -915,7 +984,7 @@
                 <div id="student-grid" class="student-grid"></div>
             </div>
 
-            <!-- 305 Batch Ranking (Class Points Based) -->
+            <!-- 305 Batch Ranking (Based on Total Points) -->
             <div id="batch-305-ranking-container" class="batch-305-ranking" style="display: none;">
                 <div class="batch-305-title">
                     <i class="fas fa-crown crown-icon"></i>
@@ -1109,7 +1178,9 @@
             db.collection('students').onSnapshot(snapshot => {
                 allStudentsData = {};
                 snapshot.forEach(doc => allStudentsData[doc.id] = doc.data());
-                updateBatch305Leaderboard();
+                if (document.getElementById('batch-305-ranking-container').style.display === 'block') {
+                    updateBatch305Leaderboard();
+                }
             });
         }
 
@@ -1225,33 +1296,93 @@
         }
 
         function updateBatch305Leaderboard() {
-            const students = [
-                { name: 'majedul islam fahad', data: allStudentsData['majedul islam fahad'] || { classPoints: 94 } },
-                { name: 'sayid hossain sayem', data: allStudentsData['sayid hossain sayem'] || { classPoints: 82 } },
-                { name: 'abu talha shamim', data: allStudentsData['abu talha shamim'] || { classPoints: 78 } },
-                { name: 'kamrul hassan sojib', data: allStudentsData['kamrul hassan sojib'] || { classPoints: 71 } }
+            const studentNames = [
+                'majedul islam fahad',
+                'sayid hossain sayem',
+                'abu talha shamim',
+                'kamrul hassan sojib'
             ];
             
-            // Sort by class points
-            students.sort((a, b) => b.data.classPoints - a.data.classPoints);
+            // Get student data and sort by totalPoints
+            const students = studentNames.map(name => ({
+                name: name,
+                data: allStudentsData[name] || { 
+                    classPoints: 0, 
+                    totalPoints: 0, 
+                    examMarks: 0, 
+                    totalMarks: 0,
+                    notice: 'No data available'
+                }
+            }));
+            
+            // Sort by totalPoints in descending order
+            students.sort((a, b) => b.data.totalPoints - a.data.totalPoints);
             
             let html = '';
             students.forEach((student, index) => {
+                const rankNumber = index + 1;
+                const isFirstRank = rankNumber === 1;
+                
                 let rankIcon = '';
-                if (index === 0) rankIcon = '<i class="fas fa-crown" style="color:#ffd700; margin-right:5px;"></i>';
-                else if (index === 1) rankIcon = '<i class="fas fa-medal" style="color:#c0c0c0; margin-right:5px;"></i>';
-                else if (index === 2) rankIcon = '<i class="fas fa-medal" style="color:#cd7f32; margin-right:5px;"></i>';
+                if (rankNumber === 1) {
+                    rankIcon = '<i class="fas fa-crown" style="color:#ffd700; margin-right:5px;"></i>';
+                } else if (rankNumber === 2) {
+                    rankIcon = '<i class="fas fa-medal" style="color:#c0c0c0; margin-right:5px;"></i>';
+                } else if (rankNumber === 3) {
+                    rankIcon = '<i class="fas fa-medal" style="color:#cd7f32; margin-right:5px;"></i>';
+                }
                 
                 html += `
-                    <div class="batch-305-leader-item">
-                        <span class="batch-305-rank">#${index + 1}</span>
-                        <span class="batch-305-name">${rankIcon} ${student.name}</span>
-                        <span class="batch-305-points">${student.data.classPoints} pts</span>
+                    <div class="batch-305-leader-item ${isFirstRank ? 'rank-1' : ''}" onclick="showStudentPopup('${student.name}')">
+                        <span class="batch-305-rank">#${rankNumber}</span>
+                        <span class="batch-305-name">
+                            ${rankIcon} ${student.name}
+                        </span>
+                        <span class="batch-305-points">${student.data.totalPoints} pts</span>
                     </div>
                 `;
             });
             
             document.getElementById('batch-305-leaderboard').innerHTML = html;
+        }
+
+        function showStudentPopup(studentName) {
+            const data = allStudentsData[studentName] || { 
+                classPoints: 0, 
+                totalPoints: 0, 
+                examMarks: 0, 
+                totalMarks: 0, 
+                notice: '🌟 No data available.'
+            };
+            
+            document.getElementById('popup-content').innerHTML = `
+                <div style="font-size:1.6rem; font-weight:800; color:cyan; margin-bottom:10px; text-transform:capitalize;">
+                    ${studentName}
+                </div>
+                <div class="student-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">Class Points:</span>
+                        <span class="detail-value">${data.classPoints}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Total Points:</span>
+                        <span class="detail-value">${data.totalPoints}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Exam Marks:</span>
+                        <span class="detail-value">${data.examMarks}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Total Marks:</span>
+                        <span class="detail-value">${data.totalMarks}</span>
+                    </div>
+                </div>
+                <div class="student-notice">
+                    <i class="fas fa-bell" style="color:cyan; margin-right:8px;"></i>
+                    ${data.notice}
+                </div>
+            `;
+            document.getElementById('popup').classList.add('show');
         }
 
         function generateDefaultStats() {
@@ -1368,37 +1499,7 @@
 
         function handleStudentClick(batch, name) {
             if (batch === '305') {
-                const data = allStudentsData[name] || { 
-                    classPoints: 94, totalPoints: 486, examMarks: 89, totalMarks: 445, 
-                    notice: '🌟 Outstanding performance! Keep it up.'
-                };
-                
-                document.getElementById('popup-content').innerHTML = `
-                    <div style="font-size:1.6rem; font-weight:800; color:cyan; margin-bottom:10px;">${name}</div>
-                    <div style="margin:15px 0; padding:15px; background:rgba(0,255,255,0.1); border-radius:20px;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                            <span>Class Points:</span>
-                            <span style="color:cyan; font-weight:700;">${data.classPoints}</span>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                            <span>Total Points:</span>
-                            <span style="color:cyan; font-weight:700;">${data.totalPoints}</span>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                            <span>Exam Marks:</span>
-                            <span style="color:cyan; font-weight:700;">${data.examMarks}</span>
-                        </div>
-                        <div style="display:flex; justify-content:space-between;">
-                            <span>Total Marks:</span>
-                            <span style="color:cyan; font-weight:700;">${data.totalMarks}</span>
-                        </div>
-                    </div>
-                    <div style="padding:15px; background:#1e293b; border-radius:16px;">
-                        <i class="fas fa-bell" style="color:cyan; margin-right:8px;"></i>
-                        ${data.notice}
-                    </div>
-                `;
-                document.getElementById('popup').classList.add('show');
+                showStudentPopup(name);
             } else {
                 document.getElementById('popup-content').innerHTML = `
                     <div style="text-align:center; padding:20px;">
