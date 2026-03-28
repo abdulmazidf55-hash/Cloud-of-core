@@ -1,11 +1,10 @@
-<!-- USER DASHBOARD: cloudofcore-ac574 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Cloud of Core - International Dashboard</title>
-    <!-- Firebase SDK v10.8.0 with new config -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -22,14 +21,14 @@
         }
 
         body {
-            background: #030614;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0f0a 100%);
             color: #fff;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* ===== PLEXUS BACKGROUND ===== */
+        /* ===== ENHANCED NETWORK BACKGROUND ===== */
         #plexus-canvas {
             position: fixed;
             top: 0;
@@ -37,7 +36,7 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.45;
+            opacity: 0.6;
             pointer-events: none;
         }
 
@@ -47,7 +46,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0,255,255,0.03) 0%, #030614 90%);
+            background: radial-gradient(circle at 50% 50%, rgba(255, 100, 0, 0.08) 0%, #0a0a0a 90%);
             z-index: 1;
             pointer-events: none;
         }
@@ -83,7 +82,7 @@
         .landing-logo {
             width: min(320px, 80%);
             margin-bottom: 25px;
-            filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8));
+            filter: drop-shadow(0 0 40px rgba(255, 100, 0, 0.8));
             animation: premiumFloat 4s ease-in-out infinite;
         }
 
@@ -97,14 +96,20 @@
             font-size: 1.4rem;
             font-weight: 700;
             border: none;
-            background: linear-gradient(135deg, #00ffff, #0066ff);
-            color: #030614;
+            background: linear-gradient(135deg, #ff6600, #ff3300);
+            color: #fff;
             border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 40px rgba(255, 102, 0, 0.6);
             width: min(350px, 85%);
             margin: 0 auto;
             border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .glow-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(255, 102, 0, 0.8);
         }
 
         /* ===== UNIQUE SIGNIN POPUP ===== */
@@ -116,7 +121,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 6, 20, 0.8);
+            background: rgba(10, 10, 10, 0.9);
             backdrop-filter: blur(15px);
             align-items: center;
             justify-content: center;
@@ -128,13 +133,13 @@
         }
 
         .modal-content {
-            background: linear-gradient(165deg, #0f1a2f, #030614);
+            background: linear-gradient(165deg, #2a1a0f, #0a0a0a);
             padding: 40px 30px;
             border-radius: 50px;
             width: 100%;
             max-width: 400px;
-            border: 2px solid rgba(0, 255, 255, 0.3);
-            box-shadow: 0 30px 60px -15px rgba(0,255,255,0.4);
+            border: 2px solid rgba(255, 102, 0, 0.5);
+            box-shadow: 0 30px 60px -15px rgba(255, 102, 0, 0.4);
             position: relative;
             animation: cardFloat 0.6s ease-out;
         }
@@ -142,26 +147,26 @@
         .modal-icon {
             width: 80px;
             height: 80px;
-            background: rgba(0, 255, 255, 0.1);
+            background: rgba(255, 102, 0, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            border: 2px solid cyan;
+            border: 2px solid #ff6600;
             font-size: 2.5rem;
-            color: cyan;
+            color: #ff6600;
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px cyan; }
-            50% { box-shadow: 0 0 40px cyan; }
+            0%, 100% { box-shadow: 0 0 20px #ff6600; }
+            50% { box-shadow: 0 0 40px #ff6600; }
         }
 
         .modal-content h2 {
             color: transparent;
-            background: linear-gradient(135deg, #00ffff, #ffffff);
+            background: linear-gradient(135deg, #ff6600, #ffaa00);
             -webkit-background-clip: text;
             background-clip: text;
             font-size: 2.2rem;
@@ -180,16 +185,16 @@
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: cyan;
+            color: #ff6600;
             font-size: 1.2rem;
         }
 
         .modal-content input {
             width: 100%;
             padding: 16px 20px 16px 55px;
-            border: 2px solid rgba(0, 255, 255, 0.2);
+            border: 2px solid rgba(255, 102, 0, 0.3);
             border-radius: 40px;
-            background: rgba(10, 20, 40, 0.7);
+            background: rgba(20, 20, 30, 0.7);
             color: white;
             font-size: 1rem;
         }
@@ -200,8 +205,8 @@
             margin: 15px 0 10px;
             border: none;
             border-radius: 40px;
-            background: linear-gradient(135deg, #00ffff, #0066ff);
-            color: #030614;
+            background: linear-gradient(135deg, #ff6600, #ff3300);
+            color: white;
             font-weight: 700;
             font-size: 1.2rem;
             cursor: pointer;
@@ -216,7 +221,7 @@
         }
 
         .auth-links span {
-            color: cyan;
+            color: #ff6600;
             cursor: pointer;
         }
 
@@ -231,10 +236,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: cyan;
+            color: #ff6600;
             font-size: 1.5rem;
             cursor: pointer;
-            border: 1px solid rgba(0,255,255,0.3);
+            border: 1px solid rgba(255,102,0,0.3);
         }
 
         /* ===== MAIN APP ===== */
@@ -247,7 +252,7 @@
         }
 
         .header {
-            background: rgba(10, 15, 30, 0.8);
+            background: rgba(20, 15, 10, 0.85);
             backdrop-filter: blur(12px);
             padding: 12px 20px;
             display: flex;
@@ -256,13 +261,13 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            border-bottom: 2px solid rgba(255, 102, 0, 0.5);
         }
 
         .header-logo {
             height: 42px;
             width: auto;
-            filter: drop-shadow(0 0 15px cyan);
+            filter: drop-shadow(0 0 15px #ff6600);
         }
 
         .search-container {
@@ -273,9 +278,9 @@
         #search-input {
             width: 100%;
             padding: 12px 18px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(255, 102, 0, 0.5);
             border-radius: 40px;
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 25, 20, 0.7);
             color: white;
             font-size: 15px;
         }
@@ -285,32 +290,38 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: #1e293b;
+            background: #2a1f15;
             border-radius: 10px;
             margin-top: 5px;
             max-height: 200px;
             overflow-y: auto;
             display: none;
-            border: 1px solid cyan;
+            border: 1px solid #ff6600;
             z-index: 1000;
         }
 
         .search-item {
             padding: 12px 15px;
-            border-bottom: 1px solid #334155;
-            color: cyan;
+            border-bottom: 1px solid #ff884d;
+            color: #ff884d;
             cursor: pointer;
         }
 
         .logout-btn {
             background: transparent;
-            border: 1.5px solid cyan;
-            color: cyan;
+            border: 1.5px solid #ff6600;
+            color: #ff6600;
             padding: 10px 20px;
             border-radius: 30px;
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ff6600;
+            color: #0a0a0a;
         }
 
         .main-content {
@@ -324,16 +335,16 @@
             width: min(200px, 45%);
             display: block;
             margin: 0 auto 20px;
-            filter: drop-shadow(0 0 30px cyan);
+            filter: drop-shadow(0 0 30px #ff6600);
         }
 
         .student-count {
             font-size: 1.5rem;
             text-align: center;
-            color: #00ffff;
+            color: #ff884d;
             margin: 15px 0 25px;
             font-weight: 700;
-            text-shadow: 0 0 20px rgba(0,255,255,0.5);
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
         }
 
         /* Stats Cards */
@@ -345,9 +356,9 @@
         }
 
         .stat-card {
-            background: linear-gradient(145deg, rgba(26, 38, 57, 0.8), rgba(15, 23, 42, 0.9));
+            background: linear-gradient(145deg, rgba(40, 30, 20, 0.8), rgba(20, 15, 10, 0.9));
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(0, 255, 255, 0.4);
+            border: 1px solid rgba(255, 102, 0, 0.5);
             border-radius: 20px;
             padding: 16px 8px;
             text-align: center;
@@ -356,7 +367,7 @@
         .stat-batch {
             font-size: 1.1rem;
             font-weight: 700;
-            color: #00ffff;
+            color: #ff884d;
             margin-bottom: 5px;
         }
 
@@ -370,12 +381,12 @@
             color: white;
         }
 
-        .trend-up { color: #22ff7e; }
-        .trend-down { color: #ff4d4d; }
+        .trend-up { color: #ffaa66; }
+        .trend-down { color: #ff6644; }
 
         .stat-label {
             font-size: 0.8rem;
-            color: #00ffff;
+            color: #ff884d;
             margin-top: 8px;
             font-weight: 600;
             text-transform: uppercase;
@@ -395,7 +406,7 @@
             font-size: 1.6rem;
             font-weight: 800;
             color: transparent;
-            background: linear-gradient(135deg, #00ffff, #ffffff);
+            background: linear-gradient(135deg, #ff884d, #ffaa66);
             -webkit-background-clip: text;
             background-clip: text;
             display: inline-block;
@@ -417,18 +428,18 @@
         .leadership-item {
             display: flex;
             align-items: center;
-            background: linear-gradient(90deg, rgba(26, 38, 57, 0.8), rgba(15, 23, 42, 0.8));
+            background: linear-gradient(90deg, rgba(40, 30, 20, 0.8), rgba(20, 15, 10, 0.8));
             backdrop-filter: blur(5px);
             padding: 12px 16px;
             border-radius: 40px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(255, 102, 0, 0.3);
         }
 
         .leadership-rank-number {
             width: 36px;
             font-size: 1.1rem;
             font-weight: 800;
-            color: #00ffff;
+            color: #ff884d;
         }
 
         .leadership-badge {
@@ -441,11 +452,11 @@
             animation: spin 3s linear infinite;
         }
 
-        .diamond-badge { color: #b9f2ff; }
-        .gold-badge { color: #ffd700; }
-        .silver-badge { color: #c0c0c0; }
-        .bronze-badge { color: #cd7f32; }
-        .standard-badge { color: #00ffff; }
+        .diamond-badge { color: #ffaa66; }
+        .gold-badge { color: #ffaa33; }
+        .silver-badge { color: #ccaa88; }
+        .bronze-badge { color: #cc8844; }
+        .standard-badge { color: #ff884d; }
 
         .leadership-batch-name {
             flex: 1;
@@ -456,7 +467,7 @@
         .leadership-points {
             font-size: 1rem;
             font-weight: 700;
-            color: #00ffff;
+            color: #ff884d;
         }
 
         .leadership-metric {
@@ -466,12 +477,12 @@
         }
 
         .leadership-item.batch-305-highlight {
-            background: linear-gradient(90deg, rgba(26, 71, 49, 0.9), rgba(10, 47, 31, 0.9));
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            background: linear-gradient(90deg, rgba(255, 102, 0, 0.3), rgba(255, 68, 0, 0.2));
+            border: 2px solid #ff884d;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.3);
         }
 
-        /* Mission Success Rank Section - New */
+        /* Mission Success Rank Section */
         .mission-section {
             margin: 30px 0 20px;
         }
@@ -485,7 +496,7 @@
             font-size: 1.6rem;
             font-weight: 800;
             color: transparent;
-            background: linear-gradient(135deg, #ffaa00, #ffff00);
+            background: linear-gradient(135deg, #ffaa44, #ff8844);
             -webkit-background-clip: text;
             background-clip: text;
             display: inline-block;
@@ -507,18 +518,18 @@
         .mission-item {
             display: flex;
             align-items: center;
-            background: linear-gradient(90deg, rgba(38, 26, 57, 0.8), rgba(23, 15, 42, 0.8));
+            background: linear-gradient(90deg, rgba(50, 35, 20, 0.8), rgba(30, 20, 10, 0.8));
             backdrop-filter: blur(5px);
             padding: 12px 16px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 200, 0, 0.3);
+            border: 1px solid rgba(255, 136, 0, 0.4);
         }
 
         .mission-rank-number {
             width: 36px;
             font-size: 1.1rem;
             font-weight: 800;
-            color: #ffaa00;
+            color: #ffaa44;
         }
 
         .mission-badge {
@@ -531,11 +542,11 @@
             animation: pulse 2s infinite;
         }
 
-        .gold-mission { color: #ffd700; }
-        .silver-mission { color: #c0c0c0; }
-        .bronze-mission { color: #cd7f32; }
-        .blue-mission { color: #00ffff; }
-        .purple-mission { color: #aa80ff; }
+        .gold-mission { color: #ffaa33; }
+        .silver-mission { color: #ccaa88; }
+        .bronze-mission { color: #cc8844; }
+        .blue-mission { color: #ff884d; }
+        .purple-mission { color: #ffaa66; }
 
         .mission-batch-name {
             flex: 1;
@@ -567,18 +578,18 @@
         }
 
         .total-mission { color: #ffffff; }
-        .success-mission { color: #00ff88; }
-        .failed-mission { color: #ff4d4d; }
+        .success-mission { color: #ffaa66; }
+        .failed-mission { color: #ff6644; }
 
         .mission-item.mission-highlight {
-            background: linear-gradient(90deg, rgba(71, 61, 26, 0.9), rgba(47, 40, 10, 0.9));
-            border: 2px solid #ffaa00;
+            background: linear-gradient(90deg, rgba(255, 102, 0, 0.25), rgba(255, 68, 0, 0.15));
+            border: 2px solid #ffaa44;
             box-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
         }
 
         @keyframes missionGlow {
-            0%, 100% { filter: drop-shadow(0 0 5px #ffaa00); }
-            50% { filter: drop-shadow(0 0 15px #ffaa00); }
+            0%, 100% { filter: drop-shadow(0 0 5px #ffaa44); }
+            50% { filter: drop-shadow(0 0 15px #ffaa44); }
         }
 
         @keyframes badgeGlow {
@@ -602,23 +613,24 @@
 
         .batch-btn {
             padding: 14px 32px;
-            border: 2px solid rgba(0, 255, 255, 0.6);
-            background: rgba(26, 38, 57, 0.8);
+            border: 2px solid rgba(255, 102, 0, 0.7);
+            background: rgba(40, 30, 20, 0.8);
             backdrop-filter: blur(5px);
             color: white;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 700;
             transition: 0.2s;
-            box-shadow: 0 5px 15px rgba(0,255,255,0.2);
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .batch-btn.batch-305-btn {
-            background: linear-gradient(145deg, #1a4731, #0a2f1f);
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            background: linear-gradient(145deg, #ff884d, #ff551a);
+            border: 2px solid #ffaa66;
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.5);
         }
 
         .batch-btn::before {
@@ -628,7 +640,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, cyan, transparent, cyan);
+            background: linear-gradient(45deg, #ff6600, transparent, #ff6600);
             border-radius: 50px;
             z-index: -1;
             animation: borderGlow 2s linear infinite;
@@ -641,27 +653,27 @@
         }
 
         .batch-btn:hover {
-            background: cyan;
-            color: #030614;
+            background: #ff6600;
+            color: #0a0a0a;
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px cyan;
+            box-shadow: 0 10px 30px #ff6600;
         }
 
         .batch-btn.batch-305-btn:hover {
-            background: #00ff88;
-            color: #030614;
+            background: #ff884d;
+            color: #0a0a0a;
         }
 
         /* Student Grid */
         .student-list-container {
             max-height: 380px;
             overflow-y: auto;
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(20, 15, 10, 0.7);
             backdrop-filter: blur(8px);
             border-radius: 24px;
             padding: 20px 15px;
             margin: 15px 0 20px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(255, 102, 0, 0.5);
         }
 
         .student-grid {
@@ -671,21 +683,21 @@
         }
 
         .student-card {
-            background: rgba(30, 41, 59, 0.8);
+            background: rgba(50, 40, 30, 0.8);
             padding: 12px 6px;
             border-radius: 16px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(255, 102, 0, 0.3);
             font-size: 0.85rem;
             text-align: center;
-            color: #00ffff;
+            color: #ff884d;
             font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
         }
 
         .student-card:active {
-            background: cyan;
-            color: #030614;
+            background: #ff6600;
+            color: #0a0a0a;
         }
 
         /* Top 10 Ranking */
@@ -697,7 +709,7 @@
             font-size: 1.6rem;
             font-weight: 800;
             color: transparent;
-            background: linear-gradient(135deg, #00ffff, #ffffff);
+            background: linear-gradient(135deg, #ff884d, #ffaa66);
             -webkit-background-clip: text;
             background-clip: text;
             text-align: center;
@@ -713,18 +725,18 @@
         .rank-item {
             display: flex;
             align-items: center;
-            background: linear-gradient(90deg, rgba(26, 38, 57, 0.8), rgba(15, 23, 42, 0.8));
+            background: linear-gradient(90deg, rgba(40, 30, 20, 0.8), rgba(20, 15, 10, 0.8));
             backdrop-filter: blur(5px);
             padding: 12px 16px;
             border-radius: 40px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(255, 102, 0, 0.3);
         }
 
         .rank-number {
             width: 36px;
             font-size: 1.1rem;
             font-weight: 800;
-            color: #00ffff;
+            color: #ff884d;
         }
 
         .rank-badge {
@@ -746,20 +758,20 @@
         .rank-points {
             font-size: 1rem;
             font-weight: 700;
-            color: #00ffff;
+            color: #ff884d;
         }
 
         /* 305 Batch Ranking */
         .batch-305-ranking {
             margin: 20px 0;
-            background: rgba(26, 47, 36, 0.4);
+            background: rgba(255, 102, 0, 0.15);
             border-radius: 20px;
             padding: 15px;
-            border: 2px solid #00ff88;
+            border: 2px solid #ff884d;
         }
 
         .batch-305-title {
-            color: #00ff88;
+            color: #ff884d;
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 15px;
@@ -779,33 +791,33 @@
         .batch-305-leader-item {
             display: flex;
             align-items: center;
-            background: rgba(0, 255, 136, 0.1);
+            background: rgba(255, 102, 0, 0.15);
             padding: 12px 16px;
             border-radius: 40px;
-            border: 1px solid #00ff88;
+            border: 1px solid #ff884d;
             cursor: pointer;
             transition: 0.2s;
         }
 
         .batch-305-leader-item:hover {
-            background: rgba(0, 255, 136, 0.2);
+            background: rgba(255, 102, 0, 0.3);
             transform: scale(1.02);
         }
 
         .batch-305-leader-item.rank-1 {
-            background: linear-gradient(90deg, rgba(0, 255, 136, 0.3), rgba(0, 200, 100, 0.3));
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            background: linear-gradient(90deg, rgba(255, 102, 0, 0.4), rgba(255, 68, 0, 0.3));
+            border: 2px solid #ffaa66;
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.4);
         }
 
         .batch-305-rank {
             width: 40px;
             font-weight: 800;
-            color: #00ff88;
+            color: #ff884d;
         }
 
         .rank-1 .batch-305-rank {
-            color: #ffd700;
+            color: #ffaa66;
         }
 
         .batch-305-name {
@@ -818,25 +830,17 @@
         }
 
         .batch-305-points {
-            color: #00ff88;
+            color: #ff884d;
             font-weight: 700;
             margin-right: 10px;
         }
 
         .rank-1 .batch-305-points {
-            color: #ffd700;
-        }
-
-        .batch-305-total-points {
-            font-size: 0.8rem;
-            color: #00ff88;
-            background: rgba(0, 255, 136, 0.2);
-            padding: 2px 8px;
-            border-radius: 20px;
+            color: #ffaa66;
         }
 
         .crown-icon {
-            color: #ffd700;
+            color: #ffaa66;
             animation: crownFloat 2s infinite;
         }
 
@@ -849,16 +853,16 @@
         .notice-section {
             margin: 30px 0 20px;
             padding: 22px 18px;
-            background: linear-gradient(145deg, rgba(26, 38, 57, 0.7), rgba(15, 23, 42, 0.8));
+            background: linear-gradient(145deg, rgba(40, 30, 20, 0.7), rgba(20, 15, 10, 0.8));
             backdrop-filter: blur(8px);
             border-radius: 28px;
-            border: 1px solid rgba(0, 255, 255, 0.4);
+            border: 1px solid rgba(255, 102, 0, 0.5);
         }
 
         .notice-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #00ffff;
+            color: #ff884d;
             text-align: center;
             margin-bottom: 12px;
             display: flex;
@@ -883,7 +887,7 @@
             padding: 15px;
             background: rgba(0, 0, 0, 0.3);
             border-radius: 18px;
-            border-left: 4px solid #00ffff;
+            border-left: 4px solid #ff6600;
         }
 
         /* Premium Popup */
@@ -894,7 +898,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 6, 20, 0.7);
+            background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(12px);
             z-index: 3000;
             align-items: center;
@@ -908,13 +912,13 @@
         }
 
         .popup-card {
-            background: linear-gradient(165deg, #1a2639, #0f172a);
+            background: linear-gradient(165deg, #2a1f15, #15100a);
             padding: 28px 22px;
             border-radius: 40px;
             width: 100%;
             max-width: 420px;
-            border: 2px solid rgba(0, 255, 255, 0.6);
-            box-shadow: 0 30px 60px -15px rgba(0,255,255,0.4);
+            border: 2px solid rgba(255, 102, 0, 0.7);
+            box-shadow: 0 30px 60px -15px rgba(255, 102, 0, 0.5);
             animation: popupAppear 0.5s ease;
             position: relative;
         }
@@ -930,16 +934,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: cyan;
+            color: #ff6600;
             font-size: 24px;
             cursor: pointer;
-            border: 1px solid rgba(0,255,255,0.3);
+            border: 1px solid rgba(255,102,0,0.5);
         }
 
         .student-detail {
             margin: 10px 0;
             padding: 15px;
-            background: rgba(0,255,255,0.1);
+            background: rgba(255, 102, 0, 0.1);
             border-radius: 20px;
         }
 
@@ -948,7 +952,7 @@
             justify-content: space-between;
             margin-bottom: 10px;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(0,255,255,0.2);
+            border-bottom: 1px solid rgba(255, 102, 0, 0.3);
         }
 
         .detail-label {
@@ -957,24 +961,24 @@
         }
 
         .detail-value {
-            color: cyan;
+            color: #ff884d;
             font-weight: 700;
             font-size: 1.1rem;
         }
 
         .student-notice {
             padding: 15px;
-            background: #1e293b;
+            background: #2a1f15;
             border-radius: 16px;
             margin-top: 15px;
-            border-left: 4px solid cyan;
+            border-left: 4px solid #ff6600;
         }
 
         .footer {
-            background: rgba(10, 15, 30, 0.8);
+            background: rgba(20, 15, 10, 0.85);
             backdrop-filter: blur(10px);
             padding: 30px 20px 15px;
-            border-top: 2px solid rgba(0, 255, 255, 0.3);
+            border-top: 2px solid rgba(255, 102, 0, 0.5);
             margin-top: 30px;
         }
 
@@ -983,7 +987,7 @@
         }
 
         .footer-section h3 {
-            color: cyan;
+            color: #ff884d;
             font-size: 1.1rem;
             margin-bottom: 8px;
         }
@@ -997,7 +1001,7 @@
             text-align: center;
             padding-top: 20px;
             margin-top: 20px;
-            border-top: 1px solid #1e293b;
+            border-top: 1px solid #2a1f15;
             color: #666;
             font-size: 0.75rem;
         }
@@ -1100,7 +1104,7 @@
 
             <!-- Student List -->
             <div id="student-list-container" class="student-list-container" style="display: none;">
-                <h3 style="color:cyan; margin-bottom:15px;" id="batch-title"></h3>
+                <h3 style="color:#ff884d; margin-bottom:15px;" id="batch-title"></h3>
                 <div id="student-grid" class="student-grid"></div>
             </div>
 
@@ -1145,7 +1149,7 @@
     </div>
 
     <script>
-        // ==================== NEW FIREBASE CONFIGURATION ====================
+        // ==================== FIREBASE CONFIGURATION ====================
         const firebaseConfig = {
             apiKey: "AIzaSyDDBbyxLcZYbSqSa12cSwK3yGxRU_NvLg8",
   authDomain: "coccore-f5f6d.firebaseapp.com",
@@ -1160,13 +1164,14 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Plexus Background
+        // ==================== ENHANCED PLEXUS BACKGROUND ====================
         function initPlexus() {
             const canvas = document.getElementById('plexus-canvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
-            const particleCount = 60;
+            const particleCount = 80;
+            let connections = [];
 
             function resize() {
                 width = window.innerWidth;
@@ -1176,13 +1181,15 @@
             }
 
             function createParticles() {
+                particles = [];
                 for (let i = 0; i < particleCount; i++) {
                     particles.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
-                        vx: (Math.random() - 0.5) * 0.2,
-                        vy: (Math.random() - 0.5) * 0.2,
-                        size: Math.random() * 1.5 + 0.5
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        size: Math.random() * 2 + 0.8,
+                        color: `rgba(255, ${100 + Math.random() * 100}, ${50 + Math.random() * 50}, ${0.4 + Math.random() * 0.3})`
                     });
                 }
             }
@@ -1190,16 +1197,21 @@
             function draw() {
                 ctx.clearRect(0, 0, width, height);
                 
+                // Draw connections first (for better visual layering)
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
                         
-                        if (dist < 120) {
+                        if (dist < 150) {
                             ctx.beginPath();
-                            ctx.strokeStyle = `rgba(0, 255, 255, ${0.1 * (1 - dist/120)})`;
-                            ctx.lineWidth = 0.5;
+                            const opacity = 0.15 * (1 - dist / 150);
+                            const gradient = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                            gradient.addColorStop(0, `rgba(255, 102, 0, ${opacity * 0.8})`);
+                            gradient.addColorStop(1, `rgba(255, 170, 68, ${opacity})`);
+                            ctx.strokeStyle = gradient;
+                            ctx.lineWidth = 0.8;
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
                             ctx.stroke();
@@ -1207,10 +1219,19 @@
                     }
                 }
                 
+                // Draw particles with glow effect
                 for (let p of particles) {
                     ctx.beginPath();
-                    ctx.fillStyle = 'rgba(0, 255, 255, 0.5)';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = `rgba(255, 102, 0, 0.6)`;
+                    ctx.fillStyle = p.color;
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Add inner glow
+                    ctx.beginPath();
+                    ctx.fillStyle = `rgba(255, 200, 100, 0.3)`;
+                    ctx.arc(p.x, p.y, p.size * 0.6, 0, Math.PI * 2);
                     ctx.fill();
                     
                     p.x += p.vx;
@@ -1218,8 +1239,15 @@
                     
                     if (p.x < 0 || p.x > width) p.vx *= -1;
                     if (p.y < 0 || p.y > height) p.vy *= -1;
+                    
+                    // Wrap around edges for continuous flow
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
                 }
                 
+                ctx.shadowBlur = 0;
                 requestAnimationFrame(draw);
             }
 
@@ -1229,7 +1257,6 @@
 
             window.addEventListener('resize', () => {
                 resize();
-                particles = [];
                 createParticles();
             });
         }
@@ -1312,7 +1339,6 @@
             document.getElementById('ranking-list').innerHTML = generateDefaultRanking();
             document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core International!';
 
-            // Load Batch Stats
             db.collection('batchStats').onSnapshot(snapshot => {
                 if (!snapshot.empty) {
                     let html = '';
@@ -1335,13 +1361,9 @@
                 }
             });
 
-            // Load Leadership Board
             loadLeadershipBoard();
-
-            // Load Mission Success Rank
             loadMissionRank();
 
-            // Load Top 10 Ranking
             db.collection('ranking').orderBy('points', 'desc').limit(10).onSnapshot(snapshot => {
                 if (!snapshot.empty) {
                     let html = '';
@@ -1349,10 +1371,10 @@
                     snapshot.forEach(doc => {
                         const s = doc.data();
                         let badge = '';
-                        if (i === 1) badge = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
-                        else if (i === 2) badge = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
-                        else if (i === 3) badge = '<i class="fas fa-medal" style="color:#cd7f32;"></i>';
-                        else badge = '<i class="fas fa-star" style="color:#00ffff;"></i>';
+                        if (i === 1) badge = '<i class="fas fa-crown" style="color:#ffaa33;"></i>';
+                        else if (i === 2) badge = '<i class="fas fa-medal" style="color:#ccaa88;"></i>';
+                        else if (i === 3) badge = '<i class="fas fa-medal" style="color:#cc8844;"></i>';
+                        else badge = '<i class="fas fa-star" style="color:#ff884d;"></i>';
                         
                         html += `
                             <div class="rank-item">
@@ -1368,7 +1390,6 @@
                 }
             });
 
-            // Load Notice
             db.collection('notices').doc('latest').onSnapshot(doc => {
                 if (doc.exists) {
                     document.getElementById('notice-content').innerHTML = doc.data().content;
@@ -1420,7 +1441,6 @@
             });
         }
 
-        // New function to load Mission Success Rank
         function loadMissionRank() {
             db.collection('missionRank').orderBy('rank', 'asc').onSnapshot(snapshot => {
                 if (!snapshot.empty) {
@@ -1430,7 +1450,6 @@
                         const batchNum = data.batch;
                         const isHighlighted = data.highlighted || false;
                         
-                        // Determine badge based on rank
                         let badgeIcon = '';
                         let badgeClass = '';
                         
@@ -1451,7 +1470,6 @@
                             badgeClass = 'purple-mission';
                         }
                         
-                        // Mission stats
                         const totalMissions = data.totalMissions || 0;
                         const successMissions = data.successMissions || 0;
                         const failedMissions = data.failedMissions || 0;
@@ -1481,7 +1499,6 @@
                     });
                     document.getElementById('mission-list').innerHTML = html;
                 } else {
-                    // Default data if none exists
                     document.getElementById('mission-list').innerHTML = generateDefaultMissionRank();
                 }
             });
@@ -1572,11 +1589,11 @@
                 
                 let rankIcon = '';
                 if (rankNumber === 1) {
-                    rankIcon = '<i class="fas fa-crown" style="color:#ffd700; margin-right:5px;"></i>';
+                    rankIcon = '<i class="fas fa-crown" style="color:#ffaa33; margin-right:5px;"></i>';
                 } else if (rankNumber === 2) {
-                    rankIcon = '<i class="fas fa-medal" style="color:#c0c0c0; margin-right:5px;"></i>';
+                    rankIcon = '<i class="fas fa-medal" style="color:#ccaa88; margin-right:5px;"></i>';
                 } else if (rankNumber === 3) {
-                    rankIcon = '<i class="fas fa-medal" style="color:#cd7f32; margin-right:5px;"></i>';
+                    rankIcon = '<i class="fas fa-medal" style="color:#cc8844; margin-right:5px;"></i>';
                 }
                 
                 html += `
@@ -1603,7 +1620,7 @@
             };
             
             document.getElementById('popup-content').innerHTML = `
-                <div style="font-size:1.6rem; font-weight:800; color:cyan; margin-bottom:10px; text-transform:capitalize;">
+                <div style="font-size:1.6rem; font-weight:800; color:#ff884d; margin-bottom:10px; text-transform:capitalize;">
                     ${studentName}
                 </div>
                 <div class="student-detail">
@@ -1625,7 +1642,7 @@
                     </div>
                 </div>
                 <div class="student-notice">
-                    <i class="fas fa-bell" style="color:cyan; margin-right:8px;"></i>
+                    <i class="fas fa-bell" style="color:#ff884d; margin-right:8px;"></i>
                     ${data.notice}
                 </div>
             `;
@@ -1660,10 +1677,10 @@
             ];
             return ranks.map((name, i) => {
                 let badge = '';
-                if (i === 0) badge = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
-                else if (i === 1) badge = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
-                else if (i === 2) badge = '<i class="fas fa-medal" style="color:#cd7f32;"></i>';
-                else badge = '<i class="fas fa-star" style="color:#00ffff;"></i>';
+                if (i === 0) badge = '<i class="fas fa-crown" style="color:#ffaa33;"></i>';
+                else if (i === 1) badge = '<i class="fas fa-medal" style="color:#ccaa88;"></i>';
+                else if (i === 2) badge = '<i class="fas fa-medal" style="color:#cc8844;"></i>';
+                else badge = '<i class="fas fa-star" style="color:#ff884d;"></i>';
                 
                 return `
                     <div class="rank-item">
@@ -1702,7 +1719,6 @@
             'Matias', 'Sebastian', 'Nicolas', 'Gabriel', 'Rafael', 'Eduardo', 'Francisco', 'Ricardo', 'Jorge', 'Pedro'
         ];
 
-        // Generate batch students
         function generateInternationalStudents(batch, count, nameArray, lastNameArray = null) {
             let students = [];
             for (let i = 0; i < count; i++) {
@@ -1750,8 +1766,8 @@
             } else {
                 document.getElementById('popup-content').innerHTML = `
                     <div style="text-align:center; padding:20px;">
-                        <i class="fas fa-exclamation-triangle" style="font-size:3rem; color:#ff4d4d; margin-bottom:15px;"></i>
-                        <h2 style="color:#ff4d4d; margin-bottom:10px;">ACCESS DENIED</h2>
+                        <i class="fas fa-exclamation-triangle" style="font-size:3rem; color:#ff6644; margin-bottom:15px;"></i>
+                        <h2 style="color:#ff6644; margin-bottom:10px;">ACCESS DENIED</h2>
                         <p style="font-size:1.1rem; color:#fff;">You are not a student of Batch ${batch}</p>
                         <p style="color:#aaa; margin-top:15px;">This section is restricted to Batch ${batch} students only.</p>
                     </div>
@@ -1764,7 +1780,6 @@
             document.getElementById('popup').classList.remove('show');
         }
 
-        // Search
         let searchTimeout;
         function searchStudents(query) {
             clearTimeout(searchTimeout);
