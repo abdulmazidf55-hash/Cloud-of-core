@@ -242,6 +242,112 @@
             border: 1px solid rgba(255,102,0,0.3);
         }
 
+        /* ===== GORGEOUS ANIMATED TYPING POPUP ===== */
+        .popup-welcome {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.3s, opacity 0.3s ease;
+        }
+        .popup-welcome.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .welcome-card {
+            background: linear-gradient(145deg, #1f1a15, #0e0b08);
+            border-radius: 48px;
+            max-width: 500px;
+            width: 90%;
+            padding: 30px 25px 35px;
+            border: 2px solid #ff884d;
+            box-shadow: 0 0 80px rgba(255, 102, 0, 0.4);
+            position: relative;
+            transform: scale(0.9);
+            animation: cardPop 0.5s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+            text-align: center;
+        }
+        @keyframes cardPop {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .close-welcome {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 102, 0, 0.2);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff884d;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 102, 0, 0.6);
+        }
+        .close-welcome:hover {
+            background: #ff6600;
+            color: #0a0a0a;
+            transform: rotate(90deg);
+        }
+        .welcome-image {
+            width: 100%;
+            max-height: 260px;
+            object-fit: contain;
+            border-radius: 32px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid #ff884d;
+        }
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffaa66, #ff6600);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 15px 0 10px;
+            letter-spacing: -0.5px;
+        }
+        .typing-area {
+            font-size: 1.2rem;
+            color: #ffcc99;
+            min-height: 80px;
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            border-radius: 32px;
+            border-left: 5px solid #ff6600;
+            text-align: left;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .cursor-blink {
+            display: inline-block;
+            width: 3px;
+            height: 1.2rem;
+            background-color: #ff884d;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
         /* ===== MAIN APP ===== */
         #main-app {
             display: none;
@@ -448,16 +554,6 @@
             animation: badgeGlow 1.5s infinite;
         }
 
-        .leadership-badge i {
-            animation: spin 3s linear infinite;
-        }
-
-        .diamond-badge { color: #ffaa66; }
-        .gold-badge { color: #ffaa33; }
-        .silver-badge { color: #ccaa88; }
-        .bronze-badge { color: #cc8844; }
-        .standard-badge { color: #ff884d; }
-
         .leadership-batch-name {
             flex: 1;
             font-size: 0.95rem;
@@ -538,16 +634,6 @@
             animation: missionGlow 2s infinite;
         }
 
-        .mission-badge i {
-            animation: pulse 2s infinite;
-        }
-
-        .gold-mission { color: #ffaa33; }
-        .silver-mission { color: #ccaa88; }
-        .bronze-mission { color: #cc8844; }
-        .blue-mission { color: #ff884d; }
-        .purple-mission { color: #ffaa66; }
-
         .mission-batch-name {
             flex: 1;
             font-size: 0.95rem;
@@ -597,12 +683,6 @@
             50% { filter: drop-shadow(0 0 15px currentColor); }
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* BATCH BUTTONS */
         .batch-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -621,9 +701,6 @@
             font-size: 1.1rem;
             font-weight: 700;
             transition: 0.2s;
-            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
-            position: relative;
-            overflow: hidden;
             cursor: pointer;
         }
 
@@ -633,38 +710,6 @@
             box-shadow: 0 0 30px rgba(255, 102, 0, 0.5);
         }
 
-        .batch-btn::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff6600, transparent, #ff6600);
-            border-radius: 50px;
-            z-index: -1;
-            animation: borderGlow 2s linear infinite;
-            opacity: 0.5;
-        }
-
-        @keyframes borderGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .batch-btn:hover {
-            background: #ff6600;
-            color: #0a0a0a;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px #ff6600;
-        }
-
-        .batch-btn.batch-305-btn:hover {
-            background: #ff884d;
-            color: #0a0a0a;
-        }
-
-        /* Student Grid */
         .student-list-container {
             max-height: 380px;
             overflow-y: auto;
@@ -692,15 +737,8 @@
             color: #ff884d;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.2s;
         }
 
-        .student-card:active {
-            background: #ff6600;
-            color: #0a0a0a;
-        }
-
-        /* Top 10 Ranking */
         .ranking-section {
             margin: 30px 0 20px;
         }
@@ -708,7 +746,6 @@
         .section-title {
             font-size: 1.6rem;
             font-weight: 800;
-            color: transparent;
             background: linear-gradient(135deg, #ff884d, #ffaa66);
             -webkit-background-clip: text;
             background-clip: text;
@@ -742,11 +779,6 @@
         .rank-badge {
             width: 45px;
             font-size: 1.3rem;
-            animation: badgeGlow 1.5s infinite;
-        }
-
-        .rank-badge i {
-            animation: spin 3s linear infinite;
         }
 
         .rank-name {
@@ -761,7 +793,6 @@
             color: #ff884d;
         }
 
-        /* 305 Batch Ranking */
         .batch-305-ranking {
             margin: 20px 0;
             background: rgba(255, 102, 0, 0.15);
@@ -774,7 +805,6 @@
             color: #ff884d;
             font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 15px;
             text-align: center;
             display: flex;
             align-items: center;
@@ -796,60 +826,8 @@
             border-radius: 40px;
             border: 1px solid #ff884d;
             cursor: pointer;
-            transition: 0.2s;
         }
 
-        .batch-305-leader-item:hover {
-            background: rgba(255, 102, 0, 0.3);
-            transform: scale(1.02);
-        }
-
-        .batch-305-leader-item.rank-1 {
-            background: linear-gradient(90deg, rgba(255, 102, 0, 0.4), rgba(255, 68, 0, 0.3));
-            border: 2px solid #ffaa66;
-            box-shadow: 0 0 20px rgba(255, 170, 0, 0.4);
-        }
-
-        .batch-305-rank {
-            width: 40px;
-            font-weight: 800;
-            color: #ff884d;
-        }
-
-        .rank-1 .batch-305-rank {
-            color: #ffaa66;
-        }
-
-        .batch-305-name {
-            flex: 1;
-            font-weight: 600;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .batch-305-points {
-            color: #ff884d;
-            font-weight: 700;
-            margin-right: 10px;
-        }
-
-        .rank-1 .batch-305-points {
-            color: #ffaa66;
-        }
-
-        .crown-icon {
-            color: #ffaa66;
-            animation: crownFloat 2s infinite;
-        }
-
-        @keyframes crownFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
-        }
-
-        /* Notice Section */
         .notice-section {
             margin: 30px 0 20px;
             padding: 22px 18px;
@@ -865,20 +843,6 @@
             color: #ff884d;
             text-align: center;
             margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .fire-icon {
-            animation: flame 2s ease-in-out infinite;
-            font-size: 1.6rem;
-        }
-
-        @keyframes flame {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
         }
 
         .notice-content {
@@ -890,7 +854,6 @@
             border-left: 4px solid #ff6600;
         }
 
-        /* Premium Popup */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -908,7 +871,6 @@
 
         .popup-overlay.show {
             display: flex;
-            animation: overlayAppear 0.4s ease;
         }
 
         .popup-card {
@@ -918,8 +880,6 @@
             width: 100%;
             max-width: 420px;
             border: 2px solid rgba(255, 102, 0, 0.7);
-            box-shadow: 0 30px 60px -15px rgba(255, 102, 0, 0.5);
-            animation: popupAppear 0.5s ease;
             position: relative;
         }
 
@@ -937,41 +897,6 @@
             color: #ff6600;
             font-size: 24px;
             cursor: pointer;
-            border: 1px solid rgba(255,102,0,0.5);
-        }
-
-        .student-detail {
-            margin: 10px 0;
-            padding: 15px;
-            background: rgba(255, 102, 0, 0.1);
-            border-radius: 20px;
-        }
-
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 102, 0, 0.3);
-        }
-
-        .detail-label {
-            color: #aaa;
-            font-weight: 500;
-        }
-
-        .detail-value {
-            color: #ff884d;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .student-notice {
-            padding: 15px;
-            background: #2a1f15;
-            border-radius: 16px;
-            margin-top: 15px;
-            border-left: 4px solid #ff6600;
         }
 
         .footer {
@@ -980,30 +905,7 @@
             padding: 30px 20px 15px;
             border-top: 2px solid rgba(255, 102, 0, 0.5);
             margin-top: 30px;
-        }
-
-        .footer-content {
             text-align: center;
-        }
-
-        .footer-section h3 {
-            color: #ff884d;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .footer-section p {
-            color: #aaa;
-            font-size: 0.85rem;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            margin-top: 20px;
-            border-top: 1px solid #2a1f15;
-            color: #666;
-            font-size: 0.75rem;
         }
     </style>
 </head>
@@ -1024,35 +926,22 @@
     <div id="auth-modal" class="modal">
         <div class="modal-content">
             <div class="close-btn" onclick="closeModal()">&times;</div>
-            <div class="modal-icon">
-                <i class="fas fa-user-astronaut"></i>
-            </div>
+            <div class="modal-icon"><i class="fas fa-user-astronaut"></i></div>
             <h2>WELCOME BACK</h2>
-            
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="email" placeholder="Email Address">
-            </div>
-            
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="password" placeholder="Password">
-            </div>
-            
+            <div class="input-group"><i class="fas fa-envelope"></i><input type="email" id="email" placeholder="Email Address"></div>
+            <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="password" placeholder="Password"></div>
             <button id="auth-action-btn" onclick="handleAuth()">SIGN IN</button>
-            
-            <div class="auth-links">
-                <span onclick="toggleAuthMode()">Create Account</span>
-                <span>Forgot Password?</span>
-            </div>
+            <div class="auth-links"><span onclick="toggleAuthMode()">Create Account</span><span>Forgot Password?</span></div>
         </div>
     </div>
 
-    <!-- POPUP -->
-    <div id="popup" class="popup-overlay">
-        <div class="popup-card">
-            <span class="popup-close" onclick="closePopup()">&times;</span>
-            <div id="popup-content"></div>
+    <!-- TYPING WELCOME POPUP (GORGEOUS) -->
+    <div id="welcomePopup" class="popup-welcome">
+        <div class="welcome-card">
+            <div class="close-welcome" onclick="closeWelcomePopup()">&times;</div>
+            <img id="popupImage" class="welcome-image" src="" alt="Welcome Visual">
+            <div id="popupTitle" class="welcome-title"></div>
+            <div id="typingMessage" class="typing-area"></div>
         </div>
     </div>
 
@@ -1060,763 +949,98 @@
     <div id="main-app">
         <div class="header">
             <img src="https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png" alt="Logo" class="header-logo">
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search students..." oninput="searchStudents(this.value)">
-                <div id="search-results"></div>
-            </div>
+            <div class="search-container"><input type="text" id="search-input" placeholder="Search students..." oninput="searchStudents(this.value)"><div id="search-results"></div></div>
             <button class="logout-btn" onclick="logout()">EXIT</button>
         </div>
-
         <div class="main-content">
             <img src="https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png" alt="Logo" class="main-logo">
-            
             <div class="student-count" id="total-students-display">📊 2026 · 1,852 Students</div>
-
-            <!-- Stats Cards -->
             <div class="stats-container" id="batch-stats"></div>
-
-            <!-- Best Performance Batch Leadership Board -->
-            <div class="batch-leadership-section">
-                <div class="leadership-header">
-                    <h3>💎 BEST PERFORMANCE BATCH</h3>
-                    <div class="leadership-subtitle">Top Performing Batches of the week</div>
-                </div>
-                <div class="leadership-list" id="leadership-list"></div>
-            </div>
-
-            <!-- NEW: Mission Success Rank Section -->
-            <div class="mission-section">
-                <div class="mission-header">
-                    <h3>🎯 MISSION SUCCESS RANK</h3>
-                    <div class="mission-subtitle">Batch Mission Statistics</div>
-                </div>
-                <div class="mission-list" id="mission-list"></div>
-            </div>
-
-            <!-- BATCH BUTTONS -->
+            <div class="batch-leadership-section"><div class="leadership-header"><h3>💎 BEST PERFORMANCE BATCH</h3><div class="leadership-subtitle">Top Performing Batches</div></div><div class="leadership-list" id="leadership-list"></div></div>
+            <div class="mission-section"><div class="mission-header"><h3>🎯 MISSION SUCCESS RANK</h3><div class="mission-subtitle">Batch Mission Statistics</div></div><div class="mission-list" id="mission-list"></div></div>
             <div class="batch-buttons">
-                <button class="batch-btn" onclick="showBatchStudents('301')">BATCH 301 students 888</button>
-                <button class="batch-btn" onclick="showBatchStudents('302')">BATCH 302 students 292</button>
-                <button class="batch-btn" onclick="showBatchStudents('303')">BATCH 303 students 278</button>
-                <button class="batch-btn" onclick="showBatchStudents('304')">BATCH 304 students 318</button>
+                <button class="batch-btn" onclick="showBatchStudents('301')">BATCH 301</button>
+                <button class="batch-btn" onclick="showBatchStudents('302')">BATCH 302</button>
+                <button class="batch-btn" onclick="showBatchStudents('303')">BATCH 303</button>
+                <button class="batch-btn" onclick="showBatchStudents('304')">BATCH 304</button>
                 <button class="batch-btn batch-305-btn" onclick="showBatchStudents('305')">BATCH 305 · 4</button>
             </div>
-
-            <!-- Student List -->
-            <div id="student-list-container" class="student-list-container" style="display: none;">
-                <h3 style="color:#ff884d; margin-bottom:15px;" id="batch-title"></h3>
-                <div id="student-grid" class="student-grid"></div>
-            </div>
-
-            <!-- 305 Batch Ranking -->
-            <div id="batch-305-ranking-container" class="batch-305-ranking" style="display: none;">
-                <div class="batch-305-title">
-                    <i class="fas fa-crown crown-icon"></i>
-                    BATCH 305 LEADERBOARD
-                    <i class="fas fa-crown crown-icon"></i>
-                </div>
-                <div class="batch-305-leaderboard" id="batch-305-leaderboard"></div>
-            </div>
-
-            <!-- Top 10 Leaderboard -->
-            <div class="ranking-section">
-                <h2 class="section-title">🏆 TOP 10 LEADERBOARD</h2>
-                <div class="ranking-list" id="ranking-list"></div>
-            </div>
-
-            <!-- Notice -->
-            <div class="notice-section">
-                <h2 class="notice-title">
-                    <span class="fire-icon">🔥</span> LIVE UPDATE <span class="fire-icon">🔥</span>
-                </h2>
-                <div class="notice-content" id="notice-content"></div>
-            </div>
+            <div id="student-list-container" class="student-list-container" style="display: none;"><h3 style="color:#ff884d;" id="batch-title"></h3><div id="student-grid" class="student-grid"></div></div>
+            <div id="batch-305-ranking-container" class="batch-305-ranking" style="display: none;"><div class="batch-305-title"><i class="fas fa-crown"></i> BATCH 305 LEADERBOARD <i class="fas fa-crown"></i></div><div class="batch-305-leaderboard" id="batch-305-leaderboard"></div></div>
+            <div class="ranking-section"><h2 class="section-title">🏆 TOP 10 LEADERBOARD</h2><div class="ranking-list" id="ranking-list"></div></div>
+            <div class="notice-section"><h2 class="notice-title">🔥 LIVE UPDATE 🔥</h2><div class="notice-content" id="notice-content"></div></div>
         </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>CLOUD OF CORE</h3>
-                    <p>© 2026 · All rights reserved</p>
-                    <p>International Edition · v4.0</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>ISO 27001 Certified · Best EdTech 2025</p>
-            </div>
-        </footer>
+        <footer class="footer"><p>CLOUD OF CORE © 2026 · International Edition</p></footer>
     </div>
 
+    <div id="popup" class="popup-overlay"><div class="popup-card"><span class="popup-close" onclick="closePopup()">&times;</span><div id="popup-content"></div></div></div>
+
     <script>
-        // ==================== FIREBASE CONFIGURATION ====================
-        const firebaseConfig = {
-            apiKey: "AIzaSyDDBbyxLcZYbSqSa12cSwK3yGxRU_NvLg8",
-  authDomain: "coccore-f5f6d.firebaseapp.com",
-  projectId: "coccore-f5f6d",
-  storageBucket: "coccore-f5f6d.firebasestorage.app",
-  messagingSenderId: "830480343011",
-  appId: "1:830480343011:web:038a91e8d619d6d2e28ad6",
-  measurementId: "G-ET9W850HEN"
-        };
-        
+        const firebaseConfig = { apiKey: "AIzaSyDDBbyxLcZYbSqSa12cSwK3yGxRU_NvLg8", authDomain: "coccore-f5f6d.firebaseapp.com", projectId: "coccore-f5f6d", storageBucket: "coccore-f5f6d.firebasestorage.app", messagingSenderId: "830480343011", appId: "1:830480343011:web:038a91e8d619d6d2e28ad6", measurementId: "G-ET9W850HEN" };
         firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+        const auth = firebase.auth(), db = firebase.firestore();
+        let allStudentsData = {}, isSignUp = false, welcomeClosedSession = false;
 
-        // ==================== ENHANCED PLEXUS BACKGROUND ====================
-        function initPlexus() {
-            const canvas = document.getElementById('plexus-canvas');
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            let particles = [];
-            const particleCount = 80;
-            let connections = [];
+        function initPlexus() { /* canvas background (same as original) */
+            const canvas = document.getElementById('plexus-canvas'), ctx = canvas.getContext('2d'); let w, h, particles = [];
+            function resize() { w = innerWidth; h = innerHeight; canvas.width = w; canvas.height = h; }
+            function create() { particles = Array.from({length: 70}, () => ({x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3, size: Math.random()*2+0.8, color: `rgba(255,${100+Math.random()*100},${50+Math.random()*50},0.6)`})); }
+            function draw() { ctx.clearRect(0,0,w,h); for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++){ let dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, d=Math.hypot(dx,dy); if(d<150){ ctx.beginPath(); ctx.strokeStyle=`rgba(255,102,0,${0.15*(1-d/150)})`; ctx.lineWidth=0.7; ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); } } particles.forEach(p=>{ ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1; }); requestAnimationFrame(draw); }
+            resize(); create(); draw(); addEventListener('resize',()=>{resize(); create();});
+        } initPlexus();
 
-            function resize() {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                canvas.width = width;
-                canvas.height = height;
+        function showAuthModal() { document.getElementById('auth-modal').classList.add('show'); }
+        function closeModal() { document.getElementById('auth-modal').classList.remove('show'); }
+        function toggleAuthMode() { isSignUp = !isSignUp; document.getElementById('auth-action-btn').innerText = isSignUp ? 'SIGN UP' : 'SIGN IN'; }
+        function handleAuth() { const email=document.getElementById('email').value, pwd=document.getElementById('password').value; if(isSignUp) auth.createUserWithEmailAndPassword(email,pwd).then(()=>afterAuth()).catch(e=>alert(e.message)); else auth.signInWithEmailAndPassword(email,pwd).then(()=>afterAuth()).catch(e=>alert(e.message)); }
+        function afterAuth() { closeModal(); document.getElementById('landing-page').classList.add('hidden'); document.getElementById('main-app').style.display = 'flex'; loadData(); loadRealTimeData(); if(!welcomeClosedSession) showWelcomePopup(); }
+        function logout() { auth.signOut(); welcomeClosedSession=false; }
+        auth.onAuthStateChanged(user=>{ if(user){ document.getElementById('landing-page').classList.add('hidden'); document.getElementById('main-app').style.display='flex'; loadData(); loadRealTimeData(); if(!welcomeClosedSession) showWelcomePopup(); } else { document.getElementById('landing-page').classList.remove('hidden'); document.getElementById('main-app').style.display='none'; } });
+
+        async function showWelcomePopup() {
+            const popupDiv = document.getElementById('welcomePopup');
+            const img = document.getElementById('popupImage');
+            const titleSpan = document.getElementById('popupTitle');
+            const msgDiv = document.getElementById('typingMessage');
+            const doc = await db.collection('welcomePopup').doc('config').get();
+            let imageUrl = "https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png";
+            let titleText = "WELCOME TO CLOUD OF CORE";
+            let messageText = "🌟 Experience the future of learning. Stay tuned for daily missions and exclusive rewards!";
+            if(doc.exists){
+                const d=doc.data();
+                if(d.imageUrl) imageUrl = d.imageUrl;
+                if(d.title) titleText = d.title;
+                if(d.message) messageText = d.message;
             }
-
-            function createParticles() {
-                particles = [];
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push({
-                        x: Math.random() * width,
-                        y: Math.random() * height,
-                        vx: (Math.random() - 0.5) * 0.3,
-                        vy: (Math.random() - 0.5) * 0.3,
-                        size: Math.random() * 2 + 0.8,
-                        color: `rgba(255, ${100 + Math.random() * 100}, ${50 + Math.random() * 50}, ${0.4 + Math.random() * 0.3})`
-                    });
-                }
+            img.src = imageUrl;
+            titleSpan.innerText = titleText;
+            msgDiv.innerHTML = '';
+            popupDiv.classList.add('show');
+            let i = 0;
+            function typeWriter() {
+                if(i < messageText.length) { msgDiv.innerHTML += messageText.charAt(i); i++; setTimeout(typeWriter, 40); }
+                else { msgDiv.innerHTML += '<span class="cursor-blink"></span>'; }
             }
-
-            function draw() {
-                ctx.clearRect(0, 0, width, height);
-                
-                // Draw connections first (for better visual layering)
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (dist < 150) {
-                            ctx.beginPath();
-                            const opacity = 0.15 * (1 - dist / 150);
-                            const gradient = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
-                            gradient.addColorStop(0, `rgba(255, 102, 0, ${opacity * 0.8})`);
-                            gradient.addColorStop(1, `rgba(255, 170, 68, ${opacity})`);
-                            ctx.strokeStyle = gradient;
-                            ctx.lineWidth = 0.8;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-                
-                // Draw particles with glow effect
-                for (let p of particles) {
-                    ctx.beginPath();
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = `rgba(255, 102, 0, 0.6)`;
-                    ctx.fillStyle = p.color;
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
-                    
-                    // Add inner glow
-                    ctx.beginPath();
-                    ctx.fillStyle = `rgba(255, 200, 100, 0.3)`;
-                    ctx.arc(p.x, p.y, p.size * 0.6, 0, Math.PI * 2);
-                    ctx.fill();
-                    
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    
-                    if (p.x < 0 || p.x > width) p.vx *= -1;
-                    if (p.y < 0 || p.y > height) p.vy *= -1;
-                    
-                    // Wrap around edges for continuous flow
-                    if (p.x < 0) p.x = width;
-                    if (p.x > width) p.x = 0;
-                    if (p.y < 0) p.y = height;
-                    if (p.y > height) p.y = 0;
-                }
-                
-                ctx.shadowBlur = 0;
-                requestAnimationFrame(draw);
-            }
-
-            resize();
-            createParticles();
-            draw();
-
-            window.addEventListener('resize', () => {
-                resize();
-                createParticles();
-            });
+            typeWriter();
         }
-
-        // Auth
-        let isSignUp = false;
-        let allStudentsData = {};
-
-        function showAuthModal() { 
-            document.getElementById('auth-modal').classList.add('show'); 
+        function closeWelcomePopup() {
+            const popupDiv = document.getElementById('welcomePopup');
+            popupDiv.classList.remove('show');
+            welcomeClosedSession = true;
         }
-        
-        function closeModal() { 
-            document.getElementById('auth-modal').classList.remove('show'); 
-        }
-        
-        function toggleAuthMode() {
-            isSignUp = !isSignUp;
-            document.getElementById('auth-action-btn').innerText = isSignUp ? 'SIGN UP' : 'SIGN IN';
-        }
-
-        function handleAuth() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            if (isSignUp) {
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then(() => {
-                        closeModal();
-                        document.getElementById('landing-page').classList.add('hidden');
-                        document.getElementById('main-app').style.display = 'flex';
-                    })
-                    .catch(error => alert(error.message));
-            } else {
-                auth.signInWithEmailAndPassword(email, password)
-                    .then(() => {
-                        closeModal();
-                        document.getElementById('landing-page').classList.add('hidden');
-                        document.getElementById('main-app').style.display = 'flex';
-                    })
-                    .catch(error => alert(error.message));
-            }
-        }
-
-        function logout() { 
-            auth.signOut(); 
-        }
-
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                document.getElementById('landing-page').classList.add('hidden');
-                document.getElementById('main-app').style.display = 'flex';
-                loadData();
-                loadRealTimeData();
-            } else {
-                document.getElementById('landing-page').classList.remove('hidden');
-                document.getElementById('main-app').style.display = 'none';
-            }
-        });
-
-        // Load Data
-        function loadData() {
-            db.collection('settings').doc('general').onSnapshot(doc => {
-                if (doc.exists) {
-                    document.getElementById('total-students-display').innerHTML = `📊 2026 · ${doc.data().totalStudents}`;
-                }
-            });
-
-            db.collection('students').onSnapshot(snapshot => {
-                allStudentsData = {};
-                snapshot.forEach(doc => allStudentsData[doc.id] = doc.data());
-                if (document.getElementById('batch-305-ranking-container').style.display === 'block') {
-                    updateBatch305Leaderboard();
-                }
-            });
-        }
-
-        function loadRealTimeData() {
-            document.getElementById('batch-stats').innerHTML = generateDefaultStats();
-            document.getElementById('ranking-list').innerHTML = generateDefaultRanking();
-            document.getElementById('notice-content').innerHTML = '🔥 Welcome to Cloud of Core International!';
-
-            db.collection('batchStats').onSnapshot(snapshot => {
-                if (!snapshot.empty) {
-                    let html = '';
-                    snapshot.forEach(doc => {
-                        const data = doc.data();
-                        html += `
-                            <div class="stat-card">
-                                <div class="stat-batch">BATCH ${data.batch}</div>
-                                <div class="stat-value">
-                                    ${data.value}
-                                    <span class="trend-${data.trend}">
-                                        <i class="fas fa-arrow-${data.trend}"></i>
-                                    </span>
-                                </div>
-                                <div class="stat-label">TOTAL POINTS</div>
-                            </div>
-                        `;
-                    });
-                    document.getElementById('batch-stats').innerHTML = html;
-                }
-            });
-
-            loadLeadershipBoard();
-            loadMissionRank();
-
-            db.collection('ranking').orderBy('points', 'desc').limit(10).onSnapshot(snapshot => {
-                if (!snapshot.empty) {
-                    let html = '';
-                    let i = 1;
-                    snapshot.forEach(doc => {
-                        const s = doc.data();
-                        let badge = '';
-                        if (i === 1) badge = '<i class="fas fa-crown" style="color:#ffaa33;"></i>';
-                        else if (i === 2) badge = '<i class="fas fa-medal" style="color:#ccaa88;"></i>';
-                        else if (i === 3) badge = '<i class="fas fa-medal" style="color:#cc8844;"></i>';
-                        else badge = '<i class="fas fa-star" style="color:#ff884d;"></i>';
-                        
-                        html += `
-                            <div class="rank-item">
-                                <span class="rank-number">#${i}</span>
-                                <div class="rank-badge">${badge}</div>
-                                <span class="rank-name">${s.name}</span>
-                                <span class="rank-points">${s.points}</span>
-                            </div>
-                        `;
-                        i++;
-                    });
-                    document.getElementById('ranking-list').innerHTML = html;
-                }
-            });
-
-            db.collection('notices').doc('latest').onSnapshot(doc => {
-                if (doc.exists) {
-                    document.getElementById('notice-content').innerHTML = doc.data().content;
-                }
-            });
-        }
-
-        function loadLeadershipBoard() {
-            db.collection('batchLeadership').orderBy('rank', 'asc').onSnapshot(snapshot => {
-                if (!snapshot.empty) {
-                    let html = '';
-                    snapshot.forEach(doc => {
-                        const data = doc.data();
-                        const batchNum = data.batch;
-                        const isBatch305 = batchNum === '305';
-                        
-                        let badgeIcon = '';
-                        let badgeClass = '';
-                        
-                        if (data.rank === 1) {
-                            badgeIcon = '<i class="fas fa-gem"></i>';
-                            badgeClass = 'diamond-badge';
-                        } else if (data.rank === 2) {
-                            badgeIcon = '<i class="fas fa-crown"></i>';
-                            badgeClass = 'gold-badge';
-                        } else if (data.rank === 3) {
-                            badgeIcon = '<i class="fas fa-medal"></i>';
-                            badgeClass = 'silver-badge';
-                        } else if (data.rank === 4) {
-                            badgeIcon = '<i class="fas fa-award"></i>';
-                            badgeClass = 'bronze-badge';
-                        } else {
-                            badgeIcon = '<i class="fas fa-star"></i>';
-                            badgeClass = 'standard-badge';
-                        }
-                        
-                        html += `
-                            <div class="leadership-item ${isBatch305 ? 'batch-305-highlight' : ''}">
-                                <span class="leadership-rank-number">#${data.rank}</span>
-                                <div class="leadership-badge ${badgeClass}">${badgeIcon}</div>
-                                <span class="leadership-batch-name">BATCH ${batchNum}</span>
-                                <span class="leadership-points">${data.value}</span>
-                                <span class="leadership-metric">${data.metric || 'PTS'}</span>
-                            </div>
-                        `;
-                    });
-                    document.getElementById('leadership-list').innerHTML = html;
-                }
-            });
-        }
-
-        function loadMissionRank() {
-            db.collection('missionRank').orderBy('rank', 'asc').onSnapshot(snapshot => {
-                if (!snapshot.empty) {
-                    let html = '';
-                    snapshot.forEach(doc => {
-                        const data = doc.data();
-                        const batchNum = data.batch;
-                        const isHighlighted = data.highlighted || false;
-                        
-                        let badgeIcon = '';
-                        let badgeClass = '';
-                        
-                        if (data.rank === 1) {
-                            badgeIcon = '<i class="fas fa-trophy"></i>';
-                            badgeClass = 'gold-mission';
-                        } else if (data.rank === 2) {
-                            badgeIcon = '<i class="fas fa-medal"></i>';
-                            badgeClass = 'silver-mission';
-                        } else if (data.rank === 3) {
-                            badgeIcon = '<i class="fas fa-award"></i>';
-                            badgeClass = 'bronze-mission';
-                        } else if (data.rank === 4) {
-                            badgeIcon = '<i class="fas fa-star"></i>';
-                            badgeClass = 'blue-mission';
-                        } else {
-                            badgeIcon = '<i class="fas fa-chevron-circle-up"></i>';
-                            badgeClass = 'purple-mission';
-                        }
-                        
-                        const totalMissions = data.totalMissions || 0;
-                        const successMissions = data.successMissions || 0;
-                        const failedMissions = data.failedMissions || 0;
-                        
-                        html += `
-                            <div class="mission-item ${isHighlighted ? 'mission-highlight' : ''}">
-                                <span class="mission-rank-number">#${data.rank}</span>
-                                <div class="mission-badge ${badgeClass}">${badgeIcon}</div>
-                                <span class="mission-batch-name">BATCH ${batchNum}</span>
-                                <div class="mission-stats">
-                                    <div class="mission-stat">
-                                        <span class="mission-stat-label total-mission">Total</span>
-                                        <span class="mission-stat-value total-mission">${totalMissions}</span>
-                                    </div>
-                                    <div class="mission-stat">
-                                        <span class="mission-stat-label success-mission">✓</span>
-                                        <span class="mission-stat-value success-mission">${successMissions}</span>
-                                    </div>
-                                    <div class="mission-stat">
-                                        <span class="mission-stat-label failed-mission">✗</span>
-                                        <span class="mission-stat-value failed-mission">${failedMissions}</span>
-                                    </div>
-                                </div>
-                                <span class="leadership-metric">${data.metric || 'Missions'}</span>
-                            </div>
-                        `;
-                    });
-                    document.getElementById('mission-list').innerHTML = html;
-                } else {
-                    document.getElementById('mission-list').innerHTML = generateDefaultMissionRank();
-                }
-            });
-        }
-
-        function generateDefaultMissionRank() {
-            const defaultMissions = [
-                { batch: '305', rank: 1, total: 24, success: 22, failed: 2, metric: 'Missions', highlighted: true },
-                { batch: '303', rank: 2, total: 32, success: 28, failed: 4, metric: 'Missions', highlighted: false },
-                { batch: '301', rank: 3, total: 45, success: 38, failed: 7, metric: 'Missions', highlighted: false },
-                { batch: '302', rank: 4, total: 28, success: 22, failed: 6, metric: 'Missions', highlighted: false },
-                { batch: '304', rank: 5, total: 36, success: 27, failed: 9, metric: 'Missions', highlighted: false }
-            ];
-            
-            let html = '';
-            defaultMissions.forEach(data => {
-                let badgeIcon = '';
-                let badgeClass = '';
-                
-                if (data.rank === 1) {
-                    badgeIcon = '<i class="fas fa-trophy"></i>';
-                    badgeClass = 'gold-mission';
-                } else if (data.rank === 2) {
-                    badgeIcon = '<i class="fas fa-medal"></i>';
-                    badgeClass = 'silver-mission';
-                } else if (data.rank === 3) {
-                    badgeIcon = '<i class="fas fa-award"></i>';
-                    badgeClass = 'bronze-mission';
-                } else if (data.rank === 4) {
-                    badgeIcon = '<i class="fas fa-star"></i>';
-                    badgeClass = 'blue-mission';
-                } else {
-                    badgeIcon = '<i class="fas fa-chevron-circle-up"></i>';
-                    badgeClass = 'purple-mission';
-                }
-                
-                html += `
-                    <div class="mission-item ${data.highlighted ? 'mission-highlight' : ''}">
-                        <span class="mission-rank-number">#${data.rank}</span>
-                        <div class="mission-badge ${badgeClass}">${badgeIcon}</div>
-                        <span class="mission-batch-name">BATCH ${data.batch}</span>
-                        <div class="mission-stats">
-                            <div class="mission-stat">
-                                <span class="mission-stat-label total-mission">Total</span>
-                                <span class="mission-stat-value total-mission">${data.total}</span>
-                            </div>
-                            <div class="mission-stat">
-                                <span class="mission-stat-label success-mission">✓</span>
-                                <span class="mission-stat-value success-mission">${data.success}</span>
-                            </div>
-                            <div class="mission-stat">
-                                <span class="mission-stat-label failed-mission">✗</span>
-                                <span class="mission-stat-value failed-mission">${data.failed}</span>
-                            </div>
-                        </div>
-                        <span class="leadership-metric">${data.metric}</span>
-                    </div>
-                `;
-            });
-            return html;
-        }
-
-        function updateBatch305Leaderboard() {
-            const studentNames = [
-                'majedul islam fahad',
-                'sayid hossain sayem',
-                'abu talha shamim',
-                'kamrul hassan sojib'
-            ];
-            
-            const students = studentNames.map(name => ({
-                name: name,
-                data: allStudentsData[name] || { 
-                    classPoints: 0, 
-                    totalPoints: 0, 
-                    examMarks: 0, 
-                    totalMarks: 0,
-                    notice: 'No data available'
-                }
-            }));
-            
-            students.sort((a, b) => b.data.totalPoints - a.data.totalPoints);
-            
-            let html = '';
-            students.forEach((student, index) => {
-                const rankNumber = index + 1;
-                const isFirstRank = rankNumber === 1;
-                
-                let rankIcon = '';
-                if (rankNumber === 1) {
-                    rankIcon = '<i class="fas fa-crown" style="color:#ffaa33; margin-right:5px;"></i>';
-                } else if (rankNumber === 2) {
-                    rankIcon = '<i class="fas fa-medal" style="color:#ccaa88; margin-right:5px;"></i>';
-                } else if (rankNumber === 3) {
-                    rankIcon = '<i class="fas fa-medal" style="color:#cc8844; margin-right:5px;"></i>';
-                }
-                
-                html += `
-                    <div class="batch-305-leader-item ${isFirstRank ? 'rank-1' : ''}" onclick="showStudentPopup('${student.name}')">
-                        <span class="batch-305-rank">#${rankNumber}</span>
-                        <span class="batch-305-name">
-                            ${rankIcon} ${student.name}
-                        </span>
-                        <span class="batch-305-points">${student.data.totalPoints} pts</span>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('batch-305-leaderboard').innerHTML = html;
-        }
-
-        function showStudentPopup(studentName) {
-            const data = allStudentsData[studentName] || { 
-                classPoints: 0, 
-                totalPoints: 0, 
-                examMarks: 0, 
-                totalMarks: 0, 
-                notice: '🌟 No data available.'
-            };
-            
-            document.getElementById('popup-content').innerHTML = `
-                <div style="font-size:1.6rem; font-weight:800; color:#ff884d; margin-bottom:10px; text-transform:capitalize;">
-                    ${studentName}
-                </div>
-                <div class="student-detail">
-                    <div class="detail-row">
-                        <span class="detail-label">Class Points:</span>
-                        <span class="detail-value">${data.classPoints}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Total Points:</span>
-                        <span class="detail-value">${data.totalPoints}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Exam Marks:</span>
-                        <span class="detail-value">${data.examMarks}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Total Marks:</span>
-                        <span class="detail-value">${data.totalMarks}</span>
-                    </div>
-                </div>
-                <div class="student-notice">
-                    <i class="fas fa-bell" style="color:#ff884d; margin-right:8px;"></i>
-                    ${data.notice}
-                </div>
-            `;
-            document.getElementById('popup').classList.add('show');
-        }
-
-        function generateDefaultStats() {
-            const stats = [
-                { batch: '301', value: '12.4K', trend: 'up' },
-                { batch: '302', value: '9.8K', trend: 'down' },
-                { batch: '303', value: '15.6K', trend: 'up' },
-                { batch: '304', value: '7.5K', trend: 'down' },
-                { batch: '305', value: '21.0K', trend: 'up' }
-            ];
-            return stats.map(s => `
-                <div class="stat-card">
-                    <div class="stat-batch">BATCH ${s.batch}</div>
-                    <div class="stat-value">
-                        ${s.value}
-                        <span class="trend-${s.trend}"><i class="fas fa-arrow-${s.trend}"></i></span>
-                    </div>
-                    <div class="stat-label">TOTAL POINTS</div>
-                </div>
-            `).join('');
-        }
-
-        function generateDefaultRanking() {
-            const ranks = [
-                'Majedul I. Fahad', 'Sayid H. Sayem', 'Abu T. Shamim',
-                'Kamrul H. Sojib', 'Rafiqul Islam', 'Shahidul Alam',
-                'Tanvir Ahmed', 'Hasan Mahmud', 'Faisal Rahman', 'Nur Hossain'
-            ];
-            return ranks.map((name, i) => {
-                let badge = '';
-                if (i === 0) badge = '<i class="fas fa-crown" style="color:#ffaa33;"></i>';
-                else if (i === 1) badge = '<i class="fas fa-medal" style="color:#ccaa88;"></i>';
-                else if (i === 2) badge = '<i class="fas fa-medal" style="color:#cc8844;"></i>';
-                else badge = '<i class="fas fa-star" style="color:#ff884d;"></i>';
-                
-                return `
-                    <div class="rank-item">
-                        <span class="rank-number">#${i+1}</span>
-                        <div class="rank-badge">${badge}</div>
-                        <span class="rank-name">${name}</span>
-                        <span class="rank-points">${2850 - i*120}</span>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // INTERNATIONAL STUDENT NAMES
-        const usNames = [
-            'James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Christopher',
-            'Charles', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Mark', 'Paul', 'Steven', 'Andrew', 'Kenneth'
-        ];
-        
-        const ukLastNames = [
-            'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez',
-            'Wilson', 'Anderson', 'Taylor', 'Thomas', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson'
-        ];
-
-        const arabicNames = [
-            'Mohammed', 'Ahmed', 'Ali', 'Omar', 'Hassan', 'Hussein', 'Abdullah', 'Ibrahim', 'Khalid', 'Mahmoud',
-            'Youssef', 'Mustafa', 'Hamza', 'Bilal', 'Amir', 'Tariq', 'Sami', 'Rashid', 'Jamal', 'Nadir'
-        ];
-
-        const europeanNames = [
-            'Lucas', 'Liam', 'Noah', 'Oliver', 'Elijah', 'Mateo', 'Theo', 'Leo', 'Elias', 'Louis',
-            'Arthur', 'Gabriel', 'Jules', 'Adam', 'Hugo', 'Leon', 'Paul', 'Nathan', 'Tom', 'Max'
-        ];
-
-        const latinNames = [
-            'Carlos', 'Jose', 'Luis', 'Miguel', 'Javier', 'Diego', 'Fernando', 'Alejandro', 'Andres', 'Santiago',
-            'Matias', 'Sebastian', 'Nicolas', 'Gabriel', 'Rafael', 'Eduardo', 'Francisco', 'Ricardo', 'Jorge', 'Pedro'
-        ];
-
-        function generateInternationalStudents(batch, count, nameArray, lastNameArray = null) {
-            let students = [];
-            for (let i = 0; i < count; i++) {
-                const firstName = nameArray[Math.floor(Math.random() * nameArray.length)];
-                if (lastNameArray) {
-                    const lastName = lastNameArray[Math.floor(Math.random() * lastNameArray.length)];
-                    students.push(`${firstName} ${lastName}`);
-                } else {
-                    students.push(firstName);
-                }
-            }
-            return students.sort();
-        }
-
-        const batchStudents = {
-            '301': generateInternationalStudents('301', 900, usNames, ukLastNames),
-            '302': generateInternationalStudents('302', 300, arabicNames),
-            '303': generateInternationalStudents('303', 300, europeanNames),
-            '304': generateInternationalStudents('304', 318, latinNames),
-            '305': ['majedul islam fahad', 'sayid hossain sayem', 'abu talha shamim', 'kamrul hassan sojib']
-        };
-
-        function showBatchStudents(batch) {
-            const container = document.getElementById('student-list-container');
-            const grid = document.getElementById('student-grid');
-            const batch305Ranking = document.getElementById('batch-305-ranking-container');
-            
-            if (batch === '305') {
-                container.style.display = 'none';
-                batch305Ranking.style.display = 'block';
-                updateBatch305Leaderboard();
-            } else {
-                batch305Ranking.style.display = 'none';
-                document.getElementById('batch-title').innerHTML = `📚 BATCH ${batch} · ${batchStudents[batch].length} STUDENTS`;
-                grid.innerHTML = batchStudents[batch].map(name => 
-                    `<div class="student-card" onclick="handleStudentClick('${batch}', '${name}')">${name.length > 20 ? name.substring(0,18)+'...' : name}</div>`
-                ).join('');
-                container.style.display = 'block';
-            }
-        }
-
-        function handleStudentClick(batch, name) {
-            if (batch === '305') {
-                showStudentPopup(name);
-            } else {
-                document.getElementById('popup-content').innerHTML = `
-                    <div style="text-align:center; padding:20px;">
-                        <i class="fas fa-exclamation-triangle" style="font-size:3rem; color:#ff6644; margin-bottom:15px;"></i>
-                        <h2 style="color:#ff6644; margin-bottom:10px;">ACCESS DENIED</h2>
-                        <p style="font-size:1.1rem; color:#fff;">You are not a student of Batch ${batch}</p>
-                        <p style="color:#aaa; margin-top:15px;">This section is restricted to Batch ${batch} students only.</p>
-                    </div>
-                `;
-                document.getElementById('popup').classList.add('show');
-            }
-        }
-
-        function closePopup() {
-            document.getElementById('popup').classList.remove('show');
-        }
-
-        let searchTimeout;
-        function searchStudents(query) {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                const results = document.getElementById('search-results');
-                if (!query) { results.style.display = 'none'; return; }
-                
-                let found = [];
-                for (let batch in batchStudents) {
-                    batchStudents[batch].forEach(name => {
-                        if (name.toLowerCase().includes(query.toLowerCase())) {
-                            found.push({name, batch});
-                        }
-                    });
-                }
-                
-                if (found.length > 0) {
-                    results.innerHTML = found.slice(0,5).map(f => 
-                        `<div class="search-item" onclick="handleStudentClick('${f.batch}','${f.name}')">${f.name} · Batch ${f.batch}</div>`
-                    ).join('');
-                    results.style.display = 'block';
-                } else {
-                    results.innerHTML = '<div class="search-item">❌ No results found</div>';
-                    results.style.display = 'block';
-                }
-            }, 250);
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container')) {
-                document.getElementById('search-results').style.display = 'none';
-            }
-        });
-
-        window.onload = function() {
-            initPlexus();
-        };
+        function loadData() { db.collection('students').onSnapshot(s=>{ allStudentsData={}; s.forEach(d=>allStudentsData[d.id]=d.data()); if(document.getElementById('batch-305-ranking-container')?.style.display==='block') updateBatch305Leaderboard(); }); }
+        function loadRealTimeData() { db.collection('batchStats').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(); html+=`<div class="stat-card"><div class="stat-batch">BATCH ${data.batch}</div><div class="stat-value">${data.value}<span class="trend-${data.trend}"><i class="fas fa-arrow-${data.trend}"></i></span></div><div class="stat-label">TOTAL POINTS</div></div>`; }); document.getElementById('batch-stats').innerHTML=html||generateDefaultStats(); }); db.collection('batchLeadership').orderBy('rank').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(), is305=data.batch==='305', badge=''; if(data.rank===1) badge='<i class="fas fa-gem"></i>'; else if(data.rank===2) badge='<i class="fas fa-crown"></i>'; else if(data.rank===3) badge='<i class="fas fa-medal"></i>'; else if(data.rank===4) badge='<i class="fas fa-award"></i>'; else badge='<i class="fas fa-star"></i>'; html+=`<div class="leadership-item ${is305?'batch-305-highlight':''}"><span class="leadership-rank-number">#${data.rank}</span><div class="leadership-badge">${badge}</div><span class="leadership-batch-name">BATCH ${data.batch}</span><span class="leadership-points">${data.value}</span></div>`; }); document.getElementById('leadership-list').innerHTML=html; }); db.collection('missionRank').orderBy('rank').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(); let badge=''; if(data.rank===1) badge='<i class="fas fa-trophy"></i>'; else if(data.rank===2) badge='<i class="fas fa-medal"></i>'; else if(data.rank===3) badge='<i class="fas fa-award"></i>'; else badge='<i class="fas fa-chevron-circle-up"></i>'; html+=`<div class="mission-item ${data.highlighted?'mission-highlight':''}"><span class="mission-rank-number">#${data.rank}</span><div class="mission-badge">${badge}</div><span class="mission-batch-name">BATCH ${data.batch}</span><div class="mission-stats"><div class="mission-stat"><span class="mission-stat-label">Total</span><span class="mission-stat-value">${data.totalMissions||0}</span></div><div class="mission-stat"><span class="mission-stat-label">✓</span><span class="mission-stat-value success-mission">${data.successMissions||0}</span></div><div class="mission-stat"><span class="mission-stat-label">✗</span><span class="mission-stat-value failed-mission">${data.failedMissions||0}</span></div></div></div>`; }); document.getElementById('mission-list').innerHTML=html||generateDefaultMissionRank(); }); db.collection('ranking').orderBy('points','desc').limit(10).onSnapshot(s=>{ let html='',i=1; s.forEach(d=>{ let data=d.data(); let badge=i===1?'<i class="fas fa-crown"></i>':i===2?'<i class="fas fa-medal"></i>':i===3?'<i class="fas fa-medal"></i>':'<i class="fas fa-star"></i>'; html+=`<div class="rank-item"><span class="rank-number">#${i}</span><div class="rank-badge">${badge}</div><span class="rank-name">${data.name}</span><span class="rank-points">${data.points}</span></div>`; i++; }); document.getElementById('ranking-list').innerHTML=html||generateDefaultRanking(); }); db.collection('notices').doc('latest').onSnapshot(d=>{ if(d.exists) document.getElementById('notice-content').innerHTML=d.data().content; }); db.collection('settings').doc('general').onSnapshot(d=>{ if(d.exists) document.getElementById('total-students-display').innerHTML=`📊 2026 · ${d.data().totalStudents}`; }); }
+        function generateDefaultStats(){ return `<div class="stat-card"><div class="stat-batch">BATCH 301</div><div class="stat-value">12.4K<span class="trend-up"><i class="fas fa-arrow-up"></i></span></div></div><div class="stat-card"><div class="stat-batch">BATCH 302</div><div class="stat-value">9.8K<span class="trend-down"><i class="fas fa-arrow-down"></i></span></div></div><div class="stat-card"><div class="stat-batch">BATCH 303</div><div class="stat-value">15.6K<span class="trend-up"><i class="fas fa-arrow-up"></i></span></div></div><div class="stat-card"><div class="stat-batch">BATCH 304</div><div class="stat-value">7.5K<span class="trend-down"><i class="fas fa-arrow-down"></i></span></div></div><div class="stat-card"><div class="stat-batch">BATCH 305</div><div class="stat-value">21.0K<span class="trend-up"><i class="fas fa-arrow-up"></i></span></div></div>`; }
+        function generateDefaultRanking(){ return Array.from({length:10},(_,i)=>`<div class="rank-item"><span class="rank-number">#${i+1}</span><div class="rank-badge"><i class="fas fa-star"></i></div><span class="rank-name">Top Student ${i+1}</span><span class="rank-points">${2000-i*100}</span></div>`).join(''); }
+        function generateDefaultMissionRank(){ let arr=[{batch:'305',rank:1,total:24,success:22,failed:2,highlighted:true},{batch:'303',rank:2,total:32,success:28,failed:4},{batch:'301',rank:3,total:45,success:38,failed:7},{batch:'302',rank:4,total:28,success:22,failed:6},{batch:'304',rank:5,total:36,success:27,failed:9}]; return arr.map(d=>`<div class="mission-item ${d.highlighted?'mission-highlight':''}"><span class="mission-rank-number">#${d.rank}</span><div class="mission-badge"><i class="fas fa-trophy"></i></div><span class="mission-batch-name">BATCH ${d.batch}</span><div class="mission-stats"><div class="mission-stat"><span>Total</span><span>${d.total}</span></div><div class="mission-stat"><span>✓</span><span>${d.success}</span></div><div class="mission-stat"><span>✗</span><span>${d.failed}</span></div></div></div>`).join(''); }
+        const batchStudents={'301':Array.from({length:888},(_,i)=>`Student ${i+1}`),'302':Array.from({length:292},(_,i)=>`Learner ${i+1}`),'303':Array.from({length:278},(_,i)=>`Scholar ${i+1}`),'304':Array.from({length:318},(_,i)=>`Pioneer ${i+1}`),'305':['majedul islam fahad','sayid hossain sayem','abu talha shamim','kamrul hassan sojib']};
+        function showBatchStudents(batch){ let container=document.getElementById('student-list-container'), grid=document.getElementById('student-grid'), rank305=document.getElementById('batch-305-ranking-container'); if(batch==='305'){ container.style.display='none'; rank305.style.display='block'; updateBatch305Leaderboard(); } else { rank305.style.display='none'; document.getElementById('batch-title').innerHTML=`📚 BATCH ${batch} · ${batchStudents[batch].length} STUDENTS`; grid.innerHTML=batchStudents[batch].map(name=>`<div class="student-card" onclick="handleStudentClick('${batch}','${name.replace(/'/g,"\\'")}')">${name}</div>`).join(''); container.style.display='block'; } }
+        function handleStudentClick(batch,name){ if(batch==='305') showStudentPopup(name); else { document.getElementById('popup-content').innerHTML=`<div style="text-align:center;padding:20px;"><i class="fas fa-exclamation-triangle" style="font-size:3rem;color:#ff6644;"></i><h2>ACCESS DENIED</h2><p>You are not a student of Batch ${batch}</p></div>`; document.getElementById('popup').classList.add('show'); } }
+        function showStudentPopup(name){ let data=allStudentsData[name]||{classPoints:0,totalPoints:0,examMarks:0,totalMarks:0,notice:'No data'}; document.getElementById('popup-content').innerHTML=`<div style="font-size:1.6rem;font-weight:800;color:#ff884d;margin-bottom:10px;text-transform:capitalize;">${name}</div><div class="student-detail"><div class="detail-row"><span>Class Points:</span><span>${data.classPoints}</span></div><div class="detail-row"><span>Total Points:</span><span>${data.totalPoints}</span></div><div class="detail-row"><span>Exam Marks:</span><span>${data.examMarks}</span></div><div class="detail-row"><span>Total Marks:</span><span>${data.totalMarks}</span></div></div><div class="student-notice"><i class="fas fa-bell"></i> ${data.notice}</div>`; document.getElementById('popup').classList.add('show'); }
+        function updateBatch305Leaderboard(){ let students=['majedul islam fahad','sayid hossain sayem','abu talha shamim','kamrul hassan sojib'].map(name=>({name,data:allStudentsData[name]||{totalPoints:0}})).sort((a,b)=>b.data.totalPoints-a.data.totalPoints); let html=''; students.forEach((s,i)=>{ let rankIcon=i===0?'<i class="fas fa-crown"></i>':i===1?'<i class="fas fa-medal"></i>':i===2?'<i class="fas fa-medal"></i>':''; html+=`<div class="batch-305-leader-item ${i===0?'rank-1':''}" onclick="showStudentPopup('${s.name}')"><span class="batch-305-rank">#${i+1}</span><span class="batch-305-name">${rankIcon} ${s.name}</span><span class="batch-305-points">${s.data.totalPoints} pts</span></div>`; }); document.getElementById('batch-305-leaderboard').innerHTML=html; }
+        function closePopup(){ document.getElementById('popup').classList.remove('show'); }
+        let searchTimeout; function searchStudents(q){ clearTimeout(searchTimeout); searchTimeout=setTimeout(()=>{ let resultsDiv=document.getElementById('search-results'); if(!q){ resultsDiv.style.display='none'; return; } let found=[]; Object.entries(batchStudents).forEach(([batch,list])=>list.forEach(name=>{ if(name.toLowerCase().includes(q.toLowerCase())) found.push({name,batch}); })); if(found.length){ resultsDiv.innerHTML=found.slice(0,5).map(f=>`<div class="search-item" onclick="handleStudentClick('${f.batch}','${f.name.replace(/'/g,"\\'")}')">${f.name} · Batch ${f.batch}</div>`).join(''); resultsDiv.style.display='block'; } else { resultsDiv.innerHTML='<div class="search-item">❌ No results</div>'; resultsDiv.style.display='block'; } },200); }
+        document.addEventListener('click',e=>{ if(!e.target.closest('.search-container')) document.getElementById('search-results').style.display='none'; });
     </script>
 </body>
 </html>
