@@ -793,41 +793,185 @@
             color: #ff884d;
         }
 
+        /* --- NEW BATCH 305 LEADERBOARD STYLES: Elegant dark theme with clear separation --- */
         .batch-305-ranking {
             margin: 20px 0;
-            background: rgba(255, 102, 0, 0.15);
-            border-radius: 20px;
-            padding: 15px;
-            border: 2px solid #ff884d;
+            background: rgba(255, 102, 0, 0.1);
+            border-radius: 32px;
+            padding: 20px 16px;
+            border: 1px solid rgba(255, 140, 0, 0.5);
+            backdrop-filter: blur(4px);
         }
 
         .batch-305-title {
-            color: #ff884d;
-            font-size: 1.3rem;
-            font-weight: 700;
+            color: #ffaa66;
+            font-size: 1.5rem;
+            font-weight: 800;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px #ff6600;
         }
 
         .batch-305-leaderboard {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
         }
 
         .batch-305-leader-item {
             display: flex;
             align-items: center;
-            background: rgba(255, 102, 0, 0.15);
-            padding: 12px 16px;
-            border-radius: 40px;
-            border: 1px solid #ff884d;
+            background: rgba(25, 20, 18, 0.8);
+            padding: 16px 20px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 120, 0, 0.5);
+            transition: all 0.2s ease;
             cursor: pointer;
+            backdrop-filter: blur(4px);
         }
 
+        .batch-305-leader-item:hover {
+            background: rgba(255, 102, 0, 0.2);
+            transform: translateX(5px);
+            border-color: #ffaa66;
+        }
+
+        .batch-305-rank {
+            width: 55px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffaa66, #ff884d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(255,100,0,0.3);
+        }
+
+        .batch-305-name {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff0e0;
+            text-transform: capitalize;
+        }
+
+        .batch-305-name i {
+            font-size: 1.2rem;
+            color: #ffaa66;
+        }
+
+        .batch-305-points {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffcc88, #ffaa66);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 4px 12px;
+            border-radius: 40px;
+            background-color: rgba(0,0,0,0.3);
+        }
+
+        /* --- Enhanced Student Popup with Table & Smooth Animation --- */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(18px);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .popup-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+        .popup-card {
+            background: linear-gradient(145deg, #231f1a, #0f0c09);
+            padding: 32px 28px;
+            border-radius: 48px;
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid #ff884d;
+            box-shadow: 0 25px 50px -12px rgba(255, 102, 0, 0.5);
+            position: relative;
+            transform: scale(0.92);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .popup-overlay.show .popup-card {
+            transform: scale(1);
+        }
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            width: 38px;
+            height: 38px;
+            background: rgba(255,100,0,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff884d;
+            font-size: 26px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .popup-close:hover {
+            background: #ff6600;
+            color: #0a0a0a;
+            transform: rotate(90deg);
+        }
+        .student-detail-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: rgba(0,0,0,0.4);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        .student-detail-table tr {
+            border-bottom: 1px solid rgba(255, 136, 0, 0.3);
+        }
+        .student-detail-table td {
+            padding: 14px 12px;
+            font-size: 1rem;
+        }
+        .student-detail-table td:first-child {
+            font-weight: 700;
+            color: #ffaa66;
+            width: 45%;
+        }
+        .student-detail-table td:last-child {
+            font-weight: 600;
+            color: #ffeedd;
+            text-align: right;
+        }
+        .student-notice {
+            margin-top: 18px;
+            background: rgba(255, 102, 0, 0.15);
+            border-radius: 28px;
+            padding: 14px;
+            font-size: 0.85rem;
+            border-left: 5px solid #ff6600;
+            color: #ffccaa;
+        }
         .notice-section {
             margin: 30px 0 20px;
             padding: 22px 18px;
@@ -836,7 +980,6 @@
             border-radius: 28px;
             border: 1px solid rgba(255, 102, 0, 0.5);
         }
-
         .notice-title {
             font-size: 1.3rem;
             font-weight: 700;
@@ -844,7 +987,6 @@
             text-align: center;
             margin-bottom: 12px;
         }
-
         .notice-content {
             font-size: 1.1rem;
             line-height: 1.6;
@@ -853,52 +995,6 @@
             border-radius: 18px;
             border-left: 4px solid #ff6600;
         }
-
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(12px);
-            z-index: 3000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .popup-overlay.show {
-            display: flex;
-        }
-
-        .popup-card {
-            background: linear-gradient(165deg, #2a1f15, #15100a);
-            padding: 28px 22px;
-            border-radius: 40px;
-            width: 100%;
-            max-width: 420px;
-            border: 2px solid rgba(255, 102, 0, 0.7);
-            position: relative;
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 18px;
-            right: 22px;
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ff6600;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
         .footer {
             background: rgba(20, 15, 10, 0.85);
             backdrop-filter: blur(10px);
@@ -935,7 +1031,7 @@
         </div>
     </div>
 
-    <!-- TYPING WELCOME POPUP (GORGEOUS) -->
+    <!-- TYPING WELCOME POPUP -->
     <div id="welcomePopup" class="popup-welcome">
         <div class="welcome-card">
             <div class="close-welcome" onclick="closeWelcomePopup()">&times;</div>
@@ -981,13 +1077,7 @@
         const auth = firebase.auth(), db = firebase.firestore();
         let allStudentsData = {}, isSignUp = false, welcomeClosedSession = false;
 
-        function initPlexus() { /* canvas background (same as original) */
-            const canvas = document.getElementById('plexus-canvas'), ctx = canvas.getContext('2d'); let w, h, particles = [];
-            function resize() { w = innerWidth; h = innerHeight; canvas.width = w; canvas.height = h; }
-            function create() { particles = Array.from({length: 70}, () => ({x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3, size: Math.random()*2+0.8, color: `rgba(255,${100+Math.random()*100},${50+Math.random()*50},0.6)`})); }
-            function draw() { ctx.clearRect(0,0,w,h); for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++){ let dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, d=Math.hypot(dx,dy); if(d<150){ ctx.beginPath(); ctx.strokeStyle=`rgba(255,102,0,${0.15*(1-d/150)})`; ctx.lineWidth=0.7; ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); } } particles.forEach(p=>{ ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1; }); requestAnimationFrame(draw); }
-            resize(); create(); draw(); addEventListener('resize',()=>{resize(); create();});
-        } initPlexus();
+        function initPlexus() { /* canvas background kept original */ const canvas = document.getElementById('plexus-canvas'), ctx = canvas.getContext('2d'); let w, h, particles = []; function resize() { w = innerWidth; h = innerHeight; canvas.width = w; canvas.height = h; } function create() { particles = Array.from({length: 70}, () => ({x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3, size: Math.random()*2+0.8, color: `rgba(255,${100+Math.random()*100},${50+Math.random()*50},0.6)`})); } function draw() { ctx.clearRect(0,0,w,h); for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++){ let dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, d=Math.hypot(dx,dy); if(d<150){ ctx.beginPath(); ctx.strokeStyle=`rgba(255,102,0,${0.15*(1-d/150)})`; ctx.lineWidth=0.7; ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); } } particles.forEach(p=>{ ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1; }); requestAnimationFrame(draw); } resize(); create(); draw(); addEventListener('resize',()=>{resize(); create();}); } initPlexus();
 
         function showAuthModal() { document.getElementById('auth-modal').classList.add('show'); }
         function closeModal() { document.getElementById('auth-modal').classList.remove('show'); }
@@ -997,47 +1087,42 @@
         function logout() { auth.signOut(); welcomeClosedSession=false; }
         auth.onAuthStateChanged(user=>{ if(user){ document.getElementById('landing-page').classList.add('hidden'); document.getElementById('main-app').style.display='flex'; loadData(); loadRealTimeData(); if(!welcomeClosedSession) showWelcomePopup(); } else { document.getElementById('landing-page').classList.remove('hidden'); document.getElementById('main-app').style.display='none'; } });
 
-        async function showWelcomePopup() {
-            const popupDiv = document.getElementById('welcomePopup');
-            const img = document.getElementById('popupImage');
-            const titleSpan = document.getElementById('popupTitle');
-            const msgDiv = document.getElementById('typingMessage');
-            const doc = await db.collection('welcomePopup').doc('config').get();
-            let imageUrl = "https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png";
-            let titleText = "WELCOME TO CLOUD OF CORE";
-            let messageText = "🌟 Experience the future of learning. Stay tuned for daily missions and exclusive rewards!";
-            if(doc.exists){
-                const d=doc.data();
-                if(d.imageUrl) imageUrl = d.imageUrl;
-                if(d.title) titleText = d.title;
-                if(d.message) messageText = d.message;
-            }
-            img.src = imageUrl;
-            titleSpan.innerText = titleText;
-            msgDiv.innerHTML = '';
-            popupDiv.classList.add('show');
-            let i = 0;
-            function typeWriter() {
-                if(i < messageText.length) { msgDiv.innerHTML += messageText.charAt(i); i++; setTimeout(typeWriter, 40); }
-                else { msgDiv.innerHTML += '<span class="cursor-blink"></span>'; }
-            }
-            typeWriter();
-        }
-        function closeWelcomePopup() {
-            const popupDiv = document.getElementById('welcomePopup');
-            popupDiv.classList.remove('show');
-            welcomeClosedSession = true;
-        }
+        async function showWelcomePopup() { /* unchanged */ const popupDiv = document.getElementById('welcomePopup'); const img = document.getElementById('popupImage'); const titleSpan = document.getElementById('popupTitle'); const msgDiv = document.getElementById('typingMessage'); const doc = await db.collection('welcomePopup').doc('config').get(); let imageUrl = "https://i.postimg.cc/kX3Xh6PG/IMG-20260211-135705-716-removebg-preview.png"; let titleText = "WELCOME TO CLOUD OF CORE"; let messageText = "🌟 Experience the future of learning. Stay tuned for daily missions and exclusive rewards!"; if(doc.exists){ const d=doc.data(); if(d.imageUrl) imageUrl = d.imageUrl; if(d.title) titleText = d.title; if(d.message) messageText = d.message; } img.src = imageUrl; titleSpan.innerText = titleText; msgDiv.innerHTML = ''; popupDiv.classList.add('show'); let i = 0; function typeWriter() { if(i < messageText.length) { msgDiv.innerHTML += messageText.charAt(i); i++; setTimeout(typeWriter, 40); } else { msgDiv.innerHTML += '<span class="cursor-blink"></span>'; } } typeWriter(); }
+        function closeWelcomePopup() { const popupDiv = document.getElementById('welcomePopup'); popupDiv.classList.remove('show'); welcomeClosedSession = true; }
         function loadData() { db.collection('students').onSnapshot(s=>{ allStudentsData={}; s.forEach(d=>allStudentsData[d.id]=d.data()); if(document.getElementById('batch-305-ranking-container')?.style.display==='block') updateBatch305Leaderboard(); }); }
-        function loadRealTimeData() { db.collection('batchStats').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(); html+=`<div class="stat-card"><div class="stat-batch">BATCH ${data.batch}</div><div class="stat-value">${data.value}<span class="trend-${data.trend}"><i class="fas fa-arrow-${data.trend}"></i></span></div><div class="stat-label">TOTAL POINTS</div></div>`; }); document.getElementById('batch-stats').innerHTML=html||generateDefaultStats(); }); db.collection('batchLeadership').orderBy('rank').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(), is305=data.batch==='305', badge=''; if(data.rank===1) badge='<i class="fas fa-gem"></i>'; else if(data.rank===2) badge='<i class="fas fa-crown"></i>'; else if(data.rank===3) badge='<i class="fas fa-medal"></i>'; else if(data.rank===4) badge='<i class="fas fa-award"></i>'; else badge='<i class="fas fa-star"></i>'; html+=`<div class="leadership-item ${is305?'batch-305-highlight':''}"><span class="leadership-rank-number">#${data.rank}</span><div class="leadership-badge">${badge}</div><span class="leadership-batch-name">BATCH ${data.batch}</span><span class="leadership-points">${data.value}</span></div>`; }); document.getElementById('leadership-list').innerHTML=html; }); db.collection('missionRank').orderBy('rank').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(); let badge=''; if(data.rank===1) badge='<i class="fas fa-trophy"></i>'; else if(data.rank===2) badge='<i class="fas fa-medal"></i>'; else if(data.rank===3) badge='<i class="fas fa-award"></i>'; else badge='<i class="fas fa-chevron-circle-up"></i>'; html+=`<div class="mission-item ${data.highlighted?'mission-highlight':''}"><span class="mission-rank-number">#${data.rank}</span><div class="mission-badge">${badge}</div><span class="mission-batch-name">BATCH ${data.batch}</span><div class="mission-stats"><div class="mission-stat"><span class="mission-stat-label">Total</span><span class="mission-stat-value">${data.totalMissions||0}</span></div><div class="mission-stat"><span class="mission-stat-label">✓</span><span class="mission-stat-value success-mission">${data.successMissions||0}</span></div><div class="mission-stat"><span class="mission-stat-label">✗</span><span class="mission-stat-value failed-mission">${data.failedMissions||0}</span></div></div></div>`; }); document.getElementById('mission-list').innerHTML=html||generateDefaultMissionRank(); }); db.collection('ranking').orderBy('points','desc').limit(10).onSnapshot(s=>{ let html='',i=1; s.forEach(d=>{ let data=d.data(); let badge=i===1?'<i class="fas fa-crown"></i>':i===2?'<i class="fas fa-medal"></i>':i===3?'<i class="fas fa-medal"></i>':'<i class="fas fa-star"></i>'; html+=`<div class="rank-item"><span class="rank-number">#${i}</span><div class="rank-badge">${badge}</div><span class="rank-name">${data.name}</span><span class="rank-points">${data.points}</span></div>`; i++; }); document.getElementById('ranking-list').innerHTML=html||generateDefaultRanking(); }); db.collection('notices').doc('latest').onSnapshot(d=>{ if(d.exists) document.getElementById('notice-content').innerHTML=d.data().content; }); db.collection('settings').doc('general').onSnapshot(d=>{ if(d.exists) document.getElementById('total-students-display').innerHTML=`📊 2026 · ${d.data().totalStudents}`; }); }
+        function loadRealTimeData() { /* existing realtime listeners unchanged but keep mission & ranking */ db.collection('batchStats').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(); html+=`<div class="stat-card"><div class="stat-batch">BATCH ${data.batch}</div><div class="stat-value">${data.value}<span class="trend-${data.trend}"><i class="fas fa-arrow-${data.trend}"></i></span></div><div class="stat-label">TOTAL POINTS</div></div>`; }); document.getElementById('batch-stats').innerHTML=html||generateDefaultStats(); }); db.collection('batchLeadership').orderBy('rank').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(), is305=data.batch==='305', badge=''; if(data.rank===1) badge='<i class="fas fa-gem"></i>'; else if(data.rank===2) badge='<i class="fas fa-crown"></i>'; else if(data.rank===3) badge='<i class="fas fa-medal"></i>'; else if(data.rank===4) badge='<i class="fas fa-award"></i>'; else badge='<i class="fas fa-star"></i>'; html+=`<div class="leadership-item ${is305?'batch-305-highlight':''}"><span class="leadership-rank-number">#${data.rank}</span><div class="leadership-badge">${badge}</div><span class="leadership-batch-name">BATCH ${data.batch}</span><span class="leadership-points">${data.value}</span></div>`; }); document.getElementById('leadership-list').innerHTML=html; }); db.collection('missionRank').orderBy('rank').onSnapshot(s=>{ let html=''; s.forEach(d=>{ let data=d.data(); let badge=''; if(data.rank===1) badge='<i class="fas fa-trophy"></i>'; else if(data.rank===2) badge='<i class="fas fa-medal"></i>'; else if(data.rank===3) badge='<i class="fas fa-award"></i>'; else badge='<i class="fas fa-chevron-circle-up"></i>'; html+=`<div class="mission-item ${data.highlighted?'mission-highlight':''}"><span class="mission-rank-number">#${data.rank}</span><div class="mission-badge">${badge}</div><span class="mission-batch-name">BATCH ${data.batch}</span><div class="mission-stats"><div class="mission-stat"><span class="mission-stat-label">Total</span><span class="mission-stat-value">${data.totalMissions||0}</span></div><div class="mission-stat"><span class="mission-stat-label">✓</span><span class="mission-stat-value success-mission">${data.successMissions||0}</span></div><div class="mission-stat"><span class="mission-stat-label">✗</span><span class="mission-stat-value failed-mission">${data.failedMissions||0}</span></div></div></div>`; }); document.getElementById('mission-list').innerHTML=html||generateDefaultMissionRank(); }); db.collection('ranking').orderBy('points','desc').limit(10).onSnapshot(s=>{ let html='',i=1; s.forEach(d=>{ let data=d.data(); let badge=i===1?'<i class="fas fa-crown"></i>':i===2?'<i class="fas fa-medal"></i>':i===3?'<i class="fas fa-medal"></i>':'<i class="fas fa-star"></i>'; html+=`<div class="rank-item"><span class="rank-number">#${i}</span><div class="rank-badge">${badge}</div><span class="rank-name">${data.name}</span><span class="rank-points">${data.points}</span></div>`; i++; }); document.getElementById('ranking-list').innerHTML=html||generateDefaultRanking(); }); db.collection('notices').doc('latest').onSnapshot(d=>{ if(d.exists) document.getElementById('notice-content').innerHTML=d.data().content; }); db.collection('settings').doc('general').onSnapshot(d=>{ if(d.exists) document.getElementById('total-students-display').innerHTML=`📊 2026 · ${d.data().totalStudents}`; }); }
         function generateDefaultStats(){ return `<div class="stat-card"><div class="stat-batch">BATCH 301</div><div class="stat-value">12.4K<span class="trend-up"><i class="fas fa-arrow-up"></i></span></div></div><div class="stat-card"><div class="stat-batch">BATCH 302</div><div class="stat-value">9.8K<span class="trend-down"><i class="fas fa-arrow-down"></i></span></div></div><div class="stat-card"><div class="stat-batch">BATCH 303</div><div class="stat-value">15.6K<span class="trend-up"><i class="fas fa-arrow-up"></i></span></div></div><div class="stat-card"><div class="stat-batch">BATCH 304</div><div class="stat-value">7.5K<span class="trend-down"><i class="fas fa-arrow-down"></i></span></div></div><div class="stat-card"><div class="stat-batch">BATCH 305</div><div class="stat-value">21.0K<span class="trend-up"><i class="fas fa-arrow-up"></i></span></div></div>`; }
         function generateDefaultRanking(){ return Array.from({length:10},(_,i)=>`<div class="rank-item"><span class="rank-number">#${i+1}</span><div class="rank-badge"><i class="fas fa-star"></i></div><span class="rank-name">Top Student ${i+1}</span><span class="rank-points">${2000-i*100}</span></div>`).join(''); }
         function generateDefaultMissionRank(){ let arr=[{batch:'305',rank:1,total:24,success:22,failed:2,highlighted:true},{batch:'303',rank:2,total:32,success:28,failed:4},{batch:'301',rank:3,total:45,success:38,failed:7},{batch:'302',rank:4,total:28,success:22,failed:6},{batch:'304',rank:5,total:36,success:27,failed:9}]; return arr.map(d=>`<div class="mission-item ${d.highlighted?'mission-highlight':''}"><span class="mission-rank-number">#${d.rank}</span><div class="mission-badge"><i class="fas fa-trophy"></i></div><span class="mission-batch-name">BATCH ${d.batch}</span><div class="mission-stats"><div class="mission-stat"><span>Total</span><span>${d.total}</span></div><div class="mission-stat"><span>✓</span><span>${d.success}</span></div><div class="mission-stat"><span>✗</span><span>${d.failed}</span></div></div></div>`).join(''); }
         const batchStudents={'301':Array.from({length:888},(_,i)=>`Student ${i+1}`),'302':Array.from({length:292},(_,i)=>`Learner ${i+1}`),'303':Array.from({length:278},(_,i)=>`Scholar ${i+1}`),'304':Array.from({length:318},(_,i)=>`Pioneer ${i+1}`),'305':['majedul islam fahad','sayid hossain sayem','abu talha shamim','kamrul hassan sojib']};
         function showBatchStudents(batch){ let container=document.getElementById('student-list-container'), grid=document.getElementById('student-grid'), rank305=document.getElementById('batch-305-ranking-container'); if(batch==='305'){ container.style.display='none'; rank305.style.display='block'; updateBatch305Leaderboard(); } else { rank305.style.display='none'; document.getElementById('batch-title').innerHTML=`📚 BATCH ${batch} · ${batchStudents[batch].length} STUDENTS`; grid.innerHTML=batchStudents[batch].map(name=>`<div class="student-card" onclick="handleStudentClick('${batch}','${name.replace(/'/g,"\\'")}')">${name}</div>`).join(''); container.style.display='block'; } }
         function handleStudentClick(batch,name){ if(batch==='305') showStudentPopup(name); else { document.getElementById('popup-content').innerHTML=`<div style="text-align:center;padding:20px;"><i class="fas fa-exclamation-triangle" style="font-size:3rem;color:#ff6644;"></i><h2>ACCESS DENIED</h2><p>You are not a student of Batch ${batch}</p></div>`; document.getElementById('popup').classList.add('show'); } }
-        function showStudentPopup(name){ let data=allStudentsData[name]||{classPoints:0,totalPoints:0,examMarks:0,totalMarks:0,notice:'No data'}; document.getElementById('popup-content').innerHTML=`<div style="font-size:1.6rem;font-weight:800;color:#ff884d;margin-bottom:10px;text-transform:capitalize;">${name}</div><div class="student-detail"><div class="detail-row"><span>Class Points:</span><span>${data.classPoints}</span></div><div class="detail-row"><span>Total Points:</span><span>${data.totalPoints}</span></div><div class="detail-row"><span>Exam Marks:</span><span>${data.examMarks}</span></div><div class="detail-row"><span>Total Marks:</span><span>${data.totalMarks}</span></div></div><div class="student-notice"><i class="fas fa-bell"></i> ${data.notice}</div>`; document.getElementById('popup').classList.add('show'); }
-        function updateBatch305Leaderboard(){ let students=['majedul islam fahad','sayid hossain sayem','abu talha shamim','kamrul hassan sojib'].map(name=>({name,data:allStudentsData[name]||{totalPoints:0}})).sort((a,b)=>b.data.totalPoints-a.data.totalPoints); let html=''; students.forEach((s,i)=>{ let rankIcon=i===0?'<i class="fas fa-crown"></i>':i===1?'<i class="fas fa-medal"></i>':i===2?'<i class="fas fa-medal"></i>':''; html+=`<div class="batch-305-leader-item ${i===0?'rank-1':''}" onclick="showStudentPopup('${s.name}')"><span class="batch-305-rank">#${i+1}</span><span class="batch-305-name">${rankIcon} ${s.name}</span><span class="batch-305-points">${s.data.totalPoints} pts</span></div>`; }); document.getElementById('batch-305-leaderboard').innerHTML=html; }
+        function showStudentPopup(name){
+            let data=allStudentsData[name]||{classPoints:0,totalPoints:0,examMarks:0,totalMarks:0,notice:'✨ No special notice available. Keep shining!'};
+            document.getElementById('popup-content').innerHTML=`
+                <div style="font-size:1.7rem;font-weight:800;color:#ffaa66;margin-bottom:12px;text-transform:capitalize;text-align:center;">🌟 ${name}</div>
+                <table class="student-detail-table">
+                    <tr><td>📚 Class Points</td><td>${data.classPoints || 0} pts</td></tr>
+                    <tr><td>🏆 Total Points</td><td>${data.totalPoints || 0} pts</td></tr>
+                    <tr><td>📝 Exam Marks</td><td>${data.examMarks || 0} / 100</td></tr>
+                    <tr><td>🎯 Total Marks (Cumulative)</td><td>${data.totalMarks || 0}</td></tr>
+                </table>
+                <div class="student-notice"><i class="fas fa-bell" style="margin-right:8px;"></i> ${data.notice}</div>`;
+            document.getElementById('popup').classList.add('show');
+        }
+        function updateBatch305Leaderboard(){
+            let students=['majedul islam fahad','sayid hossain sayem','abu talha shamim','kamrul hassan sojib'].map(name=>({name,data:allStudentsData[name]||{totalPoints:0}})).sort((a,b)=>b.data.totalPoints-a.data.totalPoints);
+            let html=''; const rankIcons=['🥇','🥈','🥉','⭐'];
+            students.forEach((s,i)=>{
+                let icon = i===0?'👑':i===1?'🏅':i===2?'🎖️':'⚡';
+                html+=`<div class="batch-305-leader-item" onclick="showStudentPopup('${s.name}')">
+                            <div class="batch-305-rank">#${i+1}</div>
+                            <div class="batch-305-name"><i class="fas ${i===0?'fa-crown':i===1?'fa-medal':i===2?'fa-award':'fa-star'}"></i> ${s.name}</div>
+                            <div class="batch-305-points">${s.data.totalPoints || 0} pts</div>
+                        </div>`;
+            });
+            document.getElementById('batch-305-leaderboard').innerHTML=html;
+        }
         function closePopup(){ document.getElementById('popup').classList.remove('show'); }
         let searchTimeout; function searchStudents(q){ clearTimeout(searchTimeout); searchTimeout=setTimeout(()=>{ let resultsDiv=document.getElementById('search-results'); if(!q){ resultsDiv.style.display='none'; return; } let found=[]; Object.entries(batchStudents).forEach(([batch,list])=>list.forEach(name=>{ if(name.toLowerCase().includes(q.toLowerCase())) found.push({name,batch}); })); if(found.length){ resultsDiv.innerHTML=found.slice(0,5).map(f=>`<div class="search-item" onclick="handleStudentClick('${f.batch}','${f.name.replace(/'/g,"\\'")}')">${f.name} · Batch ${f.batch}</div>`).join(''); resultsDiv.style.display='block'; } else { resultsDiv.innerHTML='<div class="search-item">❌ No results</div>'; resultsDiv.style.display='block'; } },200); }
         document.addEventListener('click',e=>{ if(!e.target.closest('.search-container')) document.getElementById('search-results').style.display='none'; });
